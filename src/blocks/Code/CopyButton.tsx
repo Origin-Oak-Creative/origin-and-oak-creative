@@ -1,5 +1,4 @@
 'use client'
-import { Button } from '@/components/ui/button'
 import { CopyIcon } from '@payloadcms/ui/icons/Copy'
 import { useState } from 'react'
 
@@ -16,10 +15,8 @@ export function CopyButton({ code }: { code: string }) {
   }
 
   return (
-    <div className="flex justify-end align-middle">
-      <Button
-        className="flex gap-1"
-        variant={'secondary'}
+    <div>
+      <button
         onClick={async () => {
           await navigator.clipboard.writeText(code)
           updateCopyStatus()
@@ -27,7 +24,7 @@ export function CopyButton({ code }: { code: string }) {
       >
         <p>{text}</p>
         <CopyIcon />
-      </Button>
+      </button>
     </div>
   )
 }

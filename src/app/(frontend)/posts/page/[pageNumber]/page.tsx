@@ -2,7 +2,6 @@ import type { Metadata } from 'next/types'
 
 import { CollectionArchive } from '@/components/CollectionArchive'
 import { PageRange } from '@/components/PageRange'
-import { Pagination } from '@/components/Pagination'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
@@ -34,15 +33,15 @@ export default async function Page({ params: paramsPromise }: Args) {
   })
 
   return (
-    <div className="pt-24 pb-24">
+    <div>
       <PageClient />
-      <div className="container mb-16">
-        <div className="prose dark:prose-invert max-w-none">
+      <div>
+        <div>
           <h1>Posts</h1>
         </div>
       </div>
 
-      <div className="container mb-8">
+      <div>
         <PageRange
           collection="posts"
           currentPage={posts.page}
@@ -52,12 +51,6 @@ export default async function Page({ params: paramsPromise }: Args) {
       </div>
 
       <CollectionArchive posts={posts.docs} />
-
-      <div className="container">
-        {posts?.page && posts?.totalPages > 1 && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
-        )}
-      </div>
     </div>
   )
 }
