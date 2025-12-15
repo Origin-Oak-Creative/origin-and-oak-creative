@@ -351,3 +351,88 @@ template {
 [hidden] {
   display: none;
 }
+
+/* Fonts */
+@font-face {
+  font-family: 'Analogue';
+  src: url('/fonts/AnalogueRegular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Analogue';
+  src: url('/fonts/AnalogueItalic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Analogue';
+  src: url('/fonts/AnalogueBold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Analogue';
+  src: url('/fonts/AnalogueItalic-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/fonts/LatoRegular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/fonts/LatoItalic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/fonts/LatoBold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/fonts/LatoBold-Italic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Variables */
+:root {
+  --analogue: 'Analogue', serif;
+  --lato: 'Lato', sans-serif;
+  --soft-linen: #f2eee6;
+  --river-stone: #d0c4b5;
+  --dune-sand: #e8d7c5;
+  --midnight: #2b3744;
+  --graphite-smoke: #3c3c3c;
+  --deep-wisdom-olive: #5e614c;
+}
+
+/* Base Typography */
+h1 {
+  font-family: var(--analogue);
+  font-weight: 700;
+  font-size: 72px;
+  color: var(--midnight);
+}
