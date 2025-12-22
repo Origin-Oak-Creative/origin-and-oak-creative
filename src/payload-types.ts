@@ -1664,23 +1664,34 @@ export interface Schema {
   name: string;
   businessType: 'ProfessionalService' | 'LocalBusiness' | 'Corporation';
   image?: (number | null) | Media;
+  /**
+   * Square logo for the business.
+   */
+  logo: number | Media;
+  phone: string;
   street: string;
   city: string;
   state: string;
   zip: string;
-  phone: string;
+  /**
+   * Input the exact Longitude and Latitude for Google Maps placement.
+   *
+   * @minItems 2
+   * @maxItems 2
+   */
+  geolocation?: [number, number] | null;
   priceRange?: ('$' | '$$' | '$$$' | '$$$$') | null;
   openingHours?:
     | {
-        days?: string | null;
-        opens?: string | null;
-        closes?: string | null;
+        days: string;
+        opens: string;
+        closes: string;
         id?: string | null;
       }[]
     | null;
   socials?:
     | {
-        url?: string | null;
+        url: string;
         id?: string | null;
       }[]
     | null;
@@ -1751,11 +1762,13 @@ export interface SchemaSelect<T extends boolean = true> {
   name?: T;
   businessType?: T;
   image?: T;
+  logo?: T;
+  phone?: T;
   street?: T;
   city?: T;
   state?: T;
   zip?: T;
-  phone?: T;
+  geolocation?: T;
   priceRange?: T;
   openingHours?:
     | T
