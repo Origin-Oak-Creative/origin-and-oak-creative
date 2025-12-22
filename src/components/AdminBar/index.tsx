@@ -35,7 +35,7 @@ export const AdminBar: React.FC<{
 }> = (props) => {
   const { adminBarProps } = props || {}
   const segments = useSelectedLayoutSegments()
-  const [show, setShow] = useState(false)
+  const [_show, setShow] = useState(false)
   const collection = (
     collectionLabels[segments?.[1] as keyof typeof collectionLabels] ? segments[1] : 'pages'
   ) as keyof typeof collectionLabels
@@ -65,7 +65,7 @@ export const AdminBar: React.FC<{
             })
           }}
           style={{
-            backgroundColor: 'transparent',
+            backgroundColor: 'black',
             padding: 0,
             position: 'relative',
             zIndex: 'unset',

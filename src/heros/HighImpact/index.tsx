@@ -8,6 +8,8 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 
+import styles from './index.module.css'
+
 export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
   const { setHeaderTheme } = useHeaderTheme()
 
@@ -16,24 +18,24 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
   })
 
   return (
-    <div data-theme="dark">
-      <div>
-        <div>
-          {richText && <RichText data={richText} enableGutter={false} />}
-          {Array.isArray(links) && links.length > 0 && (
-            <ul>
-              {links.map(({ link }, i) => {
-                return (
-                  <li key={i}>
-                    <CMSLink {...link} />
-                  </li>
-                )
-              })}
-            </ul>
-          )}
-        </div>
+    <div className={styles.parent}>
+      <div className={styles.content}>
+        {richText && <RichText data={richText} enableGutter={false} />}
+        {Array.isArray(links) && links.length > 0 && (
+          <ul>
+            {links.map(({ link }, i) => {
+              return (
+                <li key={i}>
+                  <CMSLink {...link} />
+                </li>
+              )
+            })}
+          </ul>
+        )}
       </div>
-      <div>{media && typeof media === 'object' && <Media fill priority resource={media} />}</div>
+      <div className={styles.background}>
+        {media && typeof media === 'object' && <Media priority resource={media} />}
+      </div>
     </div>
   )
 }

@@ -428,11 +428,3 @@ template {
   --graphite-smoke: #3c3c3c;
   --deep-wisdom-olive: #5e614c;
 }
-
-/* Base Typography */
-h1 {
-  font-family: var(--analogue);
-  font-weight: 700;
-  font-size: 72px;
-  color: var(--midnight);
-}

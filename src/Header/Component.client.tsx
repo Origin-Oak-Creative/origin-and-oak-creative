@@ -5,19 +5,28 @@ import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 import type { Header } from '@/payload-types'
+import type { Logo as LogoType } from '@/payload-types'
 
-import { Logo } from '@/components/Logo/Logo'
+import { Logo } from '@/Logo/Component'
 import { HeaderNav } from './Nav'
 
 interface HeaderClientProps {
   data: Header
+  logo: LogoType
 }
 
-export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
+// TODO: Add logo to header
+
+export const HeaderClient: React.FC<HeaderClientProps> = ({ data, logo }) => {
   /* Storing the value in a useState to avoid hydration errors */
   const [theme, setTheme] = useState<string | null>(null)
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
+
+  const media = logo && typeof logo.media === 'object' ? logo.media : null
+  const logoUrl = media?.sizes?.thumbnail?.url || media?.url
+  const logoHeight = media?.sizes?.thumbnail?.height || media?.height || undefined
+  const logoWidth = media?.sizes?.thumbnail?.width || media?.width || undefined
 
   useEffect(() => {
     setHeaderTheme(null)
@@ -33,7 +42,16 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     <header {...(theme ? { 'data-theme': theme } : {})}>
       <div>
         <Link href="/">
-          <Logo loading="eager" priority="high" />
+          {media && logoUrl && (
+            <Logo
+              loading="eager"
+              priority="high"
+              image={logoUrl}
+              alt={media.alt}
+              height={logoHeight}
+              width={logoWidth}
+            />
+          )}
         </Link>
         <HeaderNav data={data} />
       </div>

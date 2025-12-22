@@ -17,13 +17,13 @@ type Props = MediaBlockProps & {
 }
 
 export const MediaBlock: React.FC<Props> = (props) => {
-  const { className, imgClassName, media, staticImage } = props
+  const { imgClassName, media, staticImage } = props
 
   return (
-    <div className={className}>
+    <>
       {(media || staticImage) && (
         <Media imgClassName={imgClassName} resource={media} src={staticImage} />
       )}
-    </div>
+    </>
   )
 }
