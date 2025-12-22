@@ -1,10 +1,10 @@
-import { Checkbox } from './Checkbox'
-import { Email } from './Email'
-import { Message } from './Message'
-import { Number } from './Number'
-import { Select } from './Select'
-import { Text } from './Text'
-import { Textarea } from './Textarea'
+import { Checkbox } from './Checkbox';
+import { Email } from './Email';
+import { Message } from './Message';
+import { Number } from './Number';
+import { Select } from './Select';
+import { Text } from './Text';
+import { Textarea } from './Textarea';
 
 export const fields = {
   checkbox: Checkbox,
@@ -14,4 +14,4 @@ export const fields = {
   select: Select,
   text: Text,
   textarea: Textarea,
-}
+};

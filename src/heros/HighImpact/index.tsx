@@ -1,21 +1,21 @@
-'use client'
-import { useHeaderTheme } from '@/providers/HeaderTheme'
-import React, { useEffect } from 'react'
+'use client';
+import { useHeaderTheme } from '@/providers/HeaderTheme';
+import React, { useEffect } from 'react';
 
-import type { Page } from '@/payload-types'
+import type { Page } from '@/payload-types';
 
-import { CMSLink } from '@/components/Link'
-import { Media } from '@/components/Media'
-import RichText from '@/components/RichText'
+import { CMSLink } from '@/components/Link';
+import { Media } from '@/components/Media';
+import RichText from '@/components/RichText';
 
-import styles from './index.module.css'
+import styles from './index.module.css';
 
 export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
-  const { setHeaderTheme } = useHeaderTheme()
+  const { setHeaderTheme } = useHeaderTheme();
 
   useEffect(() => {
-    setHeaderTheme('dark')
-  })
+    setHeaderTheme('dark');
+  });
 
   return (
     <div className={styles.parent}>
@@ -28,7 +28,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
                 <li key={i}>
                   <CMSLink {...link} />
                 </li>
-              )
+              );
             })}
           </ul>
         )}
@@ -37,5 +37,5 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
         {media && typeof media === 'object' && <Media priority resource={media} />}
       </div>
     </div>
-  )
-}
+  );
+};

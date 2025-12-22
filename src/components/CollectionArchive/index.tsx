@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-import { Card, CardPostData } from '@/components/Card'
+import { Card, CardPostData } from '@/components/Card';
 
 export type Props = {
-  posts: CardPostData[]
-}
+  posts: CardPostData[];
+};
 
 export const CollectionArchive: React.FC<Props> = (props) => {
-  const { posts } = props
+  const { posts } = props;
 
   return (
     <div>
@@ -19,13 +19,13 @@ export const CollectionArchive: React.FC<Props> = (props) => {
                 <div key={index}>
                   <Card doc={result} relationTo="posts" showCategories />
                 </div>
-              )
+              );
             }
 
-            return null
+            return null;
           })}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

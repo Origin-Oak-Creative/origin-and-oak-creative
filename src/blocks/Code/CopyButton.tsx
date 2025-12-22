@@ -1,16 +1,16 @@
-'use client'
-import { CopyIcon } from '@payloadcms/ui/icons/Copy'
-import { useState } from 'react'
+'use client';
+import { CopyIcon } from '@payloadcms/ui/icons/Copy';
+import { useState } from 'react';
 
 export function CopyButton({ code }: { code: string }) {
-  const [text, setText] = useState('Copy')
+  const [text, setText] = useState('Copy');
 
   function updateCopyStatus() {
     if (text === 'Copy') {
-      setText(() => 'Copied!')
+      setText(() => 'Copied!');
       setTimeout(() => {
-        setText(() => 'Copy')
-      }, 1000)
+        setText(() => 'Copy');
+      }, 1000);
     }
   }
 
@@ -18,13 +18,13 @@ export function CopyButton({ code }: { code: string }) {
     <div>
       <button
         onClick={async () => {
-          await navigator.clipboard.writeText(code)
-          updateCopyStatus()
+          await navigator.clipboard.writeText(code);
+          updateCopyStatus();
         }}
       >
         <p>{text}</p>
         <CopyIcon />
       </button>
     </div>
-  )
+  );
 }

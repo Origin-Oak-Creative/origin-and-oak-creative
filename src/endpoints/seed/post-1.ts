@@ -1,11 +1,11 @@
-import type { Media, User } from '@/payload-types'
-import { RequiredDataFromCollectionSlug } from 'payload'
+import type { Media, User } from '@/payload-types';
+import { RequiredDataFromCollectionSlug } from 'payload';
 
 export type PostArgs = {
-  heroImage: Media
-  blockImage: Media
-  author: User
-}
+  heroImage: Media;
+  blockImage: Media;
+  author: User;
+};
 
 export const post1: (args: PostArgs) => RequiredDataFromCollectionSlug<'posts'> = ({
   heroImage,
@@ -311,5 +311,5 @@ export const post1: (args: PostArgs) => RequiredDataFromCollectionSlug<'posts'> 
     },
     relatedPosts: [], // this is populated by the seed script
     title: 'Digital Horizons: A Glimpse into Tomorrow',
-  }
-}
+  };
+};

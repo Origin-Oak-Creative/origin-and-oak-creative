@@ -113,11 +113,13 @@ export interface Config {
     header: Header;
     footer: Footer;
     logo: Logo;
+    schema: Schema;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     logo: LogoSelect<false> | LogoSelect<true>;
+    schema: SchemaSelect<false> | SchemaSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1655,6 +1657,38 @@ export interface Logo {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "schema".
+ */
+export interface Schema {
+  id: number;
+  name: string;
+  businessType: 'ProfessionalService' | 'LocalBusiness' | 'Corporation';
+  image?: (number | null) | Media;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
+  phone: string;
+  priceRange?: ('$' | '$$' | '$$$' | '$$$$') | null;
+  openingHours?:
+    | {
+        days?: string | null;
+        opens?: string | null;
+        closes?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  socials?:
+    | {
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1705,6 +1739,38 @@ export interface FooterSelect<T extends boolean = true> {
  */
 export interface LogoSelect<T extends boolean = true> {
   media?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "schema_select".
+ */
+export interface SchemaSelect<T extends boolean = true> {
+  name?: T;
+  businessType?: T;
+  image?: T;
+  street?: T;
+  city?: T;
+  state?: T;
+  zip?: T;
+  phone?: T;
+  priceRange?: T;
+  openingHours?:
+    | T
+    | {
+        days?: T;
+        opens?: T;
+        closes?: T;
+        id?: T;
+      };
+  socials?:
+    | T
+    | {
+        url?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

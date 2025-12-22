@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
-import * as React from 'react'
-import { useFormContext } from 'react-hook-form'
+import * as React from 'react';
+import { useFormContext } from 'react-hook-form';
 
 export const Error = ({ name }: { name: string }) => {
   const {
     formState: { errors },
-  } = useFormContext()
-  return <div>{(errors[name]?.message as string) || 'This field is required'}</div>
-}
+  } = useFormContext();
+  return <div>{(errors[name]?.message as string) || 'This field is required'}</div>;
+};

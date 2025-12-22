@@ -1,23 +1,24 @@
-import { sqliteAdapter } from '@payloadcms/db-sqlite'
-import sharp from 'sharp'
-import path from 'path'
-import { buildConfig, PayloadRequest } from 'payload'
-import { fileURLToPath } from 'url'
+import { sqliteAdapter } from '@payloadcms/db-sqlite';
+import sharp from 'sharp';
+import path from 'path';
+import { buildConfig, PayloadRequest } from 'payload';
+import { fileURLToPath } from 'url';
 
-import { Categories } from './collections/Categories'
-import { Media } from './collections/Media'
-import { Pages } from './collections/Pages'
-import { Posts } from './collections/Posts'
-import { Users } from './collections/Users'
-import { Footer } from './globals/Footer/config'
-import { Header } from './globals/Header/config'
-import { plugins } from './plugins'
-import { defaultLexical } from '@/fields/defaultLexical'
-import { getServerSideURL } from './utilities/getURL'
-import { Logo } from './globals/Logo/config'
+import { Categories } from './collections/Categories';
+import { Media } from './collections/Media';
+import { Pages } from './collections/Pages';
+import { Posts } from './collections/Posts';
+import { Users } from './collections/Users';
+import { Footer } from './globals/Footer/config';
+import { Header } from './globals/Header/config';
+import { plugins } from './plugins';
+import { defaultLexical } from '@/fields/defaultLexical';
+import { getServerSideURL } from './utilities/getURL';
+import { Logo } from './globals/Logo/config';
+import { BusinessSchema } from './globals/BusinessSchema/config';
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 export default buildConfig({
   admin: {
@@ -57,7 +58,7 @@ export default buildConfig({
   }),
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer, Logo],
+  globals: [Header, Footer, Logo, BusinessSchema],
   plugins,
   secret: process.env.PAYLOAD_SECRET,
   sharp,
@@ -68,15 +69,15 @@ export default buildConfig({
     access: {
       run: ({ req }: { req: PayloadRequest }): boolean => {
         // Allow logged in users to execute this endpoint (default)
-        if (req.user) return true
+        if (req.user) return true;
 
         // If there is no logged in user, then check
         // for the Vercel Cron secret to be present as an
         // Authorization header:
-        const authHeader = req.headers.get('authorization')
-        return authHeader === `Bearer ${process.env.CRON_SECRET}`
+        const authHeader = req.headers.get('authorization');
+        return authHeader === `Bearer ${process.env.CRON_SECRET}`;
       },
     },
     tasks: [],
   },
-})
+});

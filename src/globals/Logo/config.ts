@@ -1,6 +1,6 @@
-import type { GlobalConfig } from 'payload'
+import type { GlobalConfig } from 'payload';
 
-import { revalidateLogo } from './hooks/revalidateLogo'
+import { revalidateLogo } from './hooks/revalidateLogo';
 
 export const Logo: GlobalConfig = {
   slug: 'logo',
@@ -20,4 +20,4 @@ export const Logo: GlobalConfig = {
   hooks: {
     afterChange: [revalidateLogo],
   },
-}
+};

@@ -1,19 +1,19 @@
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
 
-import React from 'react'
+import React from 'react';
 
-import { AdminBar } from '@/components/AdminBar'
-import { Footer } from '@/globals/Footer/Component'
-import { Header } from '@/globals/Header/Component'
-import { Providers } from '@/providers'
-import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
-import { draftMode } from 'next/headers'
+import { AdminBar } from '@/components/AdminBar';
+import { Footer } from '@/globals/Footer/Component';
+import { Header } from '@/globals/Header/Component';
+import { Providers } from '@/providers';
+import { mergeOpenGraph } from '@/utilities/mergeOpenGraph';
+import { draftMode } from 'next/headers';
 
-import './globals.css'
-import { getServerSideURL } from '@/utilities/getURL'
+import './globals.css';
+import { getServerSideURL } from '@/utilities/getURL';
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const { isEnabled } = await draftMode()
+  const { isEnabled } = await draftMode();
 
   return (
     <html lang="en">
@@ -35,7 +35,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </Providers>
       </body>
     </html>
-  )
+  );
 }
 
 export const metadata: Metadata = {
@@ -45,4 +45,4 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     creator: '@payloadcms',
   },
-}
+};

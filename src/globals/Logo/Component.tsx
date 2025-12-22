@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
 interface Props {
-  image: string
-  alt: string
-  width?: number
-  height?: number
-  loading?: 'lazy' | 'eager'
-  priority?: 'auto' | 'high' | 'low'
+  image: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  loading?: 'lazy' | 'eager';
+  priority?: 'auto' | 'high' | 'low';
 }
 
 export const Logo = (props: Props) => {
@@ -17,10 +17,10 @@ export const Logo = (props: Props) => {
     alt,
     height,
     width,
-  } = props
+  } = props;
 
-  const loading = loadingFromProps || 'lazy'
-  const priority = priorityFromProps || 'low'
+  const loading = loadingFromProps || 'lazy';
+  const priority = priorityFromProps || 'low';
 
   return (
     /* eslint-disable @next/next/no-img-element */
@@ -33,5 +33,5 @@ export const Logo = (props: Props) => {
       height={height}
       width={width}
     />
-  )
-}
+  );
+};
