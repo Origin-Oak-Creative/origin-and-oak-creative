@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react'
 import type { Header } from '@/payload-types'
 import type { Logo as LogoType } from '@/payload-types'
 
-import { Logo } from '@/Logo/Component'
+import { Logo } from '@/globals/Logo/Component'
 import { HeaderNav } from './Nav'
 
 interface HeaderClientProps {

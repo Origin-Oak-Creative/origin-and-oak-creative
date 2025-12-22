@@ -5,7 +5,7 @@ import React from 'react'
 import type { Footer, Logo as LogoType } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
-import { Logo } from '@/Logo/Component'
+import { Logo } from '@/globals/Logo/Component'
 
 export async function Footer() {
   const footerData: Footer = await getCachedGlobal('footer', 1)()
