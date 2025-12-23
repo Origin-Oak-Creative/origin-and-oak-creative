@@ -1,6 +1,6 @@
-import type { GlobalConfig } from 'payload'
+import type { GlobalConfig } from 'payload';
 
-import { revalidateSchema } from './hooks/revalidateSchema'
+import { revalidateSchema } from './hooks/revalidateSchema';
 
 export const BusinessSchema: GlobalConfig = {
   slug: 'schema',
@@ -96,4 +96,4 @@ export const BusinessSchema: GlobalConfig = {
   hooks: {
     afterChange: [revalidateSchema],
   },
-}
+};

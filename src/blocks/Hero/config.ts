@@ -1,11 +1,11 @@
-import type { Block, Field } from 'payload'
+import type { Block, Field } from 'payload';
 
 import {
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
-} from '@payloadcms/richtext-lexical'
+} from '@payloadcms/richtext-lexical';
 
 const HeroFields: Field[] = [
   {
@@ -26,10 +26,10 @@ const HeroFields: Field[] = [
       ],
     }),
   },
-]
+];
 
 export const Hero: Block = {
   slug: 'hero',
   interfaceName: 'Hero Block',
   fields: HeroFields,
-}
+};

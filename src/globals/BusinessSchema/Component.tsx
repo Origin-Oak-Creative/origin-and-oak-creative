@@ -1,11 +1,11 @@
-import { getCachedGlobal } from '@/utilities/getGlobals'
-import { getServerSideURL } from '@/utilities/getURL'
+import { getCachedGlobal } from '@/utilities/getGlobals';
+import { getServerSideURL } from '@/utilities/getURL';
 
-import type { Schema, Logo } from '@/payload-types'
+import type { Schema, Logo } from '@/payload-types';
 
 export async function BusinessSchema() {
-  const schemaData: Schema = await getCachedGlobal('schema', 1)()
-  const logoData: Logo = await getCachedGlobal('logo', 1)()
+  const schemaData: Schema = await getCachedGlobal('schema', 1)();
+  const logoData: Logo = await getCachedGlobal('logo', 1)();
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -42,12 +42,12 @@ export async function BusinessSchema() {
         }))
       : undefined,
     sameAs: schemaData.socials && schemaData.socials.map((s) => s.url),
-  }
+  };
 
   return (
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />
-  )
+  );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Card, CardPostData } from '@/components/Card';
+import { Card, CardPostData } from '@/components/PostCard';
 
 export type Props = {
   posts: CardPostData[];
