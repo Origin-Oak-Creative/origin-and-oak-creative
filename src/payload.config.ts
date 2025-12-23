@@ -9,6 +9,7 @@ import { Media } from './collections/Media';
 import { Pages } from './collections/Pages';
 import { Posts } from './collections/Posts';
 import { Users } from './collections/Users';
+import { TeamMembers } from './collections/TeamMembers';
 import { Footer } from './globals/Footer/config';
 import { Header } from './globals/Header/config';
 import { plugins } from './plugins';
@@ -56,7 +57,7 @@ export default buildConfig({
       url: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
+  collections: [Pages, Posts, Media, Categories, Users, TeamMembers],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, Logo, BusinessSchema],
   plugins,
