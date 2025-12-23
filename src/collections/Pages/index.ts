@@ -9,6 +9,7 @@ import { FormBlock } from '../../blocks/Form/config';
 import { MediaBlock } from '../../blocks/MediaBlock/config';
 import { Hero } from '@/blocks/Hero/config';
 import { Team } from '@/blocks/TeamBlock/config';
+import { ContentWithMedia } from '@/blocks/ContentWithMedia/config';
 import { slugField } from 'payload';
 import { populatePublishedAt } from '../../hooks/populatePublishedAt';
 import { generatePreviewPath } from '../../utilities/generatePreviewPath';
@@ -69,7 +70,16 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [Hero, CallToAction, Content, MediaBlock, Archive, Team, FormBlock],
+              blocks: [
+                Hero,
+                CallToAction,
+                Content,
+                MediaBlock,
+                Archive,
+                Team,
+                FormBlock,
+                ContentWithMedia,
+              ],
               required: true,
               admin: {
                 initCollapsed: true,

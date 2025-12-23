@@ -163,7 +163,16 @@ export interface UserAuthOperations {
 export interface Page {
   id: number;
   title: string;
-  layout: (HeroBlock | CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | TeamBlock | FormBlock)[];
+  layout: (
+    | HeroBlock
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | TeamBlock
+    | FormBlock
+    | ContentWithMediaBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -557,7 +566,7 @@ export interface ArchiveBlock {
  * via the `definition` "Team Block".
  */
 export interface TeamBlock {
-  relationTo?: 'team-members' | null;
+  relationTo: 'team-members';
   id?: string | null;
   blockName?: string | null;
   blockType: 'team';
@@ -761,6 +770,52 @@ export interface Form {
     | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Content With Media Block".
+ */
+export interface ContentWithMediaBlock {
+  width: 'block' | 'fullWidth';
+  theme: 'softLinen' | 'riverStone' | 'midnight';
+  textDirection: 'left' | 'right';
+  heading?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  image: {
+    media: number | Media;
+    style: 'Floating' | 'fullHeight';
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'content-media';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1052,6 +1107,7 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         team?: T | TeamBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        'content-media'?: T | ContentWithMediaBlockSelect<T>;
       };
   meta?:
     | T
@@ -1169,6 +1225,25 @@ export interface FormBlockSelect<T extends boolean = true> {
   introContent?: T;
   id?: T;
   blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Content With Media Block_select".
+ */
+export interface ContentWithMediaBlockSelect {
+  width?: boolean;
+  theme?: boolean;
+  textDirection?: boolean;
+  heading?: boolean;
+  content?: boolean;
+  image?:
+    | boolean
+    | {
+        media?: boolean;
+        style?: boolean;
+      };
+  id?: boolean;
+  blockName?: boolean;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1854,17 +1929,6 @@ export interface BannerBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'banner';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CodeBlock".
- */
-export interface CodeBlock {
-  language?: ('typescript' | 'javascript' | 'css') | null;
-  code: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'code';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
