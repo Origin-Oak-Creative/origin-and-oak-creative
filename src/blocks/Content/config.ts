@@ -7,7 +7,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical';
 
-import { link } from '@/fields/link';
+import { blockWidthField, blockThemeField } from '@/fields';
 
 const columnFields: Field[] = [
   {
@@ -40,7 +40,7 @@ const columnFields: Field[] = [
       features: ({ rootFeatures }) => {
         return [
           ...rootFeatures,
-          HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+          HeadingFeature({ enabledHeadingSizes: ['h3', 'h4'] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
         ];
@@ -48,25 +48,28 @@ const columnFields: Field[] = [
     }),
     label: false,
   },
-  {
-    name: 'enableLink',
-    type: 'checkbox',
-  },
-  link({
-    overrides: {
-      admin: {
-        condition: (_data, siblingData) => {
-          return Boolean(siblingData?.enableLink);
-        },
-      },
-    },
-  }),
 ];
 
 export const Content: Block = {
   slug: 'content',
   interfaceName: 'ContentBlock',
   fields: [
+    blockWidthField,
+    blockThemeField,
+    {
+      name: 'heading',
+      type: 'richText',
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => {
+          return [
+            ...rootFeatures,
+            HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+            FixedToolbarFeature(),
+            InlineToolbarFeature(),
+          ];
+        },
+      }),
+    },
     {
       name: 'columns',
       type: 'array',

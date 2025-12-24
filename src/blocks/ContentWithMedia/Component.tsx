@@ -9,13 +9,14 @@ import RichText from '@/components/RichText';
 
 export const ContentWithMediaBlock: React.FC<ContentWithMediaBlockProps> = ({
   width,
+  theme,
   heading,
   textDirection,
   content,
   image,
 }) => {
   return (
-    <div className={width}>
+    <div className={`${theme}, ${width}`}>
       {heading && <RichText data={heading} enableGutter={false} />}
       <div className={textDirection}>
         <RichText data={content} enableGutter={false} />

@@ -10,6 +10,8 @@ import { MediaBlock } from '../../blocks/MediaBlock/config';
 import { Hero } from '@/blocks/Hero/config';
 import { Team } from '@/blocks/TeamBlock/config';
 import { ContentWithMedia } from '@/blocks/ContentWithMedia/config';
+import { ContentWithCard } from '@/blocks/ContentWithCard/config';
+import { CardGrid } from '@/blocks/CardGrid/config';
 import { slugField } from 'payload';
 import { populatePublishedAt } from '../../hooks/populatePublishedAt';
 import { generatePreviewPath } from '../../utilities/generatePreviewPath';
@@ -79,6 +81,8 @@ export const Pages: CollectionConfig<'pages'> = {
                 Team,
                 FormBlock,
                 ContentWithMedia,
+                ContentWithCard,
+                CardGrid,
               ],
               required: true,
               admin: {

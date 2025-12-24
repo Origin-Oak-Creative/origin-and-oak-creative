@@ -168,6 +168,8 @@ export interface Page {
     | TeamBlock
     | FormBlock
     | ContentWithMediaBlock
+    | ContentWithCardBlock
+    | CardGridBlock
   )[];
   meta?: {
     title?: string | null;
@@ -468,6 +470,23 @@ export interface User {
  * via the `definition` "ContentBlock".
  */
 export interface ContentBlock {
+  width: 'block' | 'fullWidth';
+  theme: 'softLinen' | 'riverStone' | 'midnight';
+  heading?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   columns?:
     | {
         size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
@@ -486,26 +505,6 @@ export interface ContentBlock {
           };
           [k: string]: unknown;
         } | null;
-        enableLink?: boolean | null;
-        link?: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: number | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: number | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-          /**
-           * Choose how the link should be rendered.
-           */
-          appearance?: ('default' | 'outline') | null;
-        };
         id?: string | null;
       }[]
     | null;
@@ -815,6 +814,111 @@ export interface ContentWithMediaBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Content With Card Block".
+ */
+export interface ContentWithCardBlock {
+  width: 'block' | 'fullWidth';
+  theme: 'softLinen' | 'riverStone' | 'midnight';
+  cardPlacement: 'left' | 'right';
+  heading?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  card: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'content-card';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Card Grid Block".
+ */
+export interface CardGridBlock {
+  width: 'block' | 'fullWidth';
+  theme: 'softLinen' | 'riverStone' | 'midnight';
+  heading?: {
+    content?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    position?: ('out' | 'in') | null;
+  };
+  columns: number;
+  cards: {
+    content: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'card-grid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "team-members".
  */
 export interface TeamMember {
@@ -1053,6 +1157,8 @@ export interface PagesSelect<T extends boolean = true> {
         team?: T | TeamBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         'content-media'?: T | ContentWithMediaBlockSelect<T>;
+        'content-card'?: T | ContentWithCardBlockSelect<T>;
+        'card-grid'?: T | CardGridBlockSelect<T>;
       };
   meta?:
     | T
@@ -1107,22 +1213,14 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
  * via the `definition` "ContentBlock_select".
  */
 export interface ContentBlockSelect<T extends boolean = true> {
+  width?: T;
+  theme?: T;
+  heading?: T;
   columns?:
     | T
     | {
         size?: T;
         richText?: T;
-        enableLink?: T;
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-              appearance?: T;
-            };
         id?: T;
       };
   id?: T;
@@ -1186,6 +1284,43 @@ export interface ContentWithMediaBlockSelect {
     | {
         media?: boolean;
         style?: boolean;
+      };
+  id?: boolean;
+  blockName?: boolean;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Content With Card Block_select".
+ */
+export interface ContentWithCardBlockSelect {
+  width?: boolean;
+  theme?: boolean;
+  cardPlacement?: boolean;
+  heading?: boolean;
+  content?: boolean;
+  card?: boolean;
+  id?: boolean;
+  blockName?: boolean;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Card Grid Block_select".
+ */
+export interface CardGridBlockSelect {
+  width?: boolean;
+  theme?: boolean;
+  heading?:
+    | boolean
+    | {
+        content?: boolean;
+        position?: boolean;
+      };
+  columns?: boolean;
+  cards?:
+    | boolean
+    | {
+        content?: boolean;
+        id?: boolean;
       };
   id?: boolean;
   blockName?: boolean;
