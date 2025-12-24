@@ -11,8 +11,6 @@ import {
   RichText as ConvertRichText,
 } from '@payloadcms/richtext-lexical/react';
 
-import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component';
-
 import type {
   BannerBlock as BannerBlockProps,
   CallToActionBlock as CTABlockProps,
@@ -23,7 +21,7 @@ import { CallToActionBlock } from '@/blocks/CallToAction/Component';
 
 type NodeTypes =
   | DefaultNodeTypes
-  | SerializedBlockNode<CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps>;
+  | SerializedBlockNode<CTABlockProps | MediaBlockProps | BannerBlockProps>;
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   const { value, relationTo } = linkNode.fields.doc!;
@@ -42,7 +40,6 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     mediaBlock: ({ node }) => (
       <MediaBlock {...node.fields} enableGutter={false} disableInnerContainer={true} />
     ),
-    code: ({ node }) => <CodeBlock {...node.fields} />,
     cta: ({ node }) => <CallToActionBlock {...node.fields} />,
   },
 });
