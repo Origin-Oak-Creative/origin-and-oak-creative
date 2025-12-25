@@ -15,6 +15,7 @@ import {
 } from '@payloadcms/richtext-lexical';
 
 import { MediaBlock } from '@/blocks/MediaBlock/config';
+import { Icon } from '@/inlineBlocks/Icon/config';
 
 export const contentLexical = () =>
   lexicalEditor({
@@ -28,7 +29,7 @@ export const contentLexical = () =>
         UnorderedListFeature(),
         OrderedListFeature(),
         HorizontalRuleFeature(),
-        BlocksFeature({ blocks: [MediaBlock] }),
+        BlocksFeature({ blocks: [MediaBlock], inlineBlocks: [Icon] }),
         TextStateFeature({
           state: {
             size: {

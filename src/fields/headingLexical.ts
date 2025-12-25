@@ -1,8 +1,10 @@
+import { Icon } from '@/inlineBlocks/Icon/config';
 import {
   BoldFeature,
   ItalicFeature,
   HeadingFeature,
   AlignFeature,
+  BlocksFeature,
   TextStateFeature,
   FixedToolbarFeature,
   InlineToolbarFeature,
@@ -18,6 +20,7 @@ export const headingLexical = (headingSizes: HeadingFeatureProps['enabledHeading
         ItalicFeature(),
         HeadingFeature({ enabledHeadingSizes: headingSizes }),
         AlignFeature(),
+        BlocksFeature({ inlineBlocks: [Icon] }),
         TextStateFeature({
           state: {
             style: {

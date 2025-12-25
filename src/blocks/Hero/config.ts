@@ -15,6 +15,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical';
 import { ContentWithMedia } from '../ContentWithMedia/config';
+import { Icon } from '@/inlineBlocks/Icon/config';
 
 const heroLexical = lexicalEditor({
   features: () => {
@@ -26,7 +27,7 @@ const heroLexical = lexicalEditor({
       IndentFeature(),
       ParagraphFeature(),
       HorizontalRuleFeature(),
-      BlocksFeature({ blocks: [ContentWithMedia] }),
+      BlocksFeature({ blocks: [ContentWithMedia], inlineBlocks: [Icon] }),
       TextStateFeature({
         state: {
           style: {
