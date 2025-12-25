@@ -1,13 +1,7 @@
 import type { Block, Field } from 'payload';
 
-import {
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical';
 import { hasText } from '@payloadcms/richtext-lexical/shared';
-import { blockWidthField, blockThemeField } from '@/fields';
+import { blockWidthField, blockThemeField, headingLexical, cardField } from '@/fields';
 
 const CardGridFields: Field[] = [
   blockWidthField,
@@ -19,16 +13,7 @@ const CardGridFields: Field[] = [
       {
         name: 'content',
         type: 'richText',
-        editor: lexicalEditor({
-          features: ({ rootFeatures }) => {
-            return [
-              ...rootFeatures,
-              HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
-              FixedToolbarFeature(),
-              InlineToolbarFeature(),
-            ];
-          },
-        }),
+        editor: headingLexical(['h2', 'h3', 'h4']),
       },
       {
         name: 'position',
@@ -59,23 +44,7 @@ const CardGridFields: Field[] = [
     admin: {
       initCollapsed: true,
     },
-    fields: [
-      {
-        name: 'content',
-        type: 'richText',
-        editor: lexicalEditor({
-          features: ({ rootFeatures }) => {
-            return [
-              ...rootFeatures,
-              HeadingFeature({ enabledHeadingSizes: ['h3', 'h4'] }),
-              FixedToolbarFeature(),
-              InlineToolbarFeature(),
-            ];
-          },
-        }),
-        required: true,
-      },
-    ],
+    fields: [cardField],
     required: true,
   },
 ];

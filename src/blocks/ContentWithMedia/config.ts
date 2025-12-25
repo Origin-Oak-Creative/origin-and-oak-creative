@@ -1,12 +1,6 @@
 import type { Block, Field } from 'payload';
 
-import {
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical';
-import { blockWidthField, blockThemeField } from '@/fields';
+import { blockWidthField, blockThemeField, headingLexical, contentLexical } from '@/fields';
 
 const ContentWithMediaFields: Field[] = [
   blockWidthField,
@@ -24,30 +18,12 @@ const ContentWithMediaFields: Field[] = [
   {
     name: 'heading',
     type: 'richText',
-    editor: lexicalEditor({
-      features: ({ rootFeatures }) => {
-        return [
-          ...rootFeatures,
-          HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
-          FixedToolbarFeature(),
-          InlineToolbarFeature(),
-        ];
-      },
-    }),
+    editor: headingLexical(['h2', 'h3', 'h4']),
   },
   {
     name: 'content',
     type: 'richText',
-    editor: lexicalEditor({
-      features: ({ rootFeatures }) => {
-        return [
-          ...rootFeatures,
-          HeadingFeature({ enabledHeadingSizes: ['h3', 'h4'] }),
-          FixedToolbarFeature(),
-          InlineToolbarFeature(),
-        ];
-      },
-    }),
+    editor: contentLexical(),
     required: true,
   },
   {
