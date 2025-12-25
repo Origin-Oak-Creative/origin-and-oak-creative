@@ -490,7 +490,7 @@ export interface ContentBlock {
   columns?:
     | {
         size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
-        richText?: {
+        content?: {
           root: {
             type: string;
             children: {
@@ -561,6 +561,36 @@ export interface ArchiveBlock {
  * via the `definition` "Team Block".
  */
 export interface TeamBlock {
+  heading?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   relationTo: 'team-members';
   id?: string | null;
   blockName?: string | null;
@@ -851,19 +881,36 @@ export interface ContentWithCardBlock {
     [k: string]: unknown;
   };
   card: {
-    root: {
-      type: string;
-      children: {
-        type: any;
+    heading?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
         version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    content: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
     };
-    [k: string]: unknown;
   };
   id?: string | null;
   blockName?: string | null;
@@ -896,20 +943,37 @@ export interface CardGridBlock {
   };
   columns: number;
   cards: {
-    content: {
-      root: {
-        type: string;
-        children: {
-          type: any;
+    card: {
+      heading?: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
           version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+      content: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
       };
-      [k: string]: unknown;
     };
     id?: string | null;
   }[];
@@ -1220,7 +1284,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
     | T
     | {
         size?: T;
-        richText?: T;
+        content?: T;
         id?: T;
       };
   id?: T;
@@ -1254,6 +1318,8 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
  * via the `definition` "Team Block_select".
  */
 export interface TeamBlockSelect {
+  heading?: boolean;
+  content?: boolean;
   relationTo?: boolean;
   id?: boolean;
   blockName?: boolean;
@@ -1298,7 +1364,12 @@ export interface ContentWithCardBlockSelect {
   cardPlacement?: boolean;
   heading?: boolean;
   content?: boolean;
-  card?: boolean;
+  card?:
+    | boolean
+    | {
+        heading?: boolean;
+        content?: boolean;
+      };
   id?: boolean;
   blockName?: boolean;
 }
@@ -1319,7 +1390,12 @@ export interface CardGridBlockSelect {
   cards?:
     | boolean
     | {
-        content?: boolean;
+        card?:
+          | boolean
+          | {
+              heading?: boolean;
+              content?: boolean;
+            };
         id?: boolean;
       };
   id?: boolean;
