@@ -14,8 +14,10 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical';
+
 import { ContentWithMedia } from '../ContentWithMedia/config';
 import { Icon } from '@/inlineBlocks/Icon/config';
+import { LinkButton } from '@/inlineBlocks/LinkButton/config';
 
 const heroLexical = lexicalEditor({
   features: () => {
@@ -27,7 +29,7 @@ const heroLexical = lexicalEditor({
       IndentFeature(),
       ParagraphFeature(),
       HorizontalRuleFeature(),
-      BlocksFeature({ blocks: [ContentWithMedia], inlineBlocks: [Icon] }),
+      BlocksFeature({ blocks: [ContentWithMedia], inlineBlocks: [Icon, LinkButton] }),
       TextStateFeature({
         state: {
           style: {

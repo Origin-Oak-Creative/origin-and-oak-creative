@@ -16,6 +16,7 @@ import {
 
 import { MediaBlock } from '@/blocks/MediaBlock/config';
 import { Icon } from '@/inlineBlocks/Icon/config';
+import { LinkButton } from '@/inlineBlocks/LinkButton/config';
 
 export const contentLexical = () =>
   lexicalEditor({
@@ -29,7 +30,7 @@ export const contentLexical = () =>
         UnorderedListFeature(),
         OrderedListFeature(),
         HorizontalRuleFeature(),
-        BlocksFeature({ blocks: [MediaBlock], inlineBlocks: [Icon] }),
+        BlocksFeature({ blocks: [MediaBlock], inlineBlocks: [Icon, LinkButton] }),
         TextStateFeature({
           state: {
             size: {

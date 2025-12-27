@@ -2,6 +2,7 @@ import type { GlobalConfig } from 'payload';
 
 import { link } from '@/fields/link';
 import { revalidateHeader } from './hooks/revalidateHeader';
+import { linkStyle } from '@/fields';
 
 export const Header: GlobalConfig = {
   slug: 'header',
@@ -12,11 +13,7 @@ export const Header: GlobalConfig = {
     {
       name: 'navItems',
       type: 'array',
-      fields: [
-        link({
-          appearances: false,
-        }),
-      ],
+      fields: [link, linkStyle, { name: 'label', type: 'text', required: true }],
       maxRows: 6,
       admin: {
         initCollapsed: true,

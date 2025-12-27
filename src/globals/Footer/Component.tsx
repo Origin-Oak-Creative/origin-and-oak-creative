@@ -4,8 +4,8 @@ import React from 'react';
 
 import type { Footer, Logo as LogoType } from '@/payload-types';
 
-import { CMSLink } from '@/components/Link';
-import { Logo } from '@/globals/Logo/Component';
+import { Logo } from '../Logo/Component';
+import { CMSLink } from '@/components/CMSLink';
 
 export async function Footer() {
   const footerData: Footer = await getCachedGlobal('footer', 1)();
@@ -35,7 +35,7 @@ export async function Footer() {
 
         <div>
           <nav>
-            {navItems.map(({ link }, i) => {
+            {navItems.map((link, i) => {
               return <CMSLink key={i} {...link} />;
             })}
           </nav>
