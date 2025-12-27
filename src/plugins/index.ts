@@ -1,5 +1,4 @@
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder';
-import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs';
 import { seoPlugin } from '@payloadcms/plugin-seo';
 import { Plugin } from 'payload';
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types';
@@ -21,10 +20,6 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 };
 
 export const plugins: Plugin[] = [
-  nestedDocsPlugin({
-    collections: ['categories'],
-    generateURL: (docs) => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
-  }),
   seoPlugin({
     generateTitle,
     generateURL,

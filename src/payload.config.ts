@@ -3,17 +3,15 @@ import sharp from 'sharp';
 import path from 'path';
 import { buildConfig, PayloadRequest } from 'payload';
 import { fileURLToPath } from 'url';
+import { lexicalEditor } from '@payloadcms/richtext-lexical';
 
-import { Categories } from './collections/Categories';
 import { Media } from './collections/Media';
 import { Pages } from './collections/Pages';
-import { Posts } from './collections/Posts';
 import { Users } from './collections/Users';
 import { TeamMembers } from './collections/TeamMembers';
 import { Footer } from './globals/Footer/config';
 import { Header } from './globals/Header/config';
 import { plugins } from './plugins';
-import { defaultLexical } from '@/fields/defaultLexical';
 import { getServerSideURL } from './utilities/getURL';
 import { Logo } from './globals/Logo/config';
 import { BusinessSchema } from './globals/BusinessSchema/config';
@@ -51,13 +49,13 @@ export default buildConfig({
     },
   },
   // This config helps us configure global or default features that the other editors can inherit
-  editor: defaultLexical,
+  editor: lexicalEditor(),
   db: sqliteAdapter({
     client: {
       url: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Pages, Posts, Media, Categories, Users, TeamMembers],
+  collections: [Pages, Media, Users, TeamMembers],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, Logo, BusinessSchema],
   plugins,

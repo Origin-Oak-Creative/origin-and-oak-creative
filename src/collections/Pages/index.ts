@@ -2,7 +2,6 @@ import type { CollectionConfig } from 'payload';
 
 import { authenticated } from '../../access/authenticated';
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished';
-import { Archive } from '../../blocks/ArchiveBlock/config';
 import { CallToAction } from '../../blocks/CallToAction/config';
 import { Content } from '../../blocks/Content/config';
 import { FormBlock } from '../../blocks/Form/config';
@@ -77,7 +76,6 @@ export const Pages: CollectionConfig<'pages'> = {
                 CallToAction,
                 Content,
                 MediaBlock,
-                Archive,
                 Team,
                 FormBlock,
                 ContentWithMedia,

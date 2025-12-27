@@ -10,6 +10,8 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component';
 import { HeroBlock } from './Hero/Component';
 import { TeamBlock } from './TeamBlock/Component';
 import { ContentWithMediaBlock } from './ContentWithMedia/Component';
+import { ContentWithCard } from './ContentWithCard/config';
+import { CardGrid } from './CardGrid/config';
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -20,6 +22,8 @@ const blockComponents = {
   hero: HeroBlock,
   team: TeamBlock,
   'content-media': ContentWithMediaBlock,
+  'content-card': ContentWithCard,
+  'card-grid': CardGrid,
 };
 
 export const RenderBlocks: React.FC<{

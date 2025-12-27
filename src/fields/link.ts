@@ -50,7 +50,7 @@ export const link: Field = {
         condition: (_, siblingData) => siblingData?.type === 'reference',
       },
       label: 'Document to link to',
-      relationTo: ['pages', 'posts'],
+      relationTo: ['pages'],
       required: true,
     },
     {
