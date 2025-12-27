@@ -2013,7 +2013,8 @@ export interface IconInlineBlock {
     | number
     | boolean
     | null;
-  color?: ('soft-linen' | 'river-stone' | 'dune-sand' | 'midnight' | 'graphite-smoke' | 'deep-wisdom-olive') | null;
+  color: '#f2eee6' | '#d0c4b5' | '#e8d7c5' | '#2b3744' | '#3c3c3c' | '#5e614c';
+  size: number;
   id?: string | null;
   blockName?: string | null;
   blockType: 'icon';

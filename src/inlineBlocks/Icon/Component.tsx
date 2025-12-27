@@ -5,7 +5,7 @@ import type { IconInlineBlock as IconInlineBlockProps } from '@/payload-types';
 
 /* This is a hack-job - need to effectively rebuild package in-house */
 
-export const IconInlineBlock: React.FC<IconInlineBlockProps> = ({ icon }) => {
+export const IconInlineBlock: React.FC<IconInlineBlockProps> = ({ icon, color, size }) => {
   let iconName: string | undefined;
   if (icon && typeof icon === 'object' && !Array.isArray(icon)) {
     // If featureIcon is an object with a name property
@@ -21,5 +21,5 @@ export const IconInlineBlock: React.FC<IconInlineBlockProps> = ({ icon }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Icon = iconName ? (LucideIcons as any)[iconName] : undefined;
 
-  return <span>{Icon && <Icon />}</span>;
+  return <>{Icon && <Icon strokeWidth={1.5} color={color} size={size} />}</>;
 };
