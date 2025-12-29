@@ -475,6 +475,25 @@ export interface Form {
             width?: number | null;
             required?: boolean | null;
             defaultValue?: boolean | null;
+            /**
+             * If the user inputs this exact value, the form will submit early.
+             */
+            earlyExitValue?: string | null;
+            conditionalRedirect?: {
+              /**
+               * Choose from the "Conditional Redirects" defined at the bottom of the form.
+               */
+              redirect?: string | null;
+              value?: string | null;
+            };
+            /**
+             * The exact name of the property in your Notion Database.
+             */
+            notionKey?: string | null;
+            /**
+             * The internal mapping key for Dubsado leads.
+             */
+            dubsadoKey?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'checkbox';
@@ -493,6 +512,14 @@ export interface Form {
             label?: string | null;
             width?: number | null;
             required?: boolean | null;
+            /**
+             * The exact name of the property in your Notion Database.
+             */
+            notionKey?: string | null;
+            /**
+             * The internal mapping key for Dubsado leads.
+             */
+            dubsadoKey?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'email';
@@ -523,6 +550,14 @@ export interface Form {
             width?: number | null;
             defaultValue?: number | null;
             required?: boolean | null;
+            /**
+             * The exact name of the property in your Notion Database.
+             */
+            notionKey?: string | null;
+            /**
+             * The internal mapping key for Dubsado leads.
+             */
+            dubsadoKey?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'number';
@@ -541,6 +576,25 @@ export interface Form {
                 }[]
               | null;
             required?: boolean | null;
+            /**
+             * If the user inputs this exact value, the form will submit early.
+             */
+            earlyExitValue?: string | null;
+            conditionalRedirect?: {
+              /**
+               * Choose from the "Conditional Redirects" defined at the bottom of the form.
+               */
+              redirect?: string | null;
+              value?: string | null;
+            };
+            /**
+             * The exact name of the property in your Notion Database.
+             */
+            notionKey?: string | null;
+            /**
+             * The internal mapping key for Dubsado leads.
+             */
+            dubsadoKey?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'select';
@@ -560,6 +614,14 @@ export interface Form {
             width?: number | null;
             defaultValue?: string | null;
             required?: boolean | null;
+            /**
+             * The exact name of the property in your Notion Database.
+             */
+            notionKey?: string | null;
+            /**
+             * The internal mapping key for Dubsado leads.
+             */
+            dubsadoKey?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'text';
@@ -570,9 +632,59 @@ export interface Form {
             width?: number | null;
             defaultValue?: string | null;
             required?: boolean | null;
+            /**
+             * The exact name of the property in your Notion Database.
+             */
+            notionKey?: string | null;
+            /**
+             * The internal mapping key for Dubsado leads.
+             */
+            dubsadoKey?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'textarea';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            defaultValue?: string | null;
+            options?:
+              | {
+                  label: string;
+                  value: string;
+                  id?: string | null;
+                }[]
+              | null;
+            required?: boolean | null;
+            /**
+             * If the user inputs this exact value, the form will submit early.
+             */
+            earlyExitValue?: string | null;
+            conditionalRedirect?: {
+              /**
+               * Choose from the "Conditional Redirects" defined at the bottom of the form.
+               */
+              redirect?: string | null;
+              value?: string | null;
+            };
+            /**
+             * The exact name of the property in your Notion Database.
+             */
+            notionKey?: string | null;
+            /**
+             * The internal mapping key for Dubsado leads.
+             */
+            dubsadoKey?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'radio';
+          }
+        | {
+            stepTitle?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stepBreak';
           }
       )[]
     | null;
@@ -597,7 +709,12 @@ export interface Form {
     [k: string]: unknown;
   } | null;
   redirect?: {
-    url: string;
+    type?: ('reference' | 'custom') | null;
+    reference?: {
+      relationTo: 'pages';
+      value: number | Page;
+    } | null;
+    url?: string | null;
   };
   /**
    * Send custom emails when the form submits. Use comma separated lists to send the same email to multiple recipients. To reference a value from this form, wrap that field's name with double curly brackets, i.e. {{firstName}}. You can use a wildcard {{*}} to output all data and {{*:table}} to format it as an HTML table in the email.
@@ -631,6 +748,30 @@ export interface Form {
         id?: string | null;
       }[]
     | null;
+  slackSettings?: {
+    sendNotification?: boolean | null;
+    /**
+     * Message to Send
+     */
+    customMessage?: string | null;
+  };
+  automationSettings: {
+    automation: 'none' | 'inquiry';
+    conditionalRedirect?:
+      | {
+          label: string;
+          value: {
+            type: 'reference' | 'custom';
+            reference?: {
+              relationTo: 'pages';
+              value: number | Page;
+            } | null;
+            url?: string | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -1370,6 +1511,15 @@ export interface FormsSelect<T extends boolean = true> {
               width?: T;
               required?: T;
               defaultValue?: T;
+              earlyExitValue?: T;
+              conditionalRedirect?:
+                | T
+                | {
+                    redirect?: T;
+                    value?: T;
+                  };
+              notionKey?: T;
+              dubsadoKey?: T;
               id?: T;
               blockName?: T;
             };
@@ -1390,6 +1540,8 @@ export interface FormsSelect<T extends boolean = true> {
               label?: T;
               width?: T;
               required?: T;
+              notionKey?: T;
+              dubsadoKey?: T;
               id?: T;
               blockName?: T;
             };
@@ -1408,6 +1560,8 @@ export interface FormsSelect<T extends boolean = true> {
               width?: T;
               defaultValue?: T;
               required?: T;
+              notionKey?: T;
+              dubsadoKey?: T;
               id?: T;
               blockName?: T;
             };
@@ -1427,6 +1581,15 @@ export interface FormsSelect<T extends boolean = true> {
                     id?: T;
                   };
               required?: T;
+              earlyExitValue?: T;
+              conditionalRedirect?:
+                | T
+                | {
+                    redirect?: T;
+                    value?: T;
+                  };
+              notionKey?: T;
+              dubsadoKey?: T;
               id?: T;
               blockName?: T;
             };
@@ -1448,6 +1611,8 @@ export interface FormsSelect<T extends boolean = true> {
               width?: T;
               defaultValue?: T;
               required?: T;
+              notionKey?: T;
+              dubsadoKey?: T;
               id?: T;
               blockName?: T;
             };
@@ -1459,6 +1624,42 @@ export interface FormsSelect<T extends boolean = true> {
               width?: T;
               defaultValue?: T;
               required?: T;
+              notionKey?: T;
+              dubsadoKey?: T;
+              id?: T;
+              blockName?: T;
+            };
+        radio?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              width?: T;
+              defaultValue?: T;
+              options?:
+                | T
+                | {
+                    label?: T;
+                    value?: T;
+                    id?: T;
+                  };
+              required?: T;
+              earlyExitValue?: T;
+              conditionalRedirect?:
+                | T
+                | {
+                    redirect?: T;
+                    value?: T;
+                  };
+              notionKey?: T;
+              dubsadoKey?: T;
+              id?: T;
+              blockName?: T;
+            };
+        stepBreak?:
+          | T
+          | {
+              stepTitle?: T;
               id?: T;
               blockName?: T;
             };
@@ -1469,6 +1670,8 @@ export interface FormsSelect<T extends boolean = true> {
   redirect?:
     | T
     | {
+        type?: T;
+        reference?: T;
         url?: T;
       };
   emails?:
@@ -1482,6 +1685,30 @@ export interface FormsSelect<T extends boolean = true> {
         subject?: T;
         message?: T;
         id?: T;
+      };
+  slackSettings?:
+    | T
+    | {
+        sendNotification?: T;
+        customMessage?: T;
+      };
+  automationSettings?:
+    | T
+    | {
+        automation?: T;
+        conditionalRedirect?:
+          | T
+          | {
+              label?: T;
+              value?:
+                | T
+                | {
+                    type?: T;
+                    reference?: T;
+                    url?: T;
+                  };
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

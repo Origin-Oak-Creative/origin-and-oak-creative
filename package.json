@@ -23,6 +23,7 @@
     "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts"
   },
   "dependencies": {
+    "@notionhq/client": "^5.6.0",
     "@payloadcms/admin-bar": "3.68.3",
     "@payloadcms/db-sqlite": "3.68.3",
     "@payloadcms/live-preview-react": "3.68.3",
