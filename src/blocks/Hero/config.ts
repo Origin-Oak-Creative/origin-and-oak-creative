@@ -16,7 +16,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical';
 
-import { ContentWithMedia } from '../ContentWithMedia/config';
+import { Content } from '../Content/config';
 import { Icon } from '@/inlineBlocks/Icon/config';
 import { LinkButton } from '@/inlineBlocks/LinkButton/config';
 import { getTextStateConfig } from '@/fields/textStateConfig';
@@ -31,7 +31,7 @@ const heroLexical = lexicalEditor({
       IndentFeature(),
       ParagraphFeature(),
       HorizontalRuleFeature(),
-      BlocksFeature({ blocks: [ContentWithMedia], inlineBlocks: [Icon, LinkButton] }),
+      BlocksFeature({ blocks: [Content], inlineBlocks: [Icon, LinkButton] }),
       TextStateFeature({
         state: {
           ...(getTextStateConfig('hero') as { [stateKey: string]: StateValues }),

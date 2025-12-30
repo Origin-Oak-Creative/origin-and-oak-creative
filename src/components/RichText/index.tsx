@@ -1,10 +1,11 @@
-import { MediaBlock } from '@/blocks/MediaBlock/Component';
-import {
+import type {
   DefaultNodeTypes,
   SerializedBlockNode,
+  SerializedInlineBlockNode,
   SerializedLinkNode,
-  type DefaultTypedEditorState,
+  DefaultTypedEditorState,
 } from '@payloadcms/richtext-lexical';
+
 import {
   type JSXConverters,
   defaultJSXConverters,
@@ -15,7 +16,9 @@ import {
 import type {
   // BannerBlock as BannerBlockProps,
   CallToActionBlock as CTABlockProps,
-  MediaBlock as MediaBlockProps,
+  ContentBlock as ContentBlockProps,
+  IconInlineBlock as IconInlineBlockProps,
+  LinkButtonInlineBlock as LinkButtonInlineBlockProps,
 } from '@/payload-types';
 
 import {
@@ -25,8 +28,14 @@ import {
 } from '@/fields/textStateConfig';
 // import { BannerBlock } from '@/blocks/Banner/Component';
 import { CallToActionBlock } from '@/blocks/CallToAction/Component';
+import { ContentBlock } from '@/blocks/Content/Component';
+import { IconInlineBlock } from '@/inlineBlocks/Icon/Component';
+import { LinkButtonInlineBlock } from '@/inlineBlocks/LinkButton/Component';
 
-type NodeTypes = DefaultNodeTypes | SerializedBlockNode<CTABlockProps | MediaBlockProps>;
+type NodeTypes =
+  | DefaultNodeTypes
+  | SerializedBlockNode<CTABlockProps | ContentBlockProps>
+  | SerializedInlineBlockNode<IconInlineBlockProps | LinkButtonInlineBlockProps>;
 
 // Lexical bitwise format constants
 const IS_BOLD = 1;
@@ -88,10 +97,12 @@ const jsxConverters = (type: ConfigType): JSXConverters<NodeTypes> => {
     ...LinkJSXConverter({ internalDocToHref }),
     blocks: {
       // banner: ({ node }) => <BannerBlock {...node.fields} />,
-      mediaBlock: ({ node }) => (
-        <MediaBlock {...node.fields} enableGutter={false} disableInnerContainer={true} />
-      ),
+      content: ({ node }) => <ContentBlock {...node.fields} />,
       cta: ({ node }) => <CallToActionBlock {...node.fields} />,
+    },
+    inlineBlocks: {
+      icon: ({ node }) => <IconInlineBlock {...node.fields} />,
+      linkButton: ({ node }) => <LinkButtonInlineBlock {...node.fields} />,
     },
     text: ({ node }) => {
       const metadata = node.$ as Record<string, string> | undefined;
