@@ -1,6 +1,6 @@
 import type { GlobalConfig } from 'payload';
 
-import { link } from '@/fields/link';
+import { linkField } from '@/fields';
 import { revalidateFooter } from './hooks/revalidateFooter';
 
 export const Footer: GlobalConfig = {
@@ -12,7 +12,7 @@ export const Footer: GlobalConfig = {
     {
       name: 'navItems',
       type: 'array',
-      fields: [link, { name: 'label', type: 'text', required: true }],
+      fields: [linkField, { name: 'label', type: 'text', required: true }],
       maxRows: 6,
       admin: {
         initCollapsed: true,

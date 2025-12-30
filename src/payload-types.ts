@@ -2061,21 +2061,10 @@ export interface LinkButtonInlineBlock {
   display: {
     appearance: 'plain' | 'solid' | 'outline' | 'circle';
     direction?: ('left' | 'right') | null;
-    label: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    };
+    label: string;
+    colour: 'light' | 'dark';
+    icon?: IconInlineBlock[] | null;
+    placement?: ('left' | 'right') | null;
   };
   id?: string | null;
   blockName?: string | null;

@@ -1,6 +1,6 @@
 import { Field } from 'payload';
 
-export const link: Field = {
+export const linkField: Field = {
   name: 'link',
   type: 'group',
   admin: {
