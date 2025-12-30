@@ -17,11 +17,15 @@ export const CardGridBlock: React.FC<CardGridBlockProps> = ({
   const { content, position } = heading;
   return (
     <div className={`${theme}, ${width}`}>
-      {content && position == 'out' && <RichText data={content} enableGutter={false} />}
+      {content && position == 'out' && (
+        <RichText data={content} enableGutter={false} type="heading" />
+      )}
       <div className={`${columns}`}>
-        {content && position == 'in' && <RichText data={content} enableGutter={false} />}
+        {content && position == 'in' && (
+          <RichText data={content} enableGutter={false} type="heading" />
+        )}
         {cards.map((e, i) => (
-          <RichTextCard key={i} theme={theme} data={e.content} />
+          <RichTextCard key={i} theme={theme} data={e.card} />
         ))}
       </div>
     </div>

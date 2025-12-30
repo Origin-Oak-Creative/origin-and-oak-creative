@@ -11,11 +11,12 @@ export const RichTextCard = ({
   data,
 }: {
   theme: ThemeField;
-  data: DefaultTypedEditorState;
+  data: { heading?: DefaultTypedEditorState | null; content: DefaultTypedEditorState };
 }) => {
   return (
     <div className={theme}>
-      <RichText data={data} />
+      {data.heading && <RichText data={data.heading} enableGutter={false} type="heading" />}
+      <RichText data={data.content} type="content" />
     </div>
   );
 };

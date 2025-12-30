@@ -17,7 +17,7 @@ export const ContentWithMediaBlock: React.FC<ContentWithMediaBlockProps> = ({
 }) => {
   return (
     <div className={`${theme}, ${width}`}>
-      {heading && <RichText data={heading} enableGutter={false} />}
+      {heading && <RichText data={heading} enableGutter={false} type="heading" />}
       <div className={textDirection}>
         <RichText data={content} enableGutter={false} />
         <Media resource={image.media} className={image.style} />

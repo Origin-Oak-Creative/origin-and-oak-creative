@@ -11,7 +11,7 @@ export const HeroBlock: React.FC<HeroBlockProps> = ({ image, content }) => {
   return (
     <div className={styles.parent}>
       <div className={styles.content}>
-        {content && <RichText data={content} enableGutter={false} />}
+        {content && <RichText data={content} enableGutter={false} type={'hero'} />}
       </div>
       <div className={styles.background}>
         {image && typeof image === 'object' && <Media priority resource={image} />}

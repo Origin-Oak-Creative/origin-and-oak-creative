@@ -8,15 +8,15 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
   return (
     <div className={`${width}. ${theme}`}>
-      {heading && <RichText data={heading} enableGutter={false} />}
+      {heading && <RichText data={heading} enableGutter={false} type="heading" />}
       <div>
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {
-            const { richText } = col;
+            const { content } = col;
 
             return (
-              <div key={index}>{richText && <RichText data={richText} enableGutter={false} />}</div>
+              <div key={index}>{content && <RichText data={content} enableGutter={false} />}</div>
             );
           })}
       </div>

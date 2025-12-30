@@ -11,8 +11,8 @@ export const TeamBlock: React.FC<TeamBlockProps> = async ({ heading, content }) 
 
   return (
     <div>
-      {heading && <RichText data={heading} />}
-      {content && <RichText data={content} />}
+      {heading && <RichText data={heading} type="heading" />}
+      {content && <RichText data={content} type="content" />}
       {members.map((m) => (
         <TeamCard key={m.id} member={m} />
       ))}

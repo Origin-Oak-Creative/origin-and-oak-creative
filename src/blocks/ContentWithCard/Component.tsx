@@ -17,7 +17,7 @@ export const ContentWithCardBlock: React.FC<ContentWithCardBlockProps> = ({
 }) => {
   return (
     <div className={`${theme}, ${width}`}>
-      {heading && <RichText data={heading} enableGutter={false} />}
+      {heading && <RichText data={heading} enableGutter={false} type="heading" />}
       <div className={cardPlacement}>
         <RichText data={content} /> <RichTextCard theme={theme} data={card} />
       </div>

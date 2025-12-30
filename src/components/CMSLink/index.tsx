@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import type { Page, Post } from '@/payload-types';
+import type { Page } from '@/payload-types';
 
 import RichText from '../RichText';
 
@@ -13,10 +13,6 @@ type LinkType = {
       | {
           relationTo: 'pages';
           value: number | Page;
-        }
-      | {
-          relationTo: 'posts';
-          value: number | Post;
         }
       | null
       | undefined;

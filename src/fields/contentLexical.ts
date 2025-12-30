@@ -14,6 +14,9 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical';
 
+import type { StateValues } from 'node_modules/@payloadcms/richtext-lexical/dist/features/textState/feature.server';
+
+import { getTextStateConfig } from './textStateConfig';
 import { MediaBlock } from '@/blocks/MediaBlock/config';
 import { Icon } from '@/inlineBlocks/Icon/config';
 import { LinkButton } from '@/inlineBlocks/LinkButton/config';
@@ -33,25 +36,7 @@ export const contentLexical = () =>
         BlocksFeature({ blocks: [MediaBlock], inlineBlocks: [Icon, LinkButton] }),
         TextStateFeature({
           state: {
-            size: {
-              large: {
-                label: 'Large',
-                css: { 'font-size': '20px' },
-              },
-              medium: {
-                label: 'Medium',
-                css: { 'font-size': '18px' },
-              },
-              small: {
-                label: 'Medium Heading',
-                css: { 'font-size': '16px' },
-              },
-            },
-            spacing: {
-              condensed: { label: 'Condensed', css: { 'letter-spacing': '-0.02em' } },
-              standard: { label: 'Standard', css: { 'letter-spacing': '0' } },
-              spacious: { label: 'Spacious', css: { 'letter-spacing': '0.02em' } },
-            },
+            ...(getTextStateConfig('content') as { [stateKey: string]: StateValues }),
           },
         }),
         FixedToolbarFeature(),
