@@ -5,7 +5,7 @@ import { ContentWithMediaBlock as ContentWithMediaBlockProps } from '@/payload-t
 import { Media } from '@/components/Media';
 import RichText from '@/components/RichText';
 
-// import styles from './style.module.css';
+import styles from './style.module.css';
 
 export const ContentWithMediaBlock: React.FC<ContentWithMediaBlockProps> = ({
   width,
@@ -16,11 +16,19 @@ export const ContentWithMediaBlock: React.FC<ContentWithMediaBlockProps> = ({
   image,
 }) => {
   return (
-    <div className={`${theme}, ${width}`}>
-      {heading && <RichText data={heading} enableGutter={false} type="heading" />}
-      <div className={textDirection}>
-        <RichText data={content} enableGutter={false} />
-        <Media resource={image.media} className={image.style} />
+    <div className={`${styles.container} ${theme}`}>
+      <div className={`${styles.wrapper} ${width}`}>
+        {heading && (
+          <div className={styles.heading}>
+            <RichText data={heading} enableGutter={false} type="heading" />
+          </div>
+        )}
+        <div className={`${styles.content} ${textDirection}`}>
+          <RichText data={content} enableGutter={false} />
+        </div>
+        <div className={`${styles.image} ${image.style}`}>
+          <Media resource={image.media} />
+        </div>
       </div>
     </div>
   );
