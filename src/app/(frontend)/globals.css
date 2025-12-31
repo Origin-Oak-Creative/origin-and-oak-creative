@@ -39,8 +39,16 @@ main {
 
 h1 {
   font-size: 2em;
-  margin: 0.67em 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 400;
+  margin: 0;
 }
 
 /* Grouping content
@@ -428,4 +436,21 @@ template {
   --midnight: #2b3744;
   --graphite-smoke: #3c3c3c;
   --deep-wisdom-olive: #5e614c;
+}
+
+p,
+span,
+a,
+button,
+li,
+h5,
+h6 {
+  font-family: var(--lato);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--analogue);
 }
