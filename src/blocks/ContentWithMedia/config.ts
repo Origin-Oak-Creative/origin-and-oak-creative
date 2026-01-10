@@ -32,12 +32,13 @@ const ContentWithMediaFields: Field[] = [
     fields: [
       { name: 'media', type: 'upload', relationTo: 'media', required: true },
       {
-        name: 'style',
+        name: 'align',
+        label: 'Top Alignment',
         type: 'select',
-        defaultValue: 'floating',
+        defaultValue: 'text',
         options: [
-          { label: 'floating', value: 'Floating' },
-          { label: 'Full Height', value: 'fullHeight' },
+          { label: 'To Content', value: 'text' },
+          { label: 'To Heading', value: 'head' },
         ],
         required: true,
       },

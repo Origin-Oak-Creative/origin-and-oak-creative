@@ -33,9 +33,10 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   column-gap: 5%;
+  grid-auto-flow: dense;
 
   &:global(.block) {
-    max-width: 1600px;
+    max-width: 1500px;
     margin: 0 auto;
   }
 }
@@ -47,6 +48,16 @@
 .content {
   overflow: hidden;
 
+  &:global(.left) {
+    grid-column: 1 / span 8;
+  }
+
+  &:global(.right) {
+    grid-column: span 8 / 13;
+  }
+}
+
+.wrappedText {
   &:global(.left) {
     grid-column: 1 / span 8;
   }

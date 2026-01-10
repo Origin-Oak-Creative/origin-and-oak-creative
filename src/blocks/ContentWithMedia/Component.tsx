@@ -18,15 +18,30 @@ export const ContentWithMediaBlock: React.FC<ContentWithMediaBlockProps> = ({
   return (
     <div className={`${styles.container} ${theme}`}>
       <div className={`${styles.wrapper} ${width}`}>
-        {heading && (
-          <div className={styles.heading}>
-            <RichText data={heading} enableGutter={false} type="heading" />
+        {image.align == 'head' ? (
+          <div className={`${styles.wrappedText} ${textDirection}`}>
+            {heading && (
+              <div className={styles.heading}>
+                <RichText data={heading} enableGutter={false} type="heading" />
+              </div>
+            )}
+            <div className={`${styles.content} ${textDirection}`}>
+              <RichText data={content} enableGutter={false} />
+            </div>
           </div>
+        ) : (
+          <>
+            {heading && (
+              <div className={styles.heading}>
+                <RichText data={heading} enableGutter={false} type="heading" />
+              </div>
+            )}
+            <div className={`${styles.content} ${textDirection}`}>
+              <RichText data={content} enableGutter={false} />
+            </div>
+          </>
         )}
-        <div className={`${styles.content} ${textDirection}`}>
-          <RichText data={content} enableGutter={false} />
-        </div>
-        <div className={`${styles.image} ${image.style}`}>
+        <div className={`${styles.image} ${textDirection}`}>
           <Media resource={image.media} />
         </div>
       </div>

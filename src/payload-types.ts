@@ -815,7 +815,7 @@ export interface ContentWithMediaBlock {
   };
   image: {
     media: number | Media;
-    style: 'Floating' | 'fullHeight';
+    align: 'text' | 'head';
   };
   id?: string | null;
   blockName?: string | null;
@@ -1315,7 +1315,7 @@ export interface ContentWithMediaBlockSelect {
     | boolean
     | {
         media?: boolean;
-        style?: boolean;
+        align?: boolean;
       };
   id?: boolean;
   blockName?: boolean;
