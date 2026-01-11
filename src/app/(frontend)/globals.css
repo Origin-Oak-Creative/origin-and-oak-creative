@@ -454,3 +454,8 @@ h3,
 h4 {
   font-family: var(--analogue);
 }
+
+p,
+li {
+  line-height: 1.6;
+}
