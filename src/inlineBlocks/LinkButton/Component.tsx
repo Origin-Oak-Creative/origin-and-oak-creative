@@ -5,7 +5,15 @@ import type { LinkButtonInlineBlock as LinkButtonInlineBlockProps } from '@/payl
 import { CMSLink } from '@/components/CMSLink';
 
 export const LinkButtonInlineBlock: React.FC<LinkButtonInlineBlockProps> = ({ link, display }) => {
-  const { appearance, direction, label } = display;
+  const { appearance, direction, label, colour } = display;
 
-  return <CMSLink link={link} appearance={appearance} direction={direction} label={label} />;
+  return (
+    <CMSLink
+      link={link}
+      appearance={appearance}
+      direction={direction}
+      label={label}
+      colour={colour}
+    />
+  );
 };

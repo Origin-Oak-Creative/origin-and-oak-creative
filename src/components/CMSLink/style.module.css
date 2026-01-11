@@ -1,0 +1,139 @@
+.link {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 700;
+
+  &:global(.plain) {
+    background-color: transparent;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      transform-origin: bottom right;
+      transition: transform 0.25s ease-in-out;
+    }
+
+    &:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+  }
+
+  &:global(.plain.light) {
+    color: var(--river-stone);
+
+    &::after {
+      background-color: var(--dune-sand);
+    }
+  }
+
+  &:global(.plain.dark) {
+    color: var(--midnight);
+
+    &::after {
+      background-color: var(--deep-wisdom-olive);
+    }
+  }
+
+  &:global(.solid) {
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.25s ease-in-out;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+  }
+
+  &:global(.solid.light) {
+    background-color: oklch(from var(--dune-sand) l c h / 90%);
+    color: var(--graphite-smoke);
+
+    &:hover {
+      background-color: oklch(from var(--dune-sand) l c h / 80%);
+    }
+  }
+
+  &:global(.solid.dark) {
+    background-color: oklch(from var(--midnight) l c h / 80%);
+    color: var(--soft-linen);
+
+    &:hover {
+      background-color: oklch(from var(--midnight) l c h / 90%);
+    }
+  }
+
+  &:global(.outline) {
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.25s ease-in-out;
+  }
+
+  &:global(.outline.light) {
+    background-color: oklch(from var(--dune-sand) l c h / 0%);
+    color: var(--dune-sand);
+    border: 2px solid var(--dune-sand);
+
+    &:hover {
+      background-color: var(--dune-sand);
+      color: var(--graphite-smoke);
+    }
+  }
+
+  &:global(.outline.dark) {
+    background-color: oklch(from var(--midnight) l c h / 0%);
+    color: var(--midnight);
+    border: 3px solid var(--midnight);
+
+    &:hover {
+      background-color: var(--midnight);
+      color: var(--soft-linen);
+    }
+  }
+
+  &:global(.circle) {
+    width: 150px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    transition: all 0.25s ease-in-out;
+    padding: 1em;
+    align-content: center;
+
+    &:hover {
+      transform: scale(105%);
+    }
+
+    &:global(.left):hover {
+      transform: rotate(-10deg);
+    }
+
+    &:global(.right):hover {
+      transform: rotate(10deg);
+    }
+  }
+
+  &:global(.circle.light) {
+    background-color: oklch(from var(--dune-sand) l c h / 90%);
+    color: var(--graphite-smoke);
+
+    &:hover {
+      background-color: oklch(from var(--dune-sand) l c h / 80%);
+    }
+  }
+
+  &:global(.circle.dark) {
+    background-color: oklch(from var(--midnight) l c h / 80%);
+    color: var(--soft-linen);
+
+    &:hover {
+      background-color: oklch(from var(--midnight) l c h / 90%);
+    }
+  }
+}

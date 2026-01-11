@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import type { Page } from '@/payload-types';
 
-import RichText from '../RichText';
+import styles from './style.module.css';
 
 type LinkType = {
   link: {
@@ -20,27 +20,11 @@ type LinkType = {
   };
   appearance?: 'plain' | 'solid' | 'outline' | 'circle';
   direction?: ('left' | 'right') | null;
-  label:
-    | string
-    | {
-        [k: string]: unknown;
-        root: {
-          type: string;
-          children: {
-            [k: string]: unknown;
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            type: any;
-            version: number;
-          }[];
-          direction: 'ltr' | 'rtl' | null;
-          format: '' | 'left' | 'right' | 'center' | 'start' | 'end' | 'justify';
-          indent: number;
-          version: number;
-        };
-      };
+  colour?: 'light' | 'dark';
+  label: string;
 };
 
-export const CMSLink: React.FC<LinkType> = ({ link, appearance, direction, label }) => {
+export const CMSLink: React.FC<LinkType> = ({ link, appearance, direction, colour, label }) => {
   const { type, newTab, reference, url } = link;
 
   const href =
@@ -58,9 +42,9 @@ export const CMSLink: React.FC<LinkType> = ({ link, appearance, direction, label
     <Link
       href={href || url || ''}
       {...newTabProps}
-      className={appearance ? `${appearance} ${direction || ''}` : ''}
+      className={`${styles.link} ${appearance ? `${appearance} ${direction || ''}` : ''} ${colour || ''}`}
     >
-      {typeof label == 'string' ? label : <RichText data={label} />}
+      {label}
     </Link>
   );
 };
