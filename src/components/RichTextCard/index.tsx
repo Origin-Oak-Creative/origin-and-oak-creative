@@ -17,7 +17,11 @@ export const RichTextCard = ({
 }) => {
   return (
     <div className={`${styles.card} ${theme}`}>
-      {data.heading && <RichText data={data.heading} enableGutter={false} type="heading" />}
+      {data.heading && (
+        <div className={styles.heading}>
+          <RichText data={data.heading} enableGutter={false} type="heading" />
+        </div>
+      )}
       <RichText data={data.content} type="content" />
     </div>
   );
