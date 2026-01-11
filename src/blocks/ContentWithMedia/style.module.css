@@ -43,6 +43,7 @@
 
 .heading {
   grid-column: span 12;
+  margin-bottom: 1em;
 }
 
 .content {

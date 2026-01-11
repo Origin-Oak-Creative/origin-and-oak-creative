@@ -43,6 +43,7 @@
 
 .heading {
   grid-column: span 12;
+  margin-bottom: 1em;
 }
 
 .content {
@@ -59,7 +60,6 @@
 
 .card {
   overflow: hidden;
-  margin-block: 1em;
 
   &:global(.right) {
     grid-column: 1 / span 5;

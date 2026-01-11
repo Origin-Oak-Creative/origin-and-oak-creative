@@ -459,3 +459,7 @@ p,
 li {
   line-height: 1.6;
 }
+
+p {
+  margin: 0;
+}
