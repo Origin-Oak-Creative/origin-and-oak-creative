@@ -399,6 +399,8 @@ export interface MediaBlock {
  * via the `definition` "Team Block".
  */
 export interface TeamBlock {
+  width: 'block' | 'fullWidth';
+  theme: 'softLinen' | 'riverStone' | 'midnight';
   heading?: {
     root: {
       type: string;
@@ -429,6 +431,7 @@ export interface TeamBlock {
     };
     [k: string]: unknown;
   } | null;
+  columns: number;
   relationTo: 'team-members';
   id?: string | null;
   blockName?: string | null;
@@ -1284,8 +1287,11 @@ export interface MediaBlockSelect<T extends boolean = true> {
  * via the `definition` "Team Block_select".
  */
 export interface TeamBlockSelect {
+  width?: boolean;
+  theme?: boolean;
   heading?: boolean;
   content?: boolean;
+  columns?: boolean;
   relationTo?: boolean;
   id?: boolean;
   blockName?: boolean;

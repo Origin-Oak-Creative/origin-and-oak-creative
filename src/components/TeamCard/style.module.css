@@ -1,0 +1,56 @@
+.card {
+  padding: 5%;
+  border-radius: 25px;
+  text-align: center;
+
+  h3 {
+    font-size: 48px;
+  }
+
+  span {
+    font-size: 20px;
+  }
+
+  &:global(.softLinen) {
+    background-color: var(--river-stone);
+    color: var(--graphite-smoke);
+
+    h3 {
+      color: var(--midnight);
+    }
+  }
+
+  &:global(.riverStone) {
+    background-color: var(--soft-linen);
+    color: var(--graphite-smoke);
+
+    h3 {
+      color: var(--midnight);
+    }
+  }
+
+  &:global(.midnight) {
+    background-color: var(--river-stone);
+    color: var(--graphite-smoke);
+
+    h3 {
+      color: var(--midnight);
+    }
+  }
+}
+
+.image {
+  border-radius: 50%;
+  width: 100%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  margin-bottom: 1em;
+  max-width: 600px;
+  margin-inline: auto;
+
+  img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+}

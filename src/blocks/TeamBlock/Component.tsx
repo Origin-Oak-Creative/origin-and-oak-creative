@@ -6,16 +6,36 @@ import { getCachedCollection } from '@/utilities/getCollection';
 import { TeamCard } from '@/components/TeamCard';
 import RichText from '@/components/RichText';
 
-export const TeamBlock: React.FC<TeamBlockProps> = async ({ heading, content }) => {
+import styles from './style.module.css';
+
+export const TeamBlock: React.FC<TeamBlockProps> = async ({
+  theme,
+  width,
+  columns,
+  heading,
+  content,
+}) => {
   const members = await getCachedCollection('team-members')();
 
   return (
-    <div>
-      {heading && <RichText data={heading} type="heading" />}
-      {content && <RichText data={content} type="content" />}
-      {members.map((m) => (
-        <TeamCard key={m.id} member={m} />
-      ))}
+    <div className={`${styles.container} ${theme}`}>
+      <div className={`${styles.wrapper} ${width}`}>
+        {heading && (
+          <div className={styles.heading}>
+            <RichText data={heading} type="heading" />
+          </div>
+        )}
+        {content && (
+          <div className={styles.content}>
+            <RichText data={content} type="content" />
+          </div>
+        )}
+        <div className={`${styles.grid} columns${columns}`}>
+          {members.map((m) => (
+            <TeamCard key={m.id} member={m} theme={theme} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
