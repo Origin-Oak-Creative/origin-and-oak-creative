@@ -1,0 +1,44 @@
+.card {
+  padding: 5%;
+  border-radius: 25px;
+
+  ul {
+    list-style-position: inside;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  &:global(.softLinen) {
+    background-color: var(--river-stone);
+    color: var(--graphite-smoke);
+
+    h2,
+    h3 {
+      color: var(--midnight);
+    }
+  }
+
+  &:global(.riverStone) {
+    background-color: var(--soft-linen);
+    color: var(--graphite-smoke);
+
+    h2,
+    h3 {
+      color: var(--midnight);
+    }
+  }
+
+  &:global(.midnight) {
+    background-color: var(--river-stone);
+    color: var(--graphite-smoke);
+
+    h2,
+    h3 {
+      color: var(--midnight);
+    }
+  }
+}
