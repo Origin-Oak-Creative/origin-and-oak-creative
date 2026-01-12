@@ -157,7 +157,6 @@ export interface Page {
   title: string;
   layout: (
     | HeroBlock
-    | CallToActionBlock
     | ContentBlock
     | MediaBlock
     | TeamBlock
@@ -312,30 +311,6 @@ export interface FolderInterface {
   folderType?: 'media'[] | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CallToActionBlock".
- */
-export interface CallToActionBlock {
-  richText?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'cta';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1213,7 +1188,6 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         hero?: T | HeroBlockSelect<T>;
-        cta?: T | CallToActionBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
         team?: T | TeamBlockSelect<T>;
@@ -1245,15 +1219,6 @@ export interface HeroBlockSelect {
   content?: boolean;
   id?: boolean;
   blockName?: boolean;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CallToActionBlock_select".
- */
-export interface CallToActionBlockSelect<T extends boolean = true> {
-  richText?: T;
-  id?: T;
-  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2049,6 +2014,35 @@ export interface IconInlineBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'icon';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Link Group Block".
+ */
+export interface LinkGroupBlock {
+  links: {
+    link: {
+      type: 'reference' | 'custom';
+      newTab?: boolean | null;
+      reference?: {
+        relationTo: 'pages';
+        value: number | Page;
+      } | null;
+      url?: string | null;
+    };
+    display: {
+      appearance: 'plain' | 'solid' | 'outline' | 'circle';
+      direction?: ('left' | 'right') | null;
+      label: string;
+      colour: 'light' | 'dark';
+      icon?: IconInlineBlock[] | null;
+      placement?: ('left' | 'right') | null;
+    };
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'linkGroup';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

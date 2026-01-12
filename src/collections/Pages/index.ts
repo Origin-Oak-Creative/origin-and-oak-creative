@@ -2,7 +2,6 @@ import type { CollectionConfig } from 'payload';
 
 import { authenticated } from '../../access/authenticated';
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished';
-import { CallToAction } from '../../blocks/CallToAction/config';
 import { Content } from '../../blocks/Content/config';
 import { FormBlock } from '../../blocks/Form/config';
 import { MediaBlock } from '../../blocks/MediaBlock/config';
@@ -73,7 +72,6 @@ export const Pages: CollectionConfig<'pages'> = {
               type: 'blocks',
               blocks: [
                 Hero,
-                CallToAction,
                 Content,
                 MediaBlock,
                 Team,

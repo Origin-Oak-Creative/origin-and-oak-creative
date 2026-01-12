@@ -4,6 +4,7 @@
   text-decoration: none;
   font-size: 18px;
   font-weight: 700;
+  text-align: center;
 
   &:global(.plain) {
     background-color: transparent;

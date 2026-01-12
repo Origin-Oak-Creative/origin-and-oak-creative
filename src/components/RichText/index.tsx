@@ -14,9 +14,7 @@ import {
 } from '@payloadcms/richtext-lexical/react';
 
 import type {
-  // BannerBlock as BannerBlockProps,
-  CallToActionBlock as CTABlockProps,
-  ContentBlock as ContentBlockProps,
+  LinkGroupBlock as LinkGroupBlockProps,
   IconInlineBlock as IconInlineBlockProps,
   LinkButtonInlineBlock as LinkButtonInlineBlockProps,
 } from '@/payload-types';
@@ -26,15 +24,13 @@ import {
   type ConfigType,
   type StyleDefinition,
 } from '@/fields/textStateConfig';
-// import { BannerBlock } from '@/blocks/Banner/Component';
-import { CallToActionBlock } from '@/blocks/CallToAction/Component';
-import { ContentBlock } from '@/blocks/Content/Component';
+import { LinkGroupBlock } from '@/blocks/LinkGroup/Component';
 import { IconInlineBlock } from '@/inlineBlocks/Icon/Component';
 import { LinkButtonInlineBlock } from '@/inlineBlocks/LinkButton/Component';
 
 type NodeTypes =
   | DefaultNodeTypes
-  | SerializedBlockNode<CTABlockProps | ContentBlockProps>
+  | SerializedBlockNode<LinkGroupBlockProps>
   | SerializedInlineBlockNode<IconInlineBlockProps | LinkButtonInlineBlockProps>;
 
 // Lexical bitwise format constants
@@ -96,9 +92,7 @@ const jsxConverters = (type: ConfigType): JSXConverters<NodeTypes> => {
     ...defaultJSXConverters,
     ...LinkJSXConverter({ internalDocToHref }),
     blocks: {
-      // banner: ({ node }) => <BannerBlock {...node.fields} />,
-      content: ({ node }) => <ContentBlock {...node.fields} />,
-      cta: ({ node }) => <CallToActionBlock {...node.fields} />,
+      linkGroup: ({ node }) => <LinkGroupBlock {...node.fields} />,
     },
     inlineBlocks: {
       icon: ({ node }) => <IconInlineBlock {...node.fields} />,
