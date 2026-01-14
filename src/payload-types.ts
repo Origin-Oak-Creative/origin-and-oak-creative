@@ -945,6 +945,7 @@ export interface CardGridBlock {
 export interface User {
   id: number;
   name?: string | null;
+  needsPasswordReset?: boolean | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -1437,6 +1438,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  needsPasswordReset?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

@@ -1,6 +1,8 @@
 import type { CollectionConfig } from 'payload';
 
 import { authenticated } from '../../access/authenticated';
+import { managePasswordReset } from './hooks/managePasswordReset';
+import { validatePassword } from './hooks/validatePassword';
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -21,6 +23,18 @@ export const Users: CollectionConfig = {
       name: 'name',
       type: 'text',
     },
+    {
+      name: 'needsPasswordReset',
+      type: 'checkbox',
+      defaultValue: true,
+      admin: {
+        condition: () => false,
+      },
+    },
   ],
   timestamps: true,
+  hooks: {
+    beforeValidate: [validatePassword],
+    beforeChange: [managePasswordReset],
+  },
 };
