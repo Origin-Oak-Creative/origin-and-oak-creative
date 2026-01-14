@@ -4,7 +4,7 @@ import { revalidateTag } from 'next/cache';
 
 import type { TeamMember } from '@/payload-types';
 
-export const revalidatePost: CollectionAfterChangeHook<TeamMember> = ({
+export const revalidateTeamMember: CollectionAfterChangeHook<TeamMember> = ({
   doc,
   req: { payload, context },
 }) => {

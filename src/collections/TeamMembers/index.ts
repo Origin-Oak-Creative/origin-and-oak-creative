@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload';
 
 import { authenticated, authenticatedOrPublished } from '@/access';
+import { revalidateDelete, revalidateTeamMember } from './hooks/revalidateTeamMember';
 
 export const TeamMembers: CollectionConfig = {
   slug: 'team-members',
@@ -32,4 +33,9 @@ export const TeamMembers: CollectionConfig = {
       required: true,
     },
   ],
+
+  hooks: {
+    afterChange: [revalidateTeamMember],
+    afterDelete: [revalidateDelete],
+  },
 };
