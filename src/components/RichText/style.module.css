@@ -1,0 +1,128 @@
+.hero,
+.heading {
+  .condensed {
+    letter-spacing: -0.02em;
+  }
+
+  .standard {
+    letter-spacing: 0;
+  }
+
+  .semi-spacious {
+    letter-spacing: 0.04em;
+  }
+
+  .spacious {
+    letter-spacing: 0.1em;
+  }
+}
+
+.hero {
+  .heading-large {
+    font-family: var(--analogue);
+    font-size: clamp(3.5rem, 8vw, 6.25rem);
+  }
+
+  .heading-medium {
+    font-family: var(--analogue);
+    font-size: clamp(3rem, 5.8vw, 4.5rem);
+  }
+
+  .heading-small {
+    font-family: var(--analogue);
+    font-size: clamp(2.5rem, 5.1vw, 4rem);
+  }
+
+  .subheading-regular {
+    font-family: var(--lato);
+    font-size: 1.25rem;
+  }
+
+  .subheading-small,
+  .paragraph {
+    font-family: var(--lato);
+    font-size: 1.25rem;
+  }
+}
+
+.heading {
+  .heading-extra-large {
+    font-family: var(--analogue);
+    font-size: clamp(2.5rem, 6.4vw, 5rem);
+  }
+
+  .heading-large {
+    font-family: var(--analogue);
+    font-size: clamp(2.25rem, 5.1vw, 4rem);
+  }
+
+  .heading-medium {
+    font-family: var(--analogue);
+    font-size: clamp(2rem, 3.8vw, 3rem);
+  }
+
+  .heading-small {
+    font-family: var(--analogue);
+    font-size: 2rem;
+  }
+
+  .subheading-large {
+    font-family: var(--lato);
+    font-size: 1.5rem;
+  }
+
+  .subheading-regular {
+    font-family: var(--lato);
+    font-size: 1.25rem;
+  }
+}
+
+.content {
+  .large {
+    font-size: 1.25rem;
+  }
+
+  .medium {
+    font-size: 1.125rem;
+  }
+
+  .small {
+    font-size: 1rem;
+  }
+
+  .condensed {
+    letter-spacing: -0.02em;
+  }
+
+  .standard {
+    letter-spacing: 0;
+  }
+
+  .spacious {
+    letter-spacing: 0.02em;
+  }
+}
+
+.soft-linen {
+  color: var(--soft-linen);
+}
+
+.river-stone {
+  color: var(--river-stone);
+}
+
+.dune-sand {
+  color: var(--dune-sand);
+}
+
+.midnight {
+  color: var(--midnight);
+}
+
+.graphite-smoke {
+  color: var(--graphite-smoke);
+}
+
+.deep-wisdom-olive {
+  color: var(--deep-wisdom-olive);
+}

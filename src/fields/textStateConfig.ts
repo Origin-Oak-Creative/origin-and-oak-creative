@@ -60,7 +60,7 @@ export const TEXT_STATE_CONFIGS = {
       },
       'heading-small': {
         label: 'Small Heading',
-        css: { 'font-family': 'var(--analogue)', 'font-size': '48px' },
+        css: { 'font-family': 'var(--analogue)', 'font-size': '32px' },
       },
       'subheading-large': {
         label: 'Large Subheading',
@@ -103,7 +103,7 @@ export const TEXT_STATE_CONFIGS = {
         css: { 'font-size': '18px' },
       },
       small: {
-        label: 'Medium Heading',
+        label: 'Small',
         css: { 'font-size': '16px' },
       },
     },
@@ -116,10 +116,6 @@ export const TEXT_STATE_CONFIGS = {
 } as const;
 
 export type ConfigType = keyof typeof TEXT_STATE_CONFIGS;
-export interface StyleDefinition {
-  readonly label?: string;
-  readonly css: Record<string, string>;
-}
 
 export const getTextStateConfig = (type: ConfigType) => {
   const config = TEXT_STATE_CONFIGS[type];

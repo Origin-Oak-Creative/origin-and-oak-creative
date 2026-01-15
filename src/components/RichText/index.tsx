@@ -19,14 +19,12 @@ import type {
   LinkButtonInlineBlock as LinkButtonInlineBlockProps,
 } from '@/payload-types';
 
-import {
-  TEXT_STATE_CONFIGS,
-  type ConfigType,
-  type StyleDefinition,
-} from '@/fields/textStateConfig';
+import { TEXT_STATE_CONFIGS, type ConfigType } from '@/fields/textStateConfig';
 import { LinkGroupBlock } from '@/blocks/LinkGroup/Component';
 import { IconInlineBlock } from '@/inlineBlocks/Icon/Component';
 import { LinkButtonInlineBlock } from '@/inlineBlocks/LinkButton/Component';
+
+import styles from './style.module.css';
 
 type NodeTypes =
   | DefaultNodeTypes
@@ -52,9 +50,9 @@ const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
 const parseLexicalStyle = <T extends ConfigType>(
   metadata: Record<string, string>,
   context: T,
-): React.CSSProperties => {
-  const finalStyles: Record<string, string> = {};
-  if (!metadata) return {};
+): string => {
+  const classNames: string[] = [];
+  if (!metadata) return '';
 
   const activeConfig = TEXT_STATE_CONFIGS[context];
 
@@ -64,27 +62,12 @@ const parseLexicalStyle = <T extends ConfigType>(
   categories.forEach((category) => {
     const selectedId = metadata[category as string];
 
-    if (selectedId) {
-      const categoryMap = activeConfig[category];
-
-      // Check if selectedId is a valid key of the categoryMap
-      if (Object.prototype.hasOwnProperty.call(categoryMap, selectedId)) {
-        // We use indexed access here.
-        // TypeScript now knows that categoryMap[selectedId] is a valid lookup
-        const definition = categoryMap[
-          selectedId as keyof typeof categoryMap
-        ] as unknown as StyleDefinition;
-
-        if (definition && definition.css) {
-          Object.entries(definition.css).forEach(([key, value]) => {
-            finalStyles[key.replace(/-./g, (x) => x[1].toUpperCase())] = value;
-          });
-        }
-      }
+    if (selectedId && styles[selectedId]) {
+      classNames.push(styles[selectedId]);
     }
   });
 
-  return finalStyles as React.CSSProperties;
+  return classNames.join(' ');
 };
 
 const jsxConverters = (type: ConfigType): JSXConverters<NodeTypes> => {
@@ -100,24 +83,29 @@ const jsxConverters = (type: ConfigType): JSXConverters<NodeTypes> => {
     },
     text: ({ node }) => {
       const metadata = node.$ as Record<string, string> | undefined;
-      const styles = parseLexicalStyle(metadata || {}, type);
+      const classNames = parseLexicalStyle(metadata || {}, type);
 
-      let element = <span style={styles}>{node.text}</span>;
+      let element: React.ReactNode = node.text;
 
-      if (node.format & IS_BOLD) {
-        element = <strong>{element}</strong>;
+      if (node.format & IS_BOLD) element = <strong>{element}</strong>;
+
+      if (node.format & IS_ITALIC) element = <em>{element}</em>;
+
+      if (node.format & IS_UNDERLINE || node.format & IS_UNDERLINE) {
+        const textDecoration = [
+          node.format & IS_UNDERLINE ? 'underline' : '',
+          node.format & IS_STRIKETHROUGH ? 'line-through' : '',
+        ]
+          .filter(Boolean)
+          .join(' ');
+
+        element = <span style={{ textDecoration }}>{element}</span>;
       }
-      if (node.format & IS_ITALIC) {
-        element = <em>{element}</em>;
-      }
-      if (node.format & IS_UNDERLINE) {
-        element = <span style={{ textDecoration: 'underline' }}>{element}</span>;
-      }
-      if (node.format & IS_STRIKETHROUGH) {
-        element = <span style={{ textDecoration: 'line-through' }}>{element}</span>;
-      }
-      if (node.format & IS_CODE) {
-        element = <code>{element}</code>;
+
+      if (node.format & IS_CODE) element = <code>{element}</code>;
+
+      if (classNames) {
+        return <span className={classNames}>{element}</span>;
       }
 
       return element;
@@ -133,11 +121,11 @@ type Props = {
 } & React.HTMLAttributes<HTMLDivElement>;
 
 export default function RichText(props: Props) {
-  const { className, enableProse = true, enableGutter = true, type = 'content', ...rest } = props;
+  const { enableProse = true, enableGutter = true, type = 'content', ...rest } = props;
   return (
     <ConvertRichText
       converters={() => jsxConverters(type)}
-      className={'payload-richtext' + ' ' + className}
+      className={'payload-richtext' + ' ' + styles[type]}
       {...rest}
     />
   );
