@@ -1,67 +1,94 @@
-.container {
-  padding: 32px 5%;
+@media all and (min-width: 0px) {
+  .container {
+    padding: 32px 5%;
 
-  &:global(.softLinen) {
-    background-color: var(--soft-linen);
-    color: var(--graphite-smoke);
+    &:global(.softLinen) {
+      background-color: var(--soft-linen);
+      color: var(--graphite-smoke);
 
-    h2 {
-      color: var(--midnight);
+      h2 {
+        color: var(--midnight);
+      }
+    }
+
+    &:global(.riverStone) {
+      background-color: var(--river-stone);
+      color: var(--graphite-smoke);
+
+      h2 {
+        color: var(--midnight);
+      }
+    }
+
+    &:global(.midnight) {
+      background-color: var(--midnight);
+      color: var(--soft-linen);
+
+      h2 {
+        color: var(--river-stone);
+      }
     }
   }
 
-  &:global(.riverStone) {
-    background-color: var(--river-stone);
-    color: var(--graphite-smoke);
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 5%;
+    row-gap: 1.5em;
+    grid-auto-flow: dense;
 
-    h2 {
-      color: var(--midnight);
+    &:global(.block) {
+      max-width: 1500px;
+      margin: 0 auto;
     }
   }
 
-  &:global(.midnight) {
-    background-color: var(--midnight);
-    color: var(--soft-linen);
-
-    h2 {
-      color: var(--river-stone);
-    }
-  }
-}
-
-.wrapper {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  column-gap: 5%;
-  row-gap: 1em;
-  grid-auto-flow: dense;
-
-  &:global(.block) {
-    max-width: 1500px;
-    margin: 0 auto;
-  }
-}
-
-.heading {
-  grid-column: span 12;
-}
-
-.column {
-  overflow: hidden;
-
-  &:global(.oneThird) {
-    grid-column: span 4;
-  }
-
-  &:global(.half) {
-    grid-column: span 6;
-  }
-
-  &:global(.twoThirds) {
-    grid-column: span 8;
-  }
-
-  &:global(.full) {
+  .heading {
     grid-column: span 12;
+  }
+
+  .column {
+    overflow: hidden;
+    grid-column: span 12;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .column {
+    &:global(.oneThird) {
+      grid-column: span 6;
+    }
+
+    &:global(.half) {
+      grid-column: span 6;
+    }
+
+    &:global(.twoThirds) {
+      grid-column: span 8;
+    }
+
+    &:global(.full) {
+      grid-column: span 12;
+    }
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .column {
+    &:global(.oneThird) {
+      grid-column: span 4;
+    }
+
+    &:global(.half) {
+      grid-column: span 6;
+    }
+
+    &:global(.twoThirds) {
+      grid-column: span 8;
+    }
+
+    &:global(.full) {
+      grid-column: span 12;
+    }
   }
 }
