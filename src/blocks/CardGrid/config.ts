@@ -34,7 +34,7 @@ const CardGridFields: Field[] = [
     label: 'Max no. of columns',
     type: 'number',
     min: 1,
-    max: 4,
+    max: 5,
     defaultValue: 3,
     required: true,
   },
