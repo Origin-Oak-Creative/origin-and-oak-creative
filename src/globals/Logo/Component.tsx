@@ -25,6 +25,7 @@ export const Logo = (props: Props) => {
   return (
     /* eslint-disable @next/next/no-img-element */
     <img
+      style={{ height: 'auto', width: '100%' }}
       alt={alt}
       loading={loading}
       fetchPriority={priority}

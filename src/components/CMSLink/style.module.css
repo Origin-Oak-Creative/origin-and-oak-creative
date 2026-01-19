@@ -8,6 +8,7 @@
 
   &:global(.plain) {
     background-color: transparent;
+    color: var(--midnight);
 
     &::after {
       content: '';
@@ -19,6 +20,7 @@
       left: 0;
       transform-origin: bottom right;
       transition: transform 0.25s ease-in-out;
+      background-color: var(--deep-wisdom-olive);
     }
 
     &:hover::after {
@@ -35,21 +37,16 @@
     }
   }
 
-  &:global(.plain.dark) {
-    color: var(--midnight);
-
-    &::after {
-      background-color: var(--deep-wisdom-olive);
-    }
-  }
-
   &:global(.solid) {
     padding: 6px 12px;
     border-radius: 4px;
     transition: all 0.25s ease-in-out;
+    background-color: oklch(from var(--midnight) l c h / 80%);
+    color: var(--soft-linen);
 
     &:hover {
       transform: translateY(-3px);
+      background-color: oklch(from var(--midnight) l c h / 90%);
     }
   }
 
@@ -62,19 +59,18 @@
     }
   }
 
-  &:global(.solid.dark) {
-    background-color: oklch(from var(--midnight) l c h / 80%);
-    color: var(--soft-linen);
-
-    &:hover {
-      background-color: oklch(from var(--midnight) l c h / 90%);
-    }
-  }
-
   &:global(.outline) {
     padding: 6px 12px;
     border-radius: 4px;
     transition: all 0.25s ease-in-out;
+    background-color: oklch(from var(--midnight) l c h / 0%);
+    color: var(--midnight);
+    border: 3px solid var(--midnight);
+
+    &:hover {
+      background-color: var(--midnight);
+      color: var(--soft-linen);
+    }
   }
 
   &:global(.outline.light) {
@@ -88,17 +84,6 @@
     }
   }
 
-  &:global(.outline.dark) {
-    background-color: oklch(from var(--midnight) l c h / 0%);
-    color: var(--midnight);
-    border: 3px solid var(--midnight);
-
-    &:hover {
-      background-color: var(--midnight);
-      color: var(--soft-linen);
-    }
-  }
-
   &:global(.circle) {
     width: 150px;
     aspect-ratio: 1/1;
@@ -106,9 +91,12 @@
     transition: all 0.25s ease-in-out;
     padding: 1em;
     align-content: center;
+    background-color: oklch(from var(--midnight) l c h / 80%);
+    color: var(--soft-linen);
 
     &:hover {
       transform: scale(105%);
+      background-color: oklch(from var(--midnight) l c h / 90%);
     }
 
     &:global(.left):hover {
@@ -126,15 +114,6 @@
 
     &:hover {
       background-color: oklch(from var(--dune-sand) l c h / 80%);
-    }
-  }
-
-  &:global(.circle.dark) {
-    background-color: oklch(from var(--midnight) l c h / 80%);
-    color: var(--soft-linen);
-
-    &:hover {
-      background-color: oklch(from var(--midnight) l c h / 90%);
     }
   }
 }

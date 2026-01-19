@@ -1,19 +1,46 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import type { Header as HeaderType } from '@/payload-types';
 
 import { CMSLink } from '@/components/CMSLink';
+import { Menu, X } from 'lucide-react';
+import styles from './style.module.css';
 
 export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   const navItems = data?.navItems || [];
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav className="flex gap-3 items-center">
-      {navItems.map((link, i) => {
-        return <CMSLink key={i} {...link} />;
-      })}
-    </nav>
+    <>
+      <button
+        className={styles.btn}
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        <Menu size={36} />
+      </button>
+      <nav className={`${styles.nav} ${open ? styles.navOpen : ''}`}>
+        <button
+          className={styles.btn}
+          onClick={() => {
+            setOpen(false);
+          }}
+        >
+          <X size={36} />
+        </button>
+        <ul>
+          {navItems.map((link, i) => {
+            return (
+              <li key={i}>
+                <CMSLink {...link} />
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </>
   );
 };

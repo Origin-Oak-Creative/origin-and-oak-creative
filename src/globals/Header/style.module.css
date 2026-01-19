@@ -1,0 +1,21 @@
+.header {
+  position: sticky;
+  top: 0px;
+  z-index: 9999;
+  background-color: var(--dune-sand);
+  padding: 0.5rem min(2rem, 5%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  max-width: 100%;
+
+  .logo {
+    flex-shrink: 2;
+    display: block;
+  }
+
+  &.stuck {
+    background-color: oklch(from var(--dune-sand) l c h / 80%);
+  }
+}

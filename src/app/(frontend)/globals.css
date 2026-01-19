@@ -1,5 +1,9 @@
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
+* {
+  box-sizing: border-box;
+}
+
 /* Document
    ========================================================================== */
 
@@ -436,6 +440,10 @@ template {
   --midnight: #2b3744;
   --graphite-smoke: #3c3c3c;
   --deep-wisdom-olive: #5e614c;
+}
+
+body {
+  background-color: var(--dune-sand);
 }
 
 p,
