@@ -4,6 +4,7 @@ import path from 'path';
 import { buildConfig, PayloadRequest } from 'payload';
 import { fileURLToPath } from 'url';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { resendAdapter } from '@payloadcms/email-resend';
 
 import { Media } from './collections/Media';
 import { Pages } from './collections/Pages';
@@ -20,6 +21,11 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
+  email: resendAdapter({
+    defaultFromAddress: 'noreply@notifs.originandoakcreative.com',
+    defaultFromName: 'Origin & Oak new Age Creative',
+    apiKey: process.env.RESEND_API_KEY || '',
+  }),
   admin: {
     importMap: {
       baseDir: path.resolve(dirname),
