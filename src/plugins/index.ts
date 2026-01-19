@@ -2,12 +2,15 @@ import { formBuilderPlugin, fields as formFields } from '@payloadcms/plugin-form
 import { seoPlugin } from '@payloadcms/plugin-seo';
 import { Block, BlocksField, Plugin, Field } from 'payload';
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types';
+import MailerLite from '@mailerlite/mailerlite-nodejs';
 
 import type { Page } from '@/payload-types';
 
 import { getServerSideURL } from '@/utilities/getURL';
 import { contentLexical } from '@/fields';
 import { automationDispatcher } from '@/blocks/Form/hooks/automationDispatch';
+
+const mailerlite = new MailerLite({ api_key: process.env.MAILERLITE_API_KEY || '' });
 
 const generateTitle: GenerateTitle<Page> = ({ doc }) => {
   return doc?.title
@@ -78,21 +81,34 @@ const automationField = (exitable = false): Field => {
           ],
         },
         {
-          name: 'notionKey',
-          type: 'text',
-          label: 'Notion Property Name',
+          name: 'mailerLiteKey',
+          type: 'select',
+          label: 'MailerLite Property Name',
           admin: {
-            description: 'The exact name of the property in your Notion Database.',
-            condition: (_, allData) => allData.automationSettings.automation === 'inquiry',
+            description:
+              'The exact name of the field to fill in MailerLite. Only used in MailerLite automation.',
           },
+          defaultValue: 'none',
+          options: [
+            { label: 'None', value: 'none' },
+            { label: 'Email', value: 'email' },
+            { label: 'Name', value: 'name' },
+            { label: 'Last Name', value: 'lastName' },
+            { label: 'Company', value: 'company' },
+            { label: 'Country', value: 'country' },
+            { label: 'City', value: 'city' },
+            { label: 'Phone', value: 'phone' },
+            { label: 'State', value: 'state' },
+            { label: 'Zip', value: 'zip' },
+          ],
         },
         {
           name: 'dubsadoKey',
           type: 'text',
           label: 'Dubsado Attribute Key',
           admin: {
-            description: 'The internal mapping key for Dubsado leads.',
-            condition: (_, allData) => allData.automationSettings.automation === 'inquiry',
+            description:
+              'The internal mapping key for Dubsado leads. Only used for general inquiry automation.',
           },
         },
       ],
@@ -104,21 +120,34 @@ const automationField = (exitable = false): Field => {
     admin: { initCollapsed: true },
     fields: [
       {
-        name: 'notionKey',
-        type: 'text',
-        label: 'Notion Property Name',
+        name: 'mailerLiteKey',
+        type: 'select',
+        label: 'MailerLite Property Name',
         admin: {
-          description: 'The exact name of the property in your Notion Database.',
-          condition: (data) => data.automationSettings.automation === 'inquiry',
+          description:
+            'The exact name of the field to fill in MailerLite. Only used in MailerLite automation.',
         },
+        defaultValue: 'none',
+        options: [
+          { label: 'None', value: 'none' },
+          { label: 'Email', value: 'email' },
+          { label: 'Name', value: 'name' },
+          { label: 'Last Name', value: 'lastName' },
+          { label: 'Company', value: 'company' },
+          { label: 'Country', value: 'country' },
+          { label: 'City', value: 'city' },
+          { label: 'Phone', value: 'phone' },
+          { label: 'State', value: 'state' },
+          { label: 'Zip', value: 'zip' },
+        ],
       },
       {
         name: 'dubsadoKey',
         type: 'text',
         label: 'Dubsado Attribute Key',
         admin: {
-          description: 'The internal mapping key for Dubsado leads.',
-          condition: (_, allData) => allData.automationSettings.automation === 'inquiry',
+          description:
+            'The internal mapping key for Dubsado leads. Only used for general inquiry automation.',
         },
       },
     ],
@@ -218,8 +247,21 @@ export const plugins: Plugin[] = [
                   required: true,
                   options: [
                     { value: 'none', label: 'None' },
-                    { value: 'inquiry', label: 'Gneral Inquiry' },
+                    { value: 'inquiry', label: 'General Inquiry' },
+                    { value: 'mailerLite', label: 'MailerLite Integration' },
                   ],
+                },
+                {
+                  name: 'mailerLiteGroup',
+                  type: 'text',
+                  label: 'MailerLite Group',
+                  admin: {
+                    position: 'sidebar',
+                    condition: (_, siblingData) => siblingData.automation == 'mailerLite',
+                    components: {
+                      Field: '@/components/MailerLiteGroupSelect#MailerLiteGroupSelect',
+                    },
+                  },
                 },
                 {
                   name: 'conditionalRedirect',
@@ -286,6 +328,26 @@ export const plugins: Plugin[] = [
             },
           ]);
       },
+      endpoints: [
+        {
+          path: '/mailerlite-groups',
+          method: 'get',
+          handler: async (req) => {
+            if (!req.user) return new Response('Unauthorized', { status: 401 });
+
+            try {
+              const response = await mailerlite.groups.get({
+                limit: 100,
+                sort: 'name',
+              });
+
+              return Response.json(response.data.data);
+            } catch (_error) {
+              return Response.json({ error: 'Failed to fetch groups' }, { status: 500 });
+            }
+          },
+        },
+      ],
     },
   }),
 ];

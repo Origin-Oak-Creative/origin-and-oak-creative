@@ -9,7 +9,19 @@ export type UnsanitizedField = UnionField[number];
 export type InputField = UnsanitizedField & { name: string };
 
 export type AutomationField = InputField & {
-  notionKey?: string | null;
+  mailerLiteKey?:
+    | 'none'
+    | 'email'
+    | 'name'
+    | 'lastName'
+    | 'company'
+    | 'country'
+    | 'city'
+    | 'phone'
+    | 'state'
+    | 'zip'
+    | null
+    | undefined;
   dubsadoKey?: string | null;
 };
 
@@ -43,6 +55,6 @@ export const isAutomationField = (field: UnsanitizedField): field is AutomationF
     field.blockType !== 'state' &&
     field.blockType !== 'message' &&
     field.blockType !== 'country' &&
-    field.blockType === 'stepBreak'
+    field.blockType !== 'stepBreak'
   );
 };

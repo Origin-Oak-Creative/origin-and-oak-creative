@@ -465,11 +465,13 @@ export interface Form {
               value?: string | null;
             };
             /**
-             * The exact name of the property in your Notion Database.
+             * The exact name of the field to fill in MailerLite. Only used in MailerLite automation.
              */
-            notionKey?: string | null;
+            mailerLiteKey?:
+              | ('none' | 'email' | 'name' | 'lastName' | 'company' | 'country' | 'city' | 'phone' | 'state' | 'zip')
+              | null;
             /**
-             * The internal mapping key for Dubsado leads.
+             * The internal mapping key for Dubsado leads. Only used for general inquiry automation.
              */
             dubsadoKey?: string | null;
             id?: string | null;
@@ -491,11 +493,13 @@ export interface Form {
             width?: number | null;
             required?: boolean | null;
             /**
-             * The exact name of the property in your Notion Database.
+             * The exact name of the field to fill in MailerLite. Only used in MailerLite automation.
              */
-            notionKey?: string | null;
+            mailerLiteKey?:
+              | ('none' | 'email' | 'name' | 'lastName' | 'company' | 'country' | 'city' | 'phone' | 'state' | 'zip')
+              | null;
             /**
-             * The internal mapping key for Dubsado leads.
+             * The internal mapping key for Dubsado leads. Only used for general inquiry automation.
              */
             dubsadoKey?: string | null;
             id?: string | null;
@@ -529,11 +533,13 @@ export interface Form {
             defaultValue?: number | null;
             required?: boolean | null;
             /**
-             * The exact name of the property in your Notion Database.
+             * The exact name of the field to fill in MailerLite. Only used in MailerLite automation.
              */
-            notionKey?: string | null;
+            mailerLiteKey?:
+              | ('none' | 'email' | 'name' | 'lastName' | 'company' | 'country' | 'city' | 'phone' | 'state' | 'zip')
+              | null;
             /**
-             * The internal mapping key for Dubsado leads.
+             * The internal mapping key for Dubsado leads. Only used for general inquiry automation.
              */
             dubsadoKey?: string | null;
             id?: string | null;
@@ -566,11 +572,13 @@ export interface Form {
               value?: string | null;
             };
             /**
-             * The exact name of the property in your Notion Database.
+             * The exact name of the field to fill in MailerLite. Only used in MailerLite automation.
              */
-            notionKey?: string | null;
+            mailerLiteKey?:
+              | ('none' | 'email' | 'name' | 'lastName' | 'company' | 'country' | 'city' | 'phone' | 'state' | 'zip')
+              | null;
             /**
-             * The internal mapping key for Dubsado leads.
+             * The internal mapping key for Dubsado leads. Only used for general inquiry automation.
              */
             dubsadoKey?: string | null;
             id?: string | null;
@@ -593,11 +601,13 @@ export interface Form {
             defaultValue?: string | null;
             required?: boolean | null;
             /**
-             * The exact name of the property in your Notion Database.
+             * The exact name of the field to fill in MailerLite. Only used in MailerLite automation.
              */
-            notionKey?: string | null;
+            mailerLiteKey?:
+              | ('none' | 'email' | 'name' | 'lastName' | 'company' | 'country' | 'city' | 'phone' | 'state' | 'zip')
+              | null;
             /**
-             * The internal mapping key for Dubsado leads.
+             * The internal mapping key for Dubsado leads. Only used for general inquiry automation.
              */
             dubsadoKey?: string | null;
             id?: string | null;
@@ -611,11 +621,13 @@ export interface Form {
             defaultValue?: string | null;
             required?: boolean | null;
             /**
-             * The exact name of the property in your Notion Database.
+             * The exact name of the field to fill in MailerLite. Only used in MailerLite automation.
              */
-            notionKey?: string | null;
+            mailerLiteKey?:
+              | ('none' | 'email' | 'name' | 'lastName' | 'company' | 'country' | 'city' | 'phone' | 'state' | 'zip')
+              | null;
             /**
-             * The internal mapping key for Dubsado leads.
+             * The internal mapping key for Dubsado leads. Only used for general inquiry automation.
              */
             dubsadoKey?: string | null;
             id?: string | null;
@@ -647,11 +659,13 @@ export interface Form {
               value?: string | null;
             };
             /**
-             * The exact name of the property in your Notion Database.
+             * The exact name of the field to fill in MailerLite. Only used in MailerLite automation.
              */
-            notionKey?: string | null;
+            mailerLiteKey?:
+              | ('none' | 'email' | 'name' | 'lastName' | 'company' | 'country' | 'city' | 'phone' | 'state' | 'zip')
+              | null;
             /**
-             * The internal mapping key for Dubsado leads.
+             * The internal mapping key for Dubsado leads. Only used for general inquiry automation.
              */
             dubsadoKey?: string | null;
             id?: string | null;
@@ -734,7 +748,8 @@ export interface Form {
     customMessage?: string | null;
   };
   automationSettings: {
-    automation: 'none' | 'inquiry';
+    automation: 'none' | 'inquiry' | 'mailerLite';
+    mailerLiteGroup?: string | null;
     conditionalRedirect?:
       | {
           label: string;
@@ -1491,7 +1506,7 @@ export interface FormsSelect<T extends boolean = true> {
                     redirect?: T;
                     value?: T;
                   };
-              notionKey?: T;
+              mailerLiteKey?: T;
               dubsadoKey?: T;
               id?: T;
               blockName?: T;
@@ -1513,7 +1528,7 @@ export interface FormsSelect<T extends boolean = true> {
               label?: T;
               width?: T;
               required?: T;
-              notionKey?: T;
+              mailerLiteKey?: T;
               dubsadoKey?: T;
               id?: T;
               blockName?: T;
@@ -1533,7 +1548,7 @@ export interface FormsSelect<T extends boolean = true> {
               width?: T;
               defaultValue?: T;
               required?: T;
-              notionKey?: T;
+              mailerLiteKey?: T;
               dubsadoKey?: T;
               id?: T;
               blockName?: T;
@@ -1561,7 +1576,7 @@ export interface FormsSelect<T extends boolean = true> {
                     redirect?: T;
                     value?: T;
                   };
-              notionKey?: T;
+              mailerLiteKey?: T;
               dubsadoKey?: T;
               id?: T;
               blockName?: T;
@@ -1584,7 +1599,7 @@ export interface FormsSelect<T extends boolean = true> {
               width?: T;
               defaultValue?: T;
               required?: T;
-              notionKey?: T;
+              mailerLiteKey?: T;
               dubsadoKey?: T;
               id?: T;
               blockName?: T;
@@ -1597,7 +1612,7 @@ export interface FormsSelect<T extends boolean = true> {
               width?: T;
               defaultValue?: T;
               required?: T;
-              notionKey?: T;
+              mailerLiteKey?: T;
               dubsadoKey?: T;
               id?: T;
               blockName?: T;
@@ -1624,7 +1639,7 @@ export interface FormsSelect<T extends boolean = true> {
                     redirect?: T;
                     value?: T;
                   };
-              notionKey?: T;
+              mailerLiteKey?: T;
               dubsadoKey?: T;
               id?: T;
               blockName?: T;
@@ -1669,6 +1684,7 @@ export interface FormsSelect<T extends boolean = true> {
     | T
     | {
         automation?: T;
+        mailerLiteGroup?: T;
         conditionalRedirect?:
           | T
           | {
