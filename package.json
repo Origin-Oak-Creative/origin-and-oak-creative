@@ -33,6 +33,7 @@
     "@payloadcms/plugin-nested-docs": "3.72.0",
     "@payloadcms/plugin-seo": "3.72.0",
     "@payloadcms/richtext-lexical": "3.72.0",
+    "@payloadcms/storage-vercel-blob": "^3.72.0",
     "@payloadcms/ui": "3.72.0",
     "class-variance-authority": "^0.7.0",
     "cross-env": "^7.0.3",

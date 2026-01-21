@@ -3,6 +3,7 @@ import { seoPlugin } from '@payloadcms/plugin-seo';
 import { Block, BlocksField, Plugin, Field } from 'payload';
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types';
 import MailerLite from '@mailerlite/mailerlite-nodejs';
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
 
 import type { Page } from '@/payload-types';
 
@@ -350,4 +351,11 @@ export const plugins: Plugin[] = [
       ],
     },
   }),
+  vercelBlobStorage({
+    enabled: process.env.NODE_ENV === 'production',
+    collections: {
+      media: true,
+    },
+    token: process.env.BLOB_TOKEN
+  })
 ];
