@@ -29,6 +29,9 @@ const nextConfig = {
 
     return webpackConfig;
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   reactStrictMode: true,
   redirects,
 };

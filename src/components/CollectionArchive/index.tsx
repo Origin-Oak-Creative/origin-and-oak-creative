@@ -1,31 +1,31 @@
-import React from 'react';
+// import React from 'react';
 
-import { Card, CardPostData } from '@/components/PostCard';
+// import { Card, CardPostData } from '@/components/PostCard';
 
-export type Props = {
-  posts: CardPostData[];
-};
+// export type Props = {
+//   posts: CardPostData[];
+// };
 
-export const CollectionArchive: React.FC<Props> = (props) => {
-  const { posts } = props;
+// export const CollectionArchive: React.FC<Props> = (props) => {
+//   const { posts } = props;
 
-  return (
-    <div>
-      <div>
-        <div>
-          {posts?.map((result, index) => {
-            if (typeof result === 'object' && result !== null) {
-              return (
-                <div key={index}>
-                  <Card doc={result} relationTo="posts" showCategories />
-                </div>
-              );
-            }
+//   return (
+//     <div>
+//       <div>
+//         <div>
+//           {posts?.map((result, index) => {
+//             if (typeof result === 'object' && result !== null) {
+//               return (
+//                 <div key={index}>
+//                   <Card doc={result} relationTo="posts" showCategories />
+//                 </div>
+//               );
+//             }
 
-            return null;
-          })}
-        </div>
-      </div>
-    </div>
-  );
-};
+//             return null;
+//           })}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };

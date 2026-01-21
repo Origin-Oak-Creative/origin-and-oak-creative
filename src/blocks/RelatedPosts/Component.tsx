@@ -1,31 +1,31 @@
-import React from 'react';
-import RichText from '@/components/RichText';
+// import React from 'react';
+// import RichText from '@/components/RichText';
 
-import type { Post } from '@/payload-types';
+// import type { Post } from '@/payload-types';
 
-import { Card } from '../../components/PostCard';
-import { DefaultTypedEditorState } from '@payloadcms/richtext-lexical';
+// import { Card } from '../../components/PostCard';
+// import { DefaultTypedEditorState } from '@payloadcms/richtext-lexical';
 
-export type RelatedPostsProps = {
-  className?: string;
-  docs?: Post[];
-  introContent?: DefaultTypedEditorState;
-};
+// export type RelatedPostsProps = {
+//   className?: string;
+//   docs?: Post[];
+//   introContent?: DefaultTypedEditorState;
+// };
 
-export const RelatedPosts: React.FC<RelatedPostsProps> = (props) => {
-  const { className, docs, introContent } = props;
+// export const RelatedPosts: React.FC<RelatedPostsProps> = (props) => {
+//   const { className, docs, introContent } = props;
 
-  return (
-    <div className={className}>
-      {introContent && <RichText data={introContent} enableGutter={false} />}
+//   return (
+//     <div className={className}>
+//       {introContent && <RichText data={introContent} enableGutter={false} />}
 
-      <div>
-        {docs?.map((doc, index) => {
-          if (typeof doc === 'string') return null;
+//       <div>
+//         {docs?.map((doc, index) => {
+//           if (typeof doc === 'string') return null;
 
-          return <Card key={index} doc={doc} relationTo="posts" showCategories />;
-        })}
-      </div>
-    </div>
-  );
-};
+//           return <Card key={index} doc={doc} relationTo="posts" showCategories />;
+//         })}
+//       </div>
+//     </div>
+//   );
+// };
