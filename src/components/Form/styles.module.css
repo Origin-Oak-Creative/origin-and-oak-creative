@@ -1,0 +1,231 @@
+@media all and (min-width: 0px) {
+  .form {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .fields {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .width {
+    width: 100%;
+    padding: 0.5rem;
+  }
+
+  .step {
+    font-family: var(--analogue);
+    font-size: 2rem;
+  }
+
+  .input,
+  .textarea,
+  .select,
+  .number {
+    display: block;
+    width: 100%;
+    margin-block: 0.25rem;
+  }
+
+  .label {
+    font-family: var(--lato);
+    font-size: 1.125rem;
+  }
+
+  .required {
+    color: red;
+    font-weight: 700;
+  }
+
+  .buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .btn {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.25s ease-in-out;
+    background-color: oklch(from var(--midnight) l c h / 0%);
+    color: var(--midnight);
+    border: 3px solid var(--midnight);
+
+    &:hover {
+      background-color: var(--midnight);
+      color: var(--soft-linen);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+
+      &:hover {
+        background-color: oklch(from var(--midnight) l c h / 0%);
+        color: var(--midnight);
+      }
+    }
+
+    &.submit {
+      background-color: oklch(from var(--deep-wisdom-olive) l c h / 80%);
+      color: var(--soft-linen);
+      border: none;
+
+      &:hover {
+        transform: translateY(-3px);
+        background-color: oklch(from var(--deep-wisdom-olive) l c h / 90%);
+      }
+    }
+  }
+
+  .input,
+  .number,
+  .textarea {
+    font-family: var(--lato);
+    font-size: 1rem;
+    color: inherit;
+    padding: 6px 10px;
+    border-radius: 4px;
+    background-color: transparent;
+    border: 2px solid oklch(from var(--deep-wisdom-olive) l c h / 50%);
+    transition: all 0.25s ease-in-out;
+
+    &:focus {
+      outline: none;
+      border: 2px solid var(--deep-wisdom-olive);
+    }
+  }
+
+  .error {
+    padding: 6px 10px;
+    border-radius: 4px;
+    width: fit-content;
+    font-family: var(--lato);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--soft-linen);
+    border: 2px solid var(--error);
+    background-color: oklch(from var(--error) l c h / 75%);
+  }
+
+  .number {
+    display: flex;
+    justify-content: space-between;
+
+    &:focus-within {
+      outline: none;
+      border: 2px solid var(--deep-wisdom-olive);
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      /* display: none; <- Crashes Chrome on hover */
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
+
+    input[type='number'] {
+      -moz-appearance: textfield; /* Firefox */
+      appearance: none;
+      color: inherit;
+      background: transparent;
+      border: none;
+      padding: 0;
+      width: 100%;
+    }
+
+    input:focus {
+      outline: none;
+    }
+
+    .spins {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      button {
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        font-size: 0;
+      }
+    }
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    input {
+      accent-color: var(--deep-wisdom-olive);
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  .select {
+    padding: 6px 10px;
+    border-radius: 4px;
+
+    border: 2px solid oklch(from var(--deep-wisdom-olive) l c h / 50%);
+    transition: all 0.25s ease-in-out;
+
+    select {
+      font-family: var(--lato);
+      font-size: 1rem;
+      color: inherit;
+      background-color: transparent;
+      border: none;
+      padding-right: 10px;
+      width: 100%;
+      height: 100%;
+    }
+
+    select:focus {
+      outline: none;
+    }
+
+    &:focus-within {
+      outline: none;
+      border: 2px solid var(--deep-wisdom-olive);
+    }
+  }
+
+  .radio {
+    border: none;
+    margin: 0;
+    padding: 0;
+
+    .radioGroup {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-block: 4px;
+    }
+
+    label {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      font-size: 1rem;
+    }
+
+    input {
+      width: 1.25rem;
+      height: 1.25rem;
+      accent-color: var(--deep-wisdom-olive);
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .width {
+    width: var(--width);
+  }
+}

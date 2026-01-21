@@ -417,7 +417,24 @@ export interface TeamBlock {
  * via the `definition` "FormBlock".
  */
 export interface FormBlock {
+  width: 'block' | 'fullWidth';
+  theme: 'softLinen' | 'riverStone';
   form: number | Form;
+  heading?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   enableIntro?: boolean | null;
   introContent?: {
     root: {
@@ -1282,7 +1299,10 @@ export interface TeamBlockSelect {
  * via the `definition` "FormBlock_select".
  */
 export interface FormBlockSelect<T extends boolean = true> {
+  width?: T;
+  theme?: T;
   form?: T;
+  heading?: T;
   enableIntro?: T;
   introContent?: T;
   id?: T;

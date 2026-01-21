@@ -365,6 +365,10 @@ template {
   display: none;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 /* Fonts */
 @font-face {
   font-family: 'Analogue';
@@ -440,6 +444,7 @@ template {
   --midnight: #2b3744;
   --graphite-smoke: #3c3c3c;
   --deep-wisdom-olive: #5e614c;
+  --error: #bb0000;
 }
 
 body {

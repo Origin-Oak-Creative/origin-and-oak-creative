@@ -8,7 +8,7 @@ import type { Page } from '@/payload-types';
 
 import { getServerSideURL } from '@/utilities/getURL';
 import { contentLexical } from '@/fields';
-import { automationDispatcher } from '@/blocks/Form/hooks/automationDispatch';
+import { automationDispatcher } from '@/components/Form/hooks/automationDispatch';
 
 const mailerlite = new MailerLite({ api_key: process.env.MAILERLITE_API_KEY || '' });
 
@@ -61,6 +61,7 @@ const automationField = (exitable = false): Field => {
               name: 'redirect',
               label: 'Redirect',
               type: 'text',
+              defaultValue: 'none',
               admin: {
                 components: {
                   Field: '@/components/RedirectSelector#RedirectSelector', // Path to your file
@@ -73,7 +74,6 @@ const automationField = (exitable = false): Field => {
               name: 'value',
               label: 'When Value Matches',
               type: 'text',
-              required: true,
               admin: {
                 condition: (_, siblingData) => siblingData.redirect !== 'None',
               },

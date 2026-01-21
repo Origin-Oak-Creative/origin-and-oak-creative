@@ -5,7 +5,10 @@ import React from 'react';
 
 import { Error } from '../Error';
 import { Width } from '../Width';
-export const Number: React.FC<
+
+import styles from '../styles.module.css';
+
+export const Text: React.FC<
   TextField & {
     errors: Partial<FieldErrorsImpl>;
     register: UseFormRegister<FieldValues>;
@@ -13,20 +16,17 @@ export const Number: React.FC<
 > = ({ name, defaultValue, errors, label, register, required, width }) => {
   return (
     <Width width={width}>
-      <label htmlFor={name}>
+      <label htmlFor={name} className={styles.label}>
         {label}
 
-        {required && (
-          <span>
-            * <span>(required)</span>
-          </span>
-        )}
+        {required && <span className={styles.required}>*</span>}
       </label>
       <input
         defaultValue={defaultValue}
         id={name}
-        type="number"
+        type="text"
         {...register(name, { required })}
+        className={styles.input}
       />
       {errors[name] && <Error name={name} />}
     </Width>

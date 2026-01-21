@@ -1,21 +1,32 @@
 import type { Block } from 'payload';
 
-import {
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical';
+import { blockWidthField, headingLexical, contentLexical } from '@/fields';
 
 export const FormBlock: Block = {
   slug: 'formBlock',
   interfaceName: 'FormBlock',
   fields: [
+    blockWidthField,
+    {
+      name: 'theme',
+      type: 'select',
+      defaultValue: 'softLinen',
+      options: [
+        { label: 'Soft Linen', value: 'softLinen' },
+        { label: 'River Stone', value: 'riverStone' },
+      ],
+      required: true,
+    },
     {
       name: 'form',
       type: 'relationship',
       relationTo: 'forms',
       required: true,
+    },
+    {
+      name: 'heading',
+      type: 'richText',
+      editor: headingLexical(['h2', 'h3', 'h4']),
     },
     {
       name: 'enableIntro',
@@ -28,16 +39,7 @@ export const FormBlock: Block = {
       admin: {
         condition: (_, { enableIntro }) => Boolean(enableIntro),
       },
-      editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
-          return [
-            ...rootFeatures,
-            HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-            FixedToolbarFeature(),
-            InlineToolbarFeature(),
-          ];
-        },
-      }),
+      editor: contentLexical(),
       label: 'Intro Content',
     },
   ],

@@ -1,0 +1,42 @@
+.container {
+  padding: 32px 5%;
+
+  &:global(.softLinen) {
+    background-color: var(--soft-linen);
+    color: var(--graphite-smoke);
+
+    h2 {
+      color: var(--midnight);
+    }
+  }
+
+  &:global(.riverStone) {
+    background-color: var(--river-stone);
+    color: var(--graphite-smoke);
+
+    h2 {
+      color: var(--midnight);
+    }
+  }
+
+  &:global(.midnight) {
+    background-color: var(--midnight);
+    color: var(--soft-linen);
+
+    h2 {
+      color: var(--river-stone);
+    }
+  }
+}
+
+.wrapper {
+  display: flex;
+  gap: 1.5em;
+  flex-direction: column;
+  align-items: flex-start;
+
+  &:global(.block) {
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+}

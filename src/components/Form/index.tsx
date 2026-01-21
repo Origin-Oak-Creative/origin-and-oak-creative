@@ -1,11 +1,7 @@
 'use client';
 
-import {
-  isEarlyExitField,
-  isInputField,
-  type ObjectFormBlock,
-  type UnsanitizedField,
-} from './types';
+import { isEarlyExitField, isInputField, type UnsanitizedField } from './types';
+import type { Form as FormProps } from '@/payload-types';
 
 import { useRouter } from 'next/navigation';
 import React, { useCallback, useState } from 'react';
@@ -16,7 +12,9 @@ import { fields as fieldComponents } from './fields';
 import { getFormSteps } from '@/utilities/tranformFormFields';
 import { handleFormSubmission } from './action';
 
-export const ClientFormBlock: React.FC<ObjectFormBlock> = ({ form, enableIntro, introContent }) => {
+import styles from './styles.module.css';
+
+export const Form: React.FC<{ form: FormProps }> = ({ form }) => {
   const { fields, id, confirmationType, confirmationMessage, redirect, submitButtonLabel } = form;
   const steps = getFormSteps(fields);
 
@@ -67,6 +65,10 @@ export const ClientFormBlock: React.FC<ObjectFormBlock> = ({ form, enableIntro, 
         setCurrentStep((prev) => prev + 1);
       }
     }
+  };
+
+  const handleBack = () => {
+    setCurrentStep((prev) => prev - 1);
   };
 
   const onSubmit = useCallback(
@@ -138,49 +140,56 @@ export const ClientFormBlock: React.FC<ObjectFormBlock> = ({ form, enableIntro, 
   );
 
   return (
-    <div>
-      {enableIntro && introContent && !hasSubmitted && (
-        <RichText data={introContent} enableGutter={false} />
+    <FormProvider {...formMethods}>
+      {!isLoading && hasSubmitted && confirmationType === 'message' && confirmationMessage && (
+        <RichText data={confirmationMessage} />
       )}
-      <div>
-        <FormProvider {...formMethods}>
-          {!isLoading && hasSubmitted && confirmationType === 'message' && confirmationMessage && (
-            <RichText data={confirmationMessage} />
-          )}
-          {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
-          {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
-          {!hasSubmitted && (
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div>
-                {steps[currentStep].map((field, index) => {
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  const Field: React.FC<any> =
-                    fieldComponents?.[field.blockType as keyof typeof fieldComponents];
-                  if (Field) {
-                    return (
-                      <div key={index}>
-                        <Field
-                          form={form}
-                          {...field}
-                          {...formMethods}
-                          control={control}
-                          errors={errors}
-                          register={register}
-                        />
-                      </div>
-                    );
-                  }
-                  return null;
-                })}
-              </div>
+      {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
+      {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
+      {!hasSubmitted && (
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+          <div className={styles.fields}>
+            {steps[currentStep].map((field, index) => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              const Field: React.FC<any> =
+                fieldComponents[field.blockType as keyof typeof fieldComponents];
+              if (Field) {
+                return (
+                  <Field
+                    key={index}
+                    form={form}
+                    {...field}
+                    {...formMethods}
+                    control={control}
+                    errors={errors}
+                    register={register}
+                  />
+                );
+              }
+              return null;
+            })}
+          </div>
 
-              <button form={`${id}`} type={isLastStep ? 'submit' : 'button'} onClick={handleNext}>
-                {isLastStep ? submitButtonLabel : 'Next'}
-              </button>
-            </form>
-          )}
-        </FormProvider>
-      </div>
-    </div>
+          <div className={styles.buttons}>
+            <button
+              type="button"
+              onClick={handleBack}
+              className={styles.btn}
+              disabled={currentStep <= 0}
+            >
+              Back
+            </button>
+            <button
+              form={`${id}`}
+              type={isLastStep ? 'submit' : 'button'}
+              onClick={handleNext}
+              className={`${styles.btn} ${isLastStep ? styles.submit : ''}`}
+            >
+              {isLastStep ? submitButtonLabel : 'Next'}
+            </button>
+          </div>
+        </form>
+      )}
+    </FormProvider>
   );
 };

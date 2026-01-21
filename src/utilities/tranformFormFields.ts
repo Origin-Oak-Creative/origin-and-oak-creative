@@ -1,5 +1,5 @@
 import type { Form } from '@/payload-types';
-import type { UnionField } from '@/blocks/Form/types';
+import type { UnionField } from '@/components/Form/types';
 
 export const getFormSteps = (fields: Form['fields']) => {
   const steps: UnionField[] = [];
@@ -7,10 +7,10 @@ export const getFormSteps = (fields: Form['fields']) => {
 
   if (!fields) return [];
 
-  fields.forEach((field) => {
+  fields.forEach((field, index) => {
     if (field.blockType === 'stepBreak') {
-      steps.push(currentStepFields);
-      currentStepFields = [];
+      if (index != 0) steps.push(currentStepFields);
+      currentStepFields = [field];
     } else {
       currentStepFields.push(field);
     }

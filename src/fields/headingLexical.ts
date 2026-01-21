@@ -3,6 +3,7 @@ import {
   BoldFeature,
   ItalicFeature,
   HeadingFeature,
+  ParagraphFeature,
   AlignFeature,
   BlocksFeature,
   TextStateFeature,
@@ -21,6 +22,7 @@ export const headingLexical = (headingSizes: HeadingFeatureProps['enabledHeading
       return [
         BoldFeature(),
         ItalicFeature(),
+        ParagraphFeature(),
         HeadingFeature({ enabledHeadingSizes: headingSizes }),
         AlignFeature(),
         BlocksFeature({ inlineBlocks: [Icon] }),

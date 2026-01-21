@@ -6,6 +6,8 @@ import React from 'react';
 import { Error } from '../Error';
 import { Width } from '../Width';
 
+import styles from '../styles.module.css';
+
 export const Textarea: React.FC<
   TextField & {
     errors: Partial<FieldErrorsImpl>;
@@ -15,14 +17,10 @@ export const Textarea: React.FC<
 > = ({ name, defaultValue, errors, label, register, required, rows = 3, width }) => {
   return (
     <Width width={width}>
-      <label htmlFor={name}>
+      <label htmlFor={name} className={styles.label}>
         {label}
 
-        {required && (
-          <span>
-            * <span>(required)</span>
-          </span>
-        )}
+        {required && <span className={styles.required}>*</span>}
       </label>
 
       <textarea
@@ -30,6 +28,7 @@ export const Textarea: React.FC<
         id={name}
         rows={rows}
         {...register(name, { required: required })}
+        className={styles.textarea}
       />
 
       {errors[name] && <Error name={name} />}
