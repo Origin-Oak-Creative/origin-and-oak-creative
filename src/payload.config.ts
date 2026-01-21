@@ -62,6 +62,7 @@ export default buildConfig({
   db: sqliteAdapter({
     client: {
       url: process.env.DATABASE_URI || '',
+      authToken: process.env.DATABASE_TOKEN || undefined,
     },
   }),
   collections: [Pages, Media, Users, TeamMembers],
