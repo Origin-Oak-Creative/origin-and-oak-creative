@@ -8,6 +8,7 @@ node_modules
 
 # Payload default media upload directory
 public/media/
+public/documents/
 
 public/robots.txt
 public/sitemap*.xml
@@ -24,3 +25,4 @@ node_modules/
 local.db
 local.db-shm
 local.db-wal
+

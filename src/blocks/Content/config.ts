@@ -1,6 +1,7 @@
 import type { Block, Field } from 'payload';
 
 import { blockWidthField, blockThemeField, headingLexical, contentLexical } from '@/fields';
+import { blockImageField } from '@/fields/blockImage';
 
 const columnFields: Field[] = [
   {
@@ -40,6 +41,7 @@ export const Content: Block = {
   fields: [
     blockWidthField,
     blockThemeField,
+    blockImageField,
     {
       name: 'heading',
       type: 'richText',

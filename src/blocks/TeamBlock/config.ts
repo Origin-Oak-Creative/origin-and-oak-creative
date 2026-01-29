@@ -1,10 +1,14 @@
 import type { Block, Field } from 'payload';
 
 import { headingLexical, contentLexical, blockThemeField, blockWidthField } from '@/fields';
+import { blockImageField } from '@/fields/blockImage';
+import { cardImageField } from '@/fields/cardImage';
 
 const TeamFields: Field[] = [
   blockWidthField,
   blockThemeField,
+  blockImageField,
+  cardImageField,
   { name: 'heading', type: 'richText', editor: headingLexical(['h2', 'h3', 'h4']) },
   { name: 'content', type: 'richText', editor: contentLexical() },
   {

@@ -25,6 +25,10 @@ export const linkField: Field = {
               value: 'reference',
             },
             {
+              label: 'PDF document',
+              value: 'pdf',
+            },
+            {
               label: 'Custom URL',
               value: 'custom',
             },
@@ -49,7 +53,7 @@ export const linkField: Field = {
       admin: {
         condition: (_, siblingData) => siblingData?.type === 'reference',
       },
-      label: 'Document to link to',
+      label: 'Page to link to',
       relationTo: ['pages'],
       required: true,
     },
@@ -60,6 +64,16 @@ export const linkField: Field = {
         condition: (_, siblingData) => siblingData?.type === 'custom',
       },
       label: 'Custom URL',
+      required: true,
+    },
+    {
+      name: 'pdf',
+      type: 'upload',
+      admin: {
+        condition: (_, siblingData) => siblingData?.type === 'pdf',
+      },
+      label: 'PDF to link to',
+      relationTo: 'pdf-documents',
       required: true,
     },
   ],

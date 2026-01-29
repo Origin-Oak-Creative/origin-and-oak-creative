@@ -41,9 +41,9 @@
   }
 
   .buttons {
-    margin-top: 1rem;
     display: flex;
     justify-content: space-between;
+    padding-inline: 0.5rem;
   }
 
   .btn {

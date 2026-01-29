@@ -2,20 +2,17 @@ import React from 'react';
 
 import type { HeroBlock as HeroBlockProps } from '@/payload-types';
 
-import { Media } from '@/components/Media';
+import { BlockBackground } from '@/components/BlockBackground';
 import RichText from '@/components/RichText';
 
 import styles from './style.module.css';
 
-export const HeroBlock: React.FC<HeroBlockProps> = ({ image, content }) => {
+export const HeroBlock: React.FC<HeroBlockProps> = ({ theme, backgroundImage, content }) => {
   return (
-    <div className={styles.parent}>
-      <div className={styles.content}>
-        {content && <RichText data={content} enableGutter={false} type={'hero'} />}
+    <BlockBackground theme={theme} {...backgroundImage}>
+      <div className={`${styles.content} ${theme}`}>
+        <RichText data={content} type="hero" />
       </div>
-      <div className={styles.background}>
-        {image && typeof image === 'object' && <Media priority resource={image} />}
-      </div>
-    </div>
+    </BlockBackground>
   );
 };

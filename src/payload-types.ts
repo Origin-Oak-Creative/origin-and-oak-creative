@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     pages: Page;
     media: Media;
+    'pdf-documents': PdfDocument;
     users: User;
     'team-members': TeamMember;
     forms: Form;
@@ -82,12 +83,13 @@ export interface Config {
   };
   collectionsJoins: {
     'payload-folders': {
-      documentsAndFolders: 'payload-folders' | 'media';
+      documentsAndFolders: 'payload-folders' | 'media' | 'pdf-documents';
     };
   };
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'pdf-documents': PdfDocumentsSelect<false> | PdfDocumentsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'team-members': TeamMembersSelect<false> | TeamMembersSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
@@ -188,7 +190,11 @@ export interface Page {
  * via the `definition` "Hero Block".
  */
 export interface HeroBlock {
-  image?: (number | null) | Media;
+  theme: 'softLinen' | 'riverStone' | 'midnight';
+  backgroundImage?: {
+    image?: (number | null) | Media;
+    opacity?: number | null;
+  };
   content: {
     root: {
       type: string;
@@ -304,13 +310,36 @@ export interface FolderInterface {
           relationTo?: 'media';
           value: number | Media;
         }
+      | {
+          relationTo?: 'pdf-documents';
+          value: number | PdfDocument;
+        }
     )[];
     hasNextPage?: boolean;
     totalDocs?: number;
   };
-  folderType?: 'media'[] | null;
+  folderType?: ('media' | 'pdf-documents')[] | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pdf-documents".
+ */
+export interface PdfDocument {
+  id: number;
+  folder?: (number | null) | FolderInterface;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -319,6 +348,10 @@ export interface FolderInterface {
 export interface ContentBlock {
   width: 'block' | 'fullWidth';
   theme: 'softLinen' | 'riverStone' | 'midnight';
+  backgroundImage?: {
+    image?: (number | null) | Media;
+    opacity?: number | null;
+  };
   heading?: {
     root: {
       type: string;
@@ -376,6 +409,14 @@ export interface MediaBlock {
 export interface TeamBlock {
   width: 'block' | 'fullWidth';
   theme: 'softLinen' | 'riverStone' | 'midnight';
+  backgroundImage?: {
+    image?: (number | null) | Media;
+    opacity?: number | null;
+  };
+  cardBackgroundImage?: {
+    image?: (number | null) | Media;
+    opacity?: number | null;
+  };
   heading?: {
     root: {
       type: string;
@@ -418,6 +459,10 @@ export interface TeamBlock {
  */
 export interface FormBlock {
   width: 'block' | 'fullWidth';
+  backgroundImage?: {
+    image?: (number | null) | Media;
+    opacity?: number | null;
+  };
   theme: 'softLinen' | 'riverStone';
   form: number | Form;
   heading?: {
@@ -792,6 +837,10 @@ export interface Form {
 export interface ContentWithMediaBlock {
   width: 'block' | 'fullWidth';
   theme: 'softLinen' | 'riverStone' | 'midnight';
+  backgroundImage?: {
+    image?: (number | null) | Media;
+    opacity?: number | null;
+  };
   textDirection: 'left' | 'right';
   heading?: {
     root: {
@@ -838,6 +887,14 @@ export interface ContentWithMediaBlock {
 export interface ContentWithCardBlock {
   width: 'block' | 'fullWidth';
   theme: 'softLinen' | 'riverStone' | 'midnight';
+  backgroundImage?: {
+    image?: (number | null) | Media;
+    opacity?: number | null;
+  };
+  cardBackgroundImage?: {
+    image?: (number | null) | Media;
+    opacity?: number | null;
+  };
   cardPlacement: 'left' | 'right';
   heading?: {
     root: {
@@ -912,6 +969,14 @@ export interface ContentWithCardBlock {
 export interface CardGridBlock {
   width: 'block' | 'fullWidth';
   theme: 'softLinen' | 'riverStone' | 'midnight';
+  backgroundImage?: {
+    image?: (number | null) | Media;
+    opacity?: number | null;
+  };
+  cardBackgroundImage?: {
+    image?: (number | null) | Media;
+    opacity?: number | null;
+  };
   heading?: {
     content?: {
       root: {
@@ -1005,6 +1070,21 @@ export interface TeamMember {
   name: string;
   title: string;
   headshot: number | Media;
+  biography: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -1150,6 +1230,10 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
+        relationTo: 'pdf-documents';
+        value: number | PdfDocument;
+      } | null)
+    | ({
         relationTo: 'users';
         value: number | User;
       } | null)
@@ -1248,7 +1332,13 @@ export interface PagesSelect<T extends boolean = true> {
  * via the `definition` "Hero Block_select".
  */
 export interface HeroBlockSelect {
-  image?: boolean;
+  theme?: boolean;
+  backgroundImage?:
+    | boolean
+    | {
+        image?: boolean;
+        opacity?: boolean;
+      };
   content?: boolean;
   id?: boolean;
   blockName?: boolean;
@@ -1260,6 +1350,12 @@ export interface HeroBlockSelect {
 export interface ContentBlockSelect<T extends boolean = true> {
   width?: T;
   theme?: T;
+  backgroundImage?:
+    | T
+    | {
+        image?: T;
+        opacity?: T;
+      };
   heading?: T;
   columns?:
     | T
@@ -1287,6 +1383,18 @@ export interface MediaBlockSelect<T extends boolean = true> {
 export interface TeamBlockSelect {
   width?: boolean;
   theme?: boolean;
+  backgroundImage?:
+    | boolean
+    | {
+        image?: boolean;
+        opacity?: boolean;
+      };
+  cardBackgroundImage?:
+    | boolean
+    | {
+        image?: boolean;
+        opacity?: boolean;
+      };
   heading?: boolean;
   content?: boolean;
   columns?: boolean;
@@ -1300,6 +1408,12 @@ export interface TeamBlockSelect {
  */
 export interface FormBlockSelect<T extends boolean = true> {
   width?: T;
+  backgroundImage?:
+    | T
+    | {
+        image?: T;
+        opacity?: T;
+      };
   theme?: T;
   form?: T;
   heading?: T;
@@ -1315,6 +1429,12 @@ export interface FormBlockSelect<T extends boolean = true> {
 export interface ContentWithMediaBlockSelect {
   width?: boolean;
   theme?: boolean;
+  backgroundImage?:
+    | boolean
+    | {
+        image?: boolean;
+        opacity?: boolean;
+      };
   textDirection?: boolean;
   heading?: boolean;
   content?: boolean;
@@ -1334,6 +1454,18 @@ export interface ContentWithMediaBlockSelect {
 export interface ContentWithCardBlockSelect {
   width?: boolean;
   theme?: boolean;
+  backgroundImage?:
+    | boolean
+    | {
+        image?: boolean;
+        opacity?: boolean;
+      };
+  cardBackgroundImage?:
+    | boolean
+    | {
+        image?: boolean;
+        opacity?: boolean;
+      };
   cardPlacement?: boolean;
   heading?: boolean;
   content?: boolean;
@@ -1353,6 +1485,18 @@ export interface ContentWithCardBlockSelect {
 export interface CardGridBlockSelect {
   width?: boolean;
   theme?: boolean;
+  backgroundImage?:
+    | boolean
+    | {
+        image?: boolean;
+        opacity?: boolean;
+      };
+  cardBackgroundImage?:
+    | boolean
+    | {
+        image?: boolean;
+        opacity?: boolean;
+      };
   heading?:
     | boolean
     | {
@@ -1469,6 +1613,24 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pdf-documents_select".
+ */
+export interface PdfDocumentsSelect<T extends boolean = true> {
+  folder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
@@ -1499,6 +1661,7 @@ export interface TeamMembersSelect<T extends boolean = true> {
   name?: T;
   title?: T;
   headshot?: T;
+  biography?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1830,13 +1993,14 @@ export interface Header {
   navItems?:
     | {
         link: {
-          type: 'reference' | 'custom';
+          type: 'reference' | 'pdf' | 'custom';
           newTab?: boolean | null;
           reference?: {
             relationTo: 'pages';
             value: number | Page;
           } | null;
           url?: string | null;
+          pdf?: (number | null) | PdfDocument;
         };
         appearance: 'plain' | 'solid' | 'outline' | 'circle';
         direction?: ('left' | 'right') | null;
@@ -1853,16 +2017,25 @@ export interface Header {
  */
 export interface Footer {
   id: number;
-  navItems?:
+  form: number | Form;
+  socials?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  legalLinks?:
     | {
         link: {
-          type: 'reference' | 'custom';
+          type: 'reference' | 'pdf' | 'custom';
           newTab?: boolean | null;
           reference?: {
             relationTo: 'pages';
             value: number | Page;
           } | null;
           url?: string | null;
+          pdf?: (number | null) | PdfDocument;
         };
         label: string;
         id?: string | null;
@@ -1939,6 +2112,7 @@ export interface HeaderSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              pdf?: T;
             };
         appearance?: T;
         direction?: T;
@@ -1954,7 +2128,15 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  navItems?:
+  form?: T;
+  socials?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  legalLinks?:
     | T
     | {
         link?:
@@ -1964,6 +2146,7 @@ export interface FooterSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              pdf?: T;
             };
         label?: T;
         id?: T;
@@ -2060,13 +2243,14 @@ export interface IconInlineBlock {
 export interface LinkGroupBlock {
   links: {
     link: {
-      type: 'reference' | 'custom';
+      type: 'reference' | 'pdf' | 'custom';
       newTab?: boolean | null;
       reference?: {
         relationTo: 'pages';
         value: number | Page;
       } | null;
       url?: string | null;
+      pdf?: (number | null) | PdfDocument;
     };
     display: {
       appearance: 'plain' | 'solid' | 'outline' | 'circle';
@@ -2088,13 +2272,14 @@ export interface LinkGroupBlock {
  */
 export interface LinkButtonInlineBlock {
   link: {
-    type: 'reference' | 'custom';
+    type: 'reference' | 'pdf' | 'custom';
     newTab?: boolean | null;
     reference?: {
       relationTo: 'pages';
       value: number | Page;
     } | null;
     url?: string | null;
+    pdf?: (number | null) | PdfDocument;
   };
   display: {
     appearance: 'plain' | 'solid' | 'outline' | 'circle';

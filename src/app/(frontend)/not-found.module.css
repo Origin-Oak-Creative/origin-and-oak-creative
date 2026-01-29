@@ -1,0 +1,75 @@
+@media all and (min-width: 0px) {
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: var(--soft-linen);
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      opacity: 0.3;
+      object-position: center;
+    }
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    padding: 32px 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    h1 {
+      font-size: 5rem;
+      font-style: italic;
+      color: var(--midnight);
+    }
+
+    p {
+      font-size: 24px;
+      color: var(--graphite-smoke);
+    }
+
+    a {
+      margin-top: 0.5rem;
+      display: inline-block;
+      position: relative;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: all 0.25s ease-in-out;
+      background-color: oklch(from var(--midnight) l c h / 80%);
+      color: var(--soft-linen);
+
+      &:hover {
+        transform: translateY(-3px);
+        background-color: oklch(from var(--midnight) l c h / 90%);
+      }
+    }
+  }
+
+  .parent {
+    position: relative;
+    width: 100%;
+    height: max-content;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .content {
+    align-self: center;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+  }
+}

@@ -16,6 +16,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
     <>
       <button
         className={styles.btn}
+        aria-label="Open menu"
         onClick={() => {
           setOpen(true);
         }}
@@ -25,6 +26,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
       <nav className={`${styles.nav} ${open ? styles.navOpen : ''}`}>
         <button
           className={styles.btn}
+          aria-label="Close menu"
           onClick={() => {
             setOpen(false);
           }}

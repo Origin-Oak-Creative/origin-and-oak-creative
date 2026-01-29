@@ -1,12 +1,14 @@
 import type { Block } from 'payload';
 
 import { blockWidthField, headingLexical, contentLexical } from '@/fields';
+import { blockImageField } from '@/fields/blockImage';
 
 export const FormBlock: Block = {
   slug: 'formBlock',
   interfaceName: 'FormBlock',
   fields: [
     blockWidthField,
+    blockImageField,
     {
       name: 'theme',
       type: 'select',

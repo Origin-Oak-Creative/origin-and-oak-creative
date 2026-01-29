@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload';
 
 import { authenticated, authenticatedOrPublished } from '@/access';
 import { revalidateDelete, revalidateTeamMember } from './hooks/revalidateTeamMember';
+import { contentLexical } from '@/fields';
 
 export const TeamMembers: CollectionConfig = {
   slug: 'team-members',
@@ -30,6 +31,12 @@ export const TeamMembers: CollectionConfig = {
       name: 'headshot',
       type: 'upload',
       relationTo: 'media',
+      required: true,
+    },
+    {
+      name: 'biography',
+      type: 'richText',
+      editor: contentLexical(),
       required: true,
     },
   ],

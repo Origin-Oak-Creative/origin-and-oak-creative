@@ -1,18 +1,15 @@
 .card {
-  padding: 5%;
-  border-radius: 25px;
   text-align: center;
 
   h3 {
     font-size: 48px;
   }
 
-  span {
+  p {
     font-size: 20px;
   }
 
   &:global(.softLinen) {
-    background-color: var(--river-stone);
     color: var(--graphite-smoke);
 
     h3 {
@@ -21,7 +18,6 @@
   }
 
   &:global(.riverStone) {
-    background-color: var(--soft-linen);
     color: var(--graphite-smoke);
 
     h3 {
@@ -30,12 +26,32 @@
   }
 
   &:global(.midnight) {
-    background-color: var(--river-stone);
     color: var(--graphite-smoke);
 
     h3 {
       color: var(--midnight);
     }
+  }
+}
+
+.btn {
+  border: none;
+  margin-top: 0.5rem;
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.25s ease-in-out;
+  background-color: oklch(from var(--midnight) l c h / 80%);
+  color: var(--soft-linen);
+
+  &:hover {
+    transform: translateY(-3px);
+    background-color: oklch(from var(--midnight) l c h / 90%);
   }
 }
 
@@ -52,5 +68,95 @@
     object-fit: cover;
     height: 100%;
     width: 100%;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+    display: none;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    display: block;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+    display: block;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(25px);
+    display: none;
+  }
+}
+
+@keyframes backdrop-fade-in {
+  0% {
+    background-color: oklch(from var(--midnight) l c h / 0%);
+  }
+
+  100% {
+    background-color: oklch(from var(--midnight) l c h / 20%);
+  }
+}
+
+@keyframes backdrop-fade-out {
+  0% {
+    background-color: oklch(from var(--midnight) l c h / 20%);
+  }
+
+  100% {
+    background-color: oklch(from var(--midnight) l c h / 0%);
+  }
+}
+
+.dialog {
+  padding: 0;
+  border: none;
+  border-radius: 25px;
+  text-align: initial;
+  animation: fade-out 0.5s ease-out;
+  max-width: 1500px;
+
+  &::backdrop {
+    background-color: oklch(from var(--midnight) l c h / 20%);
+    animation: backdrop-fade-out 0.5s ease-out;
+  }
+
+  &:open {
+    animation: fade-in 0.5s ease-in;
+  }
+
+  &:open::backdrop {
+    animation: backdrop-fade-in 0.5s ease-in;
+  }
+}
+
+.content {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-end;
+  background-color: var(--soft-linen);
+
+  button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    color: var(--midnight);
+
+    &:hover {
+      color: var(--deep-wisdom-olive);
+    }
   }
 }

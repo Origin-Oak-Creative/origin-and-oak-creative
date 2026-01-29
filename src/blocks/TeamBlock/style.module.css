@@ -1,8 +1,10 @@
-.container {
-  padding: 32px 5%;
+.wrapper {
+  &:global(.block) {
+    max-width: 1500px;
+    margin: 0 auto;
+  }
 
   &:global(.softLinen) {
-    background-color: var(--soft-linen);
     color: var(--graphite-smoke);
 
     h2 {
@@ -11,7 +13,6 @@
   }
 
   &:global(.riverStone) {
-    background-color: var(--river-stone);
     color: var(--graphite-smoke);
 
     h2 {
@@ -20,19 +21,11 @@
   }
 
   &:global(.midnight) {
-    background-color: var(--midnight);
     color: var(--soft-linen);
 
     h2 {
       color: var(--river-stone);
     }
-  }
-}
-
-.wrapper {
-  &:global(.block) {
-    max-width: 1500px;
-    margin: 0 auto;
   }
 }
 
@@ -43,7 +36,6 @@
 .grid {
   --min-column-width: 250px;
   --gap: 1rem;
-  --max-columns: 3;
 
   display: grid;
   gap: var(--gap);
@@ -58,20 +50,4 @@
       1fr
     )
   );
-
-  &:global(.columns1) {
-    grid-template-columns: 1fr;
-  }
-
-  &:global(.columns2) {
-    --max-columns: 2;
-  }
-
-  &:global(.columns3) {
-    --max-columns: 3;
-  }
-
-  &:global(.columns4) {
-    --max-columns: 4;
-  }
 }
