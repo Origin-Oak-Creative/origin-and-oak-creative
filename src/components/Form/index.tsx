@@ -169,16 +169,17 @@ export const Form: React.FC<{ form: FormProps }> = ({ form }) => {
               return null;
             })}
           </div>
-
-          <div className={styles.buttons}>
-            <button
-              type="button"
-              onClick={handleBack}
-              className={styles.btn}
-              disabled={currentStep <= 0}
-            >
-              Back
-            </button>
+          <div className={`${styles.buttons}`}>
+            {steps.length > 1 && (
+              <button
+                type="button"
+                onClick={handleBack}
+                className={styles.btn}
+                disabled={currentStep <= 0}
+              >
+                Back
+              </button>
+            )}
             <button
               form={`${id}`}
               type={isLastStep ? 'submit' : 'button'}

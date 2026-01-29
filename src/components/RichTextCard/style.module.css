@@ -1,7 +1,4 @@
 .card {
-  padding: 5%;
-  border-radius: 25px;
-
   ul {
     list-style-position: inside;
     padding: 0;
@@ -13,7 +10,6 @@
   }
 
   &:global(.softLinen) {
-    background-color: var(--river-stone);
     color: var(--graphite-smoke);
 
     h2,
@@ -23,7 +19,6 @@
   }
 
   &:global(.riverStone) {
-    background-color: var(--soft-linen);
     color: var(--graphite-smoke);
 
     h2,
@@ -33,7 +28,6 @@
   }
 
   &:global(.midnight) {
-    background-color: var(--river-stone);
     color: var(--graphite-smoke);
 
     h2,

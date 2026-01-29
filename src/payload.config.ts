@@ -10,6 +10,7 @@ import { Media } from './collections/Media';
 import { Pages } from './collections/Pages';
 import { Users } from './collections/Users';
 import { TeamMembers } from './collections/TeamMembers';
+import { PDFDocuments } from './collections/Documents';
 import { Footer } from './globals/Footer/config';
 import { Header } from './globals/Header/config';
 import { plugins } from './plugins';
@@ -64,8 +65,9 @@ export default buildConfig({
       url: process.env.DATABASE_URI || '',
       authToken: process.env.DATABASE_TOKEN || undefined,
     },
+    push: false,
   }),
-  collections: [Pages, Media, Users, TeamMembers],
+  collections: [Pages, Media, PDFDocuments, Users, TeamMembers],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, Logo, BusinessSchema],
   plugins,

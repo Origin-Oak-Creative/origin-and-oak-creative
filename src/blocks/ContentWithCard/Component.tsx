@@ -4,6 +4,7 @@ import { ContentWithCardBlock as ContentWithCardBlockProps } from '@/payload-typ
 
 import { RichTextCard } from '@/components/RichTextCard';
 import RichText from '@/components/RichText';
+import { BlockBackground } from '@/components/BlockBackground';
 
 import styles from './style.module.css';
 
@@ -14,10 +15,12 @@ export const ContentWithCardBlock: React.FC<ContentWithCardBlockProps> = ({
   heading,
   content,
   card,
+  backgroundImage = { image: null, opacity: 0 },
+  cardBackgroundImage = { image: null, opacity: 0 },
 }) => {
   return (
-    <div className={`${styles.container} ${theme}`}>
-      <div className={`${styles.wrapper} ${width}`}>
+    <BlockBackground theme={theme} {...backgroundImage}>
+      <div className={`${styles.wrapper} ${width} ${theme}`}>
         {heading && (
           <div className={styles.heading}>
             <RichText data={heading} enableGutter={false} type="heading" />
@@ -25,11 +28,11 @@ export const ContentWithCardBlock: React.FC<ContentWithCardBlockProps> = ({
         )}
         <div className={`${styles.content} ${cardPlacement}`}>
           <RichText data={content} />
-        </div>{' '}
+        </div>
         <div className={`${styles.card} ${cardPlacement}`}>
-          <RichTextCard theme={theme} data={card} />
+          <RichTextCard theme={theme} data={card} cardBackgroundImage={cardBackgroundImage} />
         </div>
       </div>
-    </div>
+    </BlockBackground>
   );
 };

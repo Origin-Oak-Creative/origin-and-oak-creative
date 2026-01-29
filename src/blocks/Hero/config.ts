@@ -20,6 +20,8 @@ import { LinkGroup } from '../LinkGroup/config';
 import { Icon } from '@/inlineBlocks/Icon/config';
 import { LinkButton } from '@/inlineBlocks/LinkButton/config';
 import { getTextStateConfig } from '@/fields/textStateConfig';
+import { blockImageField } from '@/fields/blockImage';
+import { blockThemeField } from '@/fields';
 
 const heroLexical = lexicalEditor({
   features: () => {
@@ -44,11 +46,8 @@ const heroLexical = lexicalEditor({
 });
 
 const HeroFields: Field[] = [
-  {
-    name: 'image',
-    type: 'upload',
-    relationTo: 'media',
-  },
+  blockThemeField,
+  blockImageField,
   {
     name: 'content',
     type: 'richText',

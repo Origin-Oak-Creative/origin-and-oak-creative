@@ -2,10 +2,14 @@ import type { Block, Field } from 'payload';
 
 import { hasText } from '@payloadcms/richtext-lexical/shared';
 import { blockWidthField, blockThemeField, headingLexical, cardField } from '@/fields';
+import { blockImageField } from '@/fields/blockImage';
+import { cardImageField } from '@/fields/cardImage';
 
 const CardGridFields: Field[] = [
   blockWidthField,
   blockThemeField,
+  blockImageField,
+  cardImageField,
   {
     name: 'heading',
     type: 'group',

@@ -4,6 +4,7 @@ import { ContentWithMediaBlock as ContentWithMediaBlockProps } from '@/payload-t
 
 import { Media } from '@/components/Media';
 import RichText from '@/components/RichText';
+import { BlockBackground } from '@/components/BlockBackground';
 
 import styles from './style.module.css';
 
@@ -14,10 +15,11 @@ export const ContentWithMediaBlock: React.FC<ContentWithMediaBlockProps> = ({
   textDirection,
   content,
   image,
+  backgroundImage = { image: null, opacity: 0 },
 }) => {
   return (
-    <div className={`${styles.container} ${theme}`}>
-      <div className={`${styles.wrapper} ${width}`}>
+    <BlockBackground theme={theme} {...backgroundImage}>
+      <div className={`${styles.wrapper} ${width} ${theme}`}>
         {image.align == 'head' ? (
           <div className={`${styles.wrappedText} ${textDirection}`}>
             {heading && (
@@ -45,6 +47,6 @@ export const ContentWithMediaBlock: React.FC<ContentWithMediaBlockProps> = ({
           <Media resource={image.media} />
         </div>
       </div>
-    </div>
+    </BlockBackground>
   );
 };

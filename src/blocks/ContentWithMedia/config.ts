@@ -1,10 +1,12 @@
 import type { Block, Field } from 'payload';
 
 import { blockWidthField, blockThemeField, headingLexical, contentLexical } from '@/fields';
+import { blockImageField } from '@/fields/blockImage';
 
 const ContentWithMediaFields: Field[] = [
   blockWidthField,
   blockThemeField,
+  blockImageField,
   {
     name: 'textDirection',
     type: 'radio',

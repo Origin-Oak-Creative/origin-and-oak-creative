@@ -1,16 +1,22 @@
 import React from 'react';
-import RichText from '@/components/RichText';
 
 import type { ContentBlock as ContentBlockProps } from '@/payload-types';
 
+import { BlockBackground } from '@/components/BlockBackground';
+import RichText from '@/components/RichText';
+
 import styles from './style.module.css';
 
-export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
-  const { width, theme, heading, columns } = props;
-
+export const ContentBlock: React.FC<ContentBlockProps> = ({
+  width,
+  theme,
+  heading,
+  columns,
+  backgroundImage = { image: null, opacity: 0 },
+}) => {
   return (
-    <div className={`${styles.container} ${theme}`}>
-      <div className={`${styles.wrapper} ${width}`}>
+    <BlockBackground theme={theme} {...backgroundImage}>
+      <div className={`${styles.wrapper} ${width} ${theme}`}>
         {heading && (
           <div className={styles.heading}>
             <RichText data={heading} type="heading" />
@@ -27,6 +33,6 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
             );
           })}
       </div>
-    </div>
+    </BlockBackground>
   );
 };

@@ -7,10 +7,14 @@ import {
   contentLexical,
   cardField,
 } from '@/fields';
+import { blockImageField } from '@/fields/blockImage';
+import { cardImageField } from '@/fields/cardImage';
 
 const ContentWithCardFields: Field[] = [
   blockWidthField,
   blockThemeField,
+  blockImageField,
+  cardImageField,
   {
     name: 'cardPlacement',
     type: 'radio',

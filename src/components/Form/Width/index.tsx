@@ -7,7 +7,7 @@ export const Width: React.FC<{
   width?: number | string;
 }> = ({ children, width }) => {
   return (
-    <div className={styles.width} style={{ '--width': `${width}%` }}>
+    <div className={styles.width} style={{ '--width': `${width ? width : 100}%` }}>
       {children}
     </div>
   );

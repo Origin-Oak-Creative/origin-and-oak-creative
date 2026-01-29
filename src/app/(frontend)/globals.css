@@ -13,6 +13,7 @@
  */
 
 html {
+  scroll-behavior: smooth;
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
 }
@@ -448,7 +449,14 @@ template {
 }
 
 body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-color: var(--dune-sand);
+}
+
+main {
+  flex-grow: 2;
 }
 
 p,

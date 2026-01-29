@@ -1,8 +1,10 @@
 import React from 'react';
 
 import type { FormBlock as FormBlockProps } from '@/payload-types';
+
 import RichText from '@/components/RichText';
 import { Form } from '@/components/Form';
+import { BlockBackground } from '@/components/BlockBackground';
 
 import styles from './style.module.css';
 
@@ -13,11 +15,12 @@ export const FormBlock: React.FC<FormBlockProps> = ({
   heading,
   width,
   theme,
+  backgroundImage = { image: null, opacity: 0 },
 }) => {
   if (typeof form === 'object')
     return (
-      <div className={`${styles.container} ${theme}`}>
-        <div className={`${styles.wrapper} ${width}`}>
+      <BlockBackground theme={theme} {...backgroundImage}>
+        <div className={`${styles.wrapper} ${width} ${theme}`}>
           {heading && (
             <div className={styles.heading}>
               <RichText data={heading} enableGutter={false} type="heading" />
@@ -30,7 +33,7 @@ export const FormBlock: React.FC<FormBlockProps> = ({
           )}
           <Form form={form} />
         </div>
-      </div>
+      </BlockBackground>
     );
 
   return null;
