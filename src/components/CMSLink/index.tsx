@@ -22,13 +22,7 @@ type LinkType = {
   label: string;
 };
 
-export const CMSLink: React.FC<LinkType> = async ({
-  link,
-  appearance,
-  direction,
-  colour,
-  label,
-}) => {
+export const CMSLink: React.FC<LinkType> = ({ link, appearance, direction, colour, label }) => {
   const { type, newTab, reference, url, pdf } = link;
 
   const href =
