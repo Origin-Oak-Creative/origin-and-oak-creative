@@ -17,6 +17,8 @@ export const LinkGroupBlock: React.FC<LinkGroupBlockProps> = ({ links }) => {
           direction={e.display.direction}
           label={e.display.label}
           colour={e.display.colour}
+          icon={e.display.icon}
+          placement={e.display.placement}
         />
       ))}
     </div>

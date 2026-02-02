@@ -48,6 +48,7 @@ const LinkButtonFields: Field[] = [
             admin: {
               width: '50%',
             },
+            maxRows: 1,
           },
           {
             name: 'placement',
