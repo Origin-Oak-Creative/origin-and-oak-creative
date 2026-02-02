@@ -3,7 +3,6 @@ import sharp from 'sharp';
 import path from 'path';
 import { buildConfig, PayloadRequest } from 'payload';
 import { fileURLToPath } from 'url';
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { resendAdapter } from '@payloadcms/email-resend';
 
 import { Media } from './collections/Media';
@@ -17,6 +16,7 @@ import { plugins } from './plugins';
 import { getServerSideURL } from './utilities/getURL';
 import { Logo } from './globals/Logo/config';
 import { BusinessSchema } from './globals/BusinessSchema/config';
+import { contentLexical } from './fields';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -59,7 +59,7 @@ export default buildConfig({
     },
   },
   // This config helps us configure global or default features that the other editors can inherit
-  editor: lexicalEditor(),
+  editor: contentLexical(),
   db: sqliteAdapter({
     client: {
       url: process.env.DATABASE_URI || '',

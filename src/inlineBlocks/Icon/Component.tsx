@@ -1,5 +1,8 @@
 import React from 'react';
-import * as LucideIcons from 'lucide-react';
+import { DynamicIcon } from 'lucide-react/dynamic';
+import { dynamicIconImports } from 'lucide-react/dynamic';
+
+type IconName = keyof typeof dynamicIconImports;
 
 import type { IconInlineBlock as IconInlineBlockProps } from '@/payload-types';
 
@@ -18,8 +21,7 @@ export const IconInlineBlock: React.FC<IconInlineBlockProps> = ({ icon, color, s
     iconName = icon;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const Icon = iconName ? (LucideIcons as any)[iconName] : undefined;
+  if (!iconName) return null;
 
-  return <>{Icon && <Icon strokeWidth={1.5} color={color} size={size} />}</>;
+  return <DynamicIcon name={iconName as IconName} strokeWidth={1.5} color={color} size={size} />;
 };

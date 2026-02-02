@@ -7,6 +7,7 @@ import { Text } from './Text';
 import { Textarea } from './Textarea';
 import { StepBreak } from './StepBreak';
 import { Radio } from './Radio';
+import { Date } from './Date';
 
 export const fields = {
   checkbox: Checkbox,
@@ -18,4 +19,5 @@ export const fields = {
   textarea: Textarea,
   stepBreak: StepBreak,
   radio: Radio,
+  date: Date,
 };

@@ -1,7 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 
-import type { Page, PdfDocument } from '@/payload-types';
+import type { Page, PdfDocument, IconInlineBlock as IconInlineBlockProps } from '@/payload-types';
+
+import { IconInlineBlock } from '@/inlineBlocks/Icon/Component';
 
 import styles from './style.module.css';
 
@@ -20,9 +22,19 @@ type LinkType = {
   direction?: ('left' | 'right') | null;
   colour?: 'light' | 'dark';
   label: string;
+  icon?: IconInlineBlockProps[] | null;
+  placement?: 'left' | 'right' | null;
 };
 
-export const CMSLink: React.FC<LinkType> = ({ link, appearance, direction, colour, label }) => {
+export const CMSLink: React.FC<LinkType> = ({
+  link,
+  appearance,
+  direction,
+  colour,
+  label,
+  icon,
+  placement,
+}) => {
   const { type, newTab, reference, url, pdf } = link;
 
   const href =
@@ -42,7 +54,9 @@ export const CMSLink: React.FC<LinkType> = ({ link, appearance, direction, colou
       {...newTabProps}
       className={`${styles.link} ${appearance ? `${appearance} ${direction || ''}` : ''} ${colour || ''}`}
     >
+      {placement == 'left' && icon && <IconInlineBlock {...icon[0]} />}
       {label}
+      {placement == 'right' && icon && <IconInlineBlock {...icon[0]} />}
     </Link>
   );
 };

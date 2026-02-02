@@ -545,15 +545,6 @@ export interface Form {
             label?: string | null;
             width?: number | null;
             required?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'country';
-          }
-        | {
-            name: string;
-            label?: string | null;
-            width?: number | null;
-            required?: boolean | null;
             /**
              * The exact name of the field to fill in MailerLite. Only used in MailerLite automation.
              */
@@ -651,15 +642,6 @@ export interface Form {
             name: string;
             label?: string | null;
             width?: number | null;
-            required?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'state';
-          }
-        | {
-            name: string;
-            label?: string | null;
-            width?: number | null;
             defaultValue?: string | null;
             required?: boolean | null;
             /**
@@ -733,6 +715,26 @@ export interface Form {
             id?: string | null;
             blockName?: string | null;
             blockType: 'radio';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            required?: boolean | null;
+            defaultValue?: string | null;
+            /**
+             * The exact name of the field to fill in MailerLite. Only used in MailerLite automation.
+             */
+            mailerLiteKey?:
+              | ('none' | 'email' | 'name' | 'lastName' | 'company' | 'country' | 'city' | 'phone' | 'state' | 'zip')
+              | null;
+            /**
+             * The internal mapping key for Dubsado leads. Only used for general inquiry automation.
+             */
+            dubsadoKey?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'date';
           }
         | {
             stepTitle?: string | null;
@@ -1694,16 +1696,6 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        country?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              width?: T;
-              required?: T;
-              id?: T;
-              blockName?: T;
-            };
         email?:
           | T
           | {
@@ -1764,16 +1756,6 @@ export interface FormsSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        state?:
-          | T
-          | {
-              name?: T;
-              label?: T;
-              width?: T;
-              required?: T;
-              id?: T;
-              blockName?: T;
-            };
         text?:
           | T
           | {
@@ -1822,6 +1804,19 @@ export interface FormsSelect<T extends boolean = true> {
                     redirect?: T;
                     value?: T;
                   };
+              mailerLiteKey?: T;
+              dubsadoKey?: T;
+              id?: T;
+              blockName?: T;
+            };
+        date?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              width?: T;
+              required?: T;
+              defaultValue?: T;
               mailerLiteKey?: T;
               dubsadoKey?: T;
               id?: T;
