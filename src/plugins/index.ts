@@ -37,6 +37,8 @@ const checkboxField =
   typeof formFields.checkbox === 'function'
     ? formFields.checkbox()
     : (formFields.checkbox as Block);
+const dateField =
+  typeof formFields.date === 'function' ? formFields.date() : (formFields.date as Block);
 
 const automationField = (exitable = false): Field => {
   if (exitable)
@@ -175,10 +177,10 @@ export const plugins: Plugin[] = [
       email: { ...emailField, fields: [...emailField.fields, automationField(false)] },
       checkbox: { ...checkboxField, fields: [...checkboxField.fields, automationField(true)] },
       number: { ...numberField, fields: [...numberField.fields, automationField(false)] },
-      state: true,
-      country: true,
+      state: false,
+      country: false,
       message: true,
-      date: false,
+      date: { ...dateField, fields: [...dateField.fields, automationField(false)] },
       payment: false,
     },
     redirectRelationships: ['pages'],
@@ -356,6 +358,6 @@ export const plugins: Plugin[] = [
     collections: {
       media: true,
     },
-    token: process.env.BLOB_READ_WRITE_TOKEN
-  })
+    token: process.env.BLOB_READ_WRITE_TOKEN,
+  }),
 ];
