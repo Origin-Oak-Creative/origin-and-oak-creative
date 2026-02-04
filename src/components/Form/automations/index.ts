@@ -14,7 +14,7 @@ export async function runFormAutomations(
   const submissionData = submission.submissionData || [];
 
   if (automationSettings?.automation === 'inquiry' && fields) {
-    await handleGenInquiry(fields, submissionData, payload);
+    await handleGenInquiry(fields, submissionData, payload, submission.id);
   }
 
   if (
@@ -22,7 +22,13 @@ export async function runFormAutomations(
     fields &&
     automationSettings.mailerLiteGroup
   ) {
-    await handleMailerLite(fields, submissionData, payload, automationSettings.mailerLiteGroup);
+    await handleMailerLite(
+      fields,
+      submissionData,
+      payload,
+      automationSettings.mailerLiteGroup,
+      submission.id,
+    );
   }
 
   if (slackSettings && slackSettings.sendNotification) {
