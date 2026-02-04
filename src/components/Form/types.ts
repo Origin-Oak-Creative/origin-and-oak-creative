@@ -51,10 +51,5 @@ export const isInputField = (field: UnsanitizedField): field is InputField => {
 };
 
 export const isAutomationField = (field: UnsanitizedField): field is AutomationField => {
-  return (
-    field.blockType !== 'state' &&
-    field.blockType !== 'message' &&
-    field.blockType !== 'country' &&
-    field.blockType !== 'stepBreak'
-  );
+  return field.blockType !== 'message' && field.blockType !== 'stepBreak';
 };
