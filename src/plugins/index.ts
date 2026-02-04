@@ -107,12 +107,8 @@ const automationField = (exitable = false): Field => {
         },
         {
           name: 'dubsadoKey',
+          label: 'Dubsado Mapping ID',
           type: 'text',
-          label: 'Dubsado Attribute Key',
-          admin: {
-            description:
-              'The internal mapping key for Dubsado leads. Only used for general inquiry automation.',
-          },
         },
       ],
     };
@@ -146,12 +142,8 @@ const automationField = (exitable = false): Field => {
       },
       {
         name: 'dubsadoKey',
+        label: 'Dubsado Mapping ID',
         type: 'text',
-        label: 'Dubsado Attribute Key',
-        admin: {
-          description:
-            'The internal mapping key for Dubsado leads. Only used for general inquiry automation.',
-        },
       },
     ],
   };
@@ -185,6 +177,38 @@ export const plugins: Plugin[] = [
     },
     redirectRelationships: ['pages'],
     formSubmissionOverrides: {
+      fields: ({ defaultFields }) => [
+        ...defaultFields,
+        {
+          name: 'dubsadoSyncStatus',
+          label: 'Sync Status - Dubsado',
+          type: 'select',
+          defaultValue: 'na',
+          options: [
+            { label: 'Not Applicable', value: 'na' },
+            { label: 'Success', value: 'success' },
+            { label: 'Failed', value: 'failed' },
+          ],
+          admin: {
+            position: 'sidebar',
+            readOnly: true,
+          },
+        },
+        {
+          name: 'mailerLiteSyncStatus',
+          type: 'select',
+          defaultValue: 'na',
+          options: [
+            { label: 'Not Applicable', value: 'na' },
+            { label: 'Success', value: 'success' },
+            { label: 'Failed', value: 'failed' },
+          ],
+          admin: {
+            position: 'sidebar',
+            readOnly: true,
+          },
+        },
+      ],
       hooks: {
         afterChange: [automationDispatcher],
       },

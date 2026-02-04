@@ -532,9 +532,6 @@ export interface Form {
             mailerLiteKey?:
               | ('none' | 'email' | 'name' | 'lastName' | 'company' | 'country' | 'city' | 'phone' | 'state' | 'zip')
               | null;
-            /**
-             * The internal mapping key for Dubsado leads. Only used for general inquiry automation.
-             */
             dubsadoKey?: string | null;
             id?: string | null;
             blockName?: string | null;
@@ -551,9 +548,6 @@ export interface Form {
             mailerLiteKey?:
               | ('none' | 'email' | 'name' | 'lastName' | 'company' | 'country' | 'city' | 'phone' | 'state' | 'zip')
               | null;
-            /**
-             * The internal mapping key for Dubsado leads. Only used for general inquiry automation.
-             */
             dubsadoKey?: string | null;
             id?: string | null;
             blockName?: string | null;
@@ -591,9 +585,6 @@ export interface Form {
             mailerLiteKey?:
               | ('none' | 'email' | 'name' | 'lastName' | 'company' | 'country' | 'city' | 'phone' | 'state' | 'zip')
               | null;
-            /**
-             * The internal mapping key for Dubsado leads. Only used for general inquiry automation.
-             */
             dubsadoKey?: string | null;
             id?: string | null;
             blockName?: string | null;
@@ -630,9 +621,6 @@ export interface Form {
             mailerLiteKey?:
               | ('none' | 'email' | 'name' | 'lastName' | 'company' | 'country' | 'city' | 'phone' | 'state' | 'zip')
               | null;
-            /**
-             * The internal mapping key for Dubsado leads. Only used for general inquiry automation.
-             */
             dubsadoKey?: string | null;
             id?: string | null;
             blockName?: string | null;
@@ -650,9 +638,6 @@ export interface Form {
             mailerLiteKey?:
               | ('none' | 'email' | 'name' | 'lastName' | 'company' | 'country' | 'city' | 'phone' | 'state' | 'zip')
               | null;
-            /**
-             * The internal mapping key for Dubsado leads. Only used for general inquiry automation.
-             */
             dubsadoKey?: string | null;
             id?: string | null;
             blockName?: string | null;
@@ -670,9 +655,6 @@ export interface Form {
             mailerLiteKey?:
               | ('none' | 'email' | 'name' | 'lastName' | 'company' | 'country' | 'city' | 'phone' | 'state' | 'zip')
               | null;
-            /**
-             * The internal mapping key for Dubsado leads. Only used for general inquiry automation.
-             */
             dubsadoKey?: string | null;
             id?: string | null;
             blockName?: string | null;
@@ -708,9 +690,6 @@ export interface Form {
             mailerLiteKey?:
               | ('none' | 'email' | 'name' | 'lastName' | 'company' | 'country' | 'city' | 'phone' | 'state' | 'zip')
               | null;
-            /**
-             * The internal mapping key for Dubsado leads. Only used for general inquiry automation.
-             */
             dubsadoKey?: string | null;
             id?: string | null;
             blockName?: string | null;
@@ -728,9 +707,6 @@ export interface Form {
             mailerLiteKey?:
               | ('none' | 'email' | 'name' | 'lastName' | 'company' | 'country' | 'city' | 'phone' | 'state' | 'zip')
               | null;
-            /**
-             * The internal mapping key for Dubsado leads. Only used for general inquiry automation.
-             */
             dubsadoKey?: string | null;
             id?: string | null;
             blockName?: string | null;
@@ -1104,6 +1080,8 @@ export interface FormSubmission {
         id?: string | null;
       }[]
     | null;
+  dubsadoSyncStatus?: ('na' | 'success' | 'failed') | null;
+  mailerLiteSyncStatus?: ('na' | 'success' | 'failed') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1893,6 +1871,8 @@ export interface FormSubmissionsSelect<T extends boolean = true> {
         value?: T;
         id?: T;
       };
+  dubsadoSyncStatus?: T;
+  mailerLiteSyncStatus?: T;
   updatedAt?: T;
   createdAt?: T;
 }
