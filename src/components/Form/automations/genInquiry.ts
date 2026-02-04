@@ -109,7 +109,7 @@ export const handleGenInquiry = async (
       throw new Error('Submission Failed');
     }
 
-    payload.update({
+    await payload.update({
       collection: 'form-submissions',
       id,
       data: {
@@ -118,7 +118,7 @@ export const handleGenInquiry = async (
     });
     payload.logger.info('Dubsado sync complete');
   } catch (e) {
-    payload.update({
+    await payload.update({
       collection: 'form-submissions',
       id,
       data: {

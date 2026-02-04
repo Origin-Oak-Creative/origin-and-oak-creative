@@ -55,7 +55,7 @@ export const handleMailerLite = async (
 
       await mailerlite.groups.assignSubscriber(id, group);
 
-      payload.update({
+      await payload.update({
         collection: 'form-submissions',
         id,
         data: {
@@ -67,7 +67,7 @@ export const handleMailerLite = async (
       );
     }
   } catch (e) {
-    payload.update({
+    await payload.update({
       collection: 'form-submissions',
       id,
       data: {
