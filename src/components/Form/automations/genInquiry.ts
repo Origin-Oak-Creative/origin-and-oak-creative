@@ -36,6 +36,9 @@ export const handleGenInquiry = async (
     const initResponse = await fetch(FORM_URL, {
       headers: {
         Accept: 'application/json',
+        'User-Agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        Connection: 'close',
       },
     });
     if (!initResponse.ok) {
@@ -96,6 +99,9 @@ export const handleGenInquiry = async (
       headers: {
         'Content-Type': 'application/json',
         Accept: '*/*',
+        'User-Agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        Connection: 'close',
         'X-Requested-With': 'XMLHttpRequest',
         Origin: BASE_URL,
         Referer: PUBLIC_URL,
