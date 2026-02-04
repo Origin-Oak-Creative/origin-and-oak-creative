@@ -14,6 +14,7 @@ export const handleMailerLite = async (
   data: SubmissionValue[],
   payload: BasePayload,
   group: string,
+  id: string | number,
 ) => {
   try {
     const mappedFields: Record<string, string> = {};
@@ -27,6 +28,13 @@ export const handleMailerLite = async (
     });
 
     if (!mappedFields['email']) {
+      payload.update({
+        collection: 'form-submissions',
+        id,
+        data: {
+          mailerLiteSyncStatus: 'failed',
+        },
+      });
       payload.logger.error('MailerLite Hook: No email field found in submission.');
     } else {
       const res = await mailerlite.subscribers.createOrUpdate({
@@ -43,15 +51,29 @@ export const handleMailerLite = async (
         },
         status: 'active',
       });
-
       const id = res.data.data.id;
 
       await mailerlite.groups.assignSubscriber(id, group);
+
+      payload.update({
+        collection: 'form-submissions',
+        id,
+        data: {
+          mailerLiteSyncStatus: 'success',
+        },
+      });
       payload.logger.info(
         `Successfully added ${mappedFields['email']} to MailerLite group ${group}`,
       );
     }
   } catch (e) {
+    payload.update({
+      collection: 'form-submissions',
+      id,
+      data: {
+        mailerLiteSyncStatus: 'failed',
+      },
+    });
     payload.logger.error(e, 'MailerLite Hook Error');
   }
 };

@@ -1,46 +1,130 @@
 import { BasePayload } from 'payload';
-import { isAutomationField, UnionField } from '../types';
+
 import type { SubmissionValue } from '@payloadcms/plugin-form-builder/types';
+
+import { isAutomationField, UnionField } from '../types';
 
 const isString = (val: unknown): val is string => {
   return typeof val === 'string';
 };
 
-const isNumber = (val: unknown): val is number => {
-  return typeof val === 'number';
+type FieldItem = {
+  id: string;
+  type: 'question' | 'date' | 'leadSource';
+  [k: string]: string | number | boolean | undefined | null;
+  value?: string;
 };
 
 export const handleGenInquiry = async (
   fields: UnionField,
   data: SubmissionValue[],
   payload: BasePayload,
+  id: string | number,
 ) => {
-  // Dubsado
-  const formData = new URLSearchParams();
+  const FORM_ID = process.env.DUBSADO_FORM_ID;
+  const USER_ID = process.env.DUBSADO_USER_ID;
+  const BASE_URL = process.env.DUBSADO_BASE_URL || 'https://portal.dubsado.com';
 
   try {
-    if (!process.env.DUBSADO_FORM_ID)
-      throw new ReferenceError('Dubsado Form ID is not defined or is null.');
+    if (!FORM_ID) throw new ReferenceError('Dubsado Form ID is not defined or is null.');
+    if (!USER_ID) throw new ReferenceError('Dubsado User ID is not defined or is null.');
 
-    formData.append('form_id', process.env.DUBSADO_FORM_ID);
-    fields.forEach((field) => {
-      if (isAutomationField(field) && field.dubsadoKey) {
-        const val = data.find((s) => s.field === field.name)?.value;
-        if (val && (isString(val) || isNumber(val)))
-          formData.append(field.dubsadoKey, val.toString());
+    const FORM_URL = `${BASE_URL}/api/forms/u/${FORM_ID}?isOnScheduler=false&ignoreCache=false`;
+    const FORM_SUBMIT_URL = `${BASE_URL}/api/forms/Capture/${FORM_ID}`;
+    const PUBLIC_URL = `${BASE_URL}/public/form/view/${FORM_ID}`;
+
+    const initResponse = await fetch(FORM_URL, {
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+    if (!initResponse.ok) {
+      console.log('Status: ' + initResponse.status);
+      console.log(initResponse.headers);
+      console.log(await initResponse.json());
+      throw new Error('Init Fetch Failed');
+    }
+
+    const formObj = await initResponse.json();
+
+    let matchCount = 0;
+    formObj.data = formObj.data.map((fieldItem: FieldItem) => {
+      const payloadField = fields.find((f) => {
+        if (isAutomationField(f)) return f.dubsadoKey === fieldItem.id;
+        else return false;
+      });
+
+      if (payloadField && isAutomationField(payloadField)) {
+        const submittedValue = data.find(
+          (s: SubmissionValue) => s.field === payloadField.name,
+        )?.value;
+
+        if (isString(submittedValue)) {
+          matchCount++;
+          if (fieldItem.type === 'date') {
+            const dateObj = new Date(submittedValue);
+            return {
+              ...fieldItem,
+              value: dateObj.getTime(),
+              date: dateObj.toISOString(),
+            };
+          }
+          return { ...fieldItem, value: submittedValue };
+        }
       }
+      return fieldItem;
     });
 
-    await fetch(
-      `${process.env.DUBSADO_BASE_URL || 'https://portal.dubsado.com'}/public/form/submit/${process.env.DUBSADO_FORM_ID}`,
-      {
-        method: 'POST',
-        body: formData.toString(),
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    payload.logger.info(`Mapped ${matchCount} fields to Dubsado schema`);
+
+    if (matchCount === 0) {
+      throw new Error('Mapping failed: No matching fields found between Payload and Dubsado JSON.');
+    }
+
+    const finalPayload = {
+      form: {
+        ...formObj,
+        completed: true,
+        completedDate: new Date().toISOString(),
       },
-    );
+      inProgress: false,
+    };
+
+    const res = await fetch(FORM_SUBMIT_URL, {
+      method: 'PUT',
+      body: JSON.stringify(finalPayload),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: '*/*',
+        'X-Requested-With': 'XMLHttpRequest',
+        Origin: BASE_URL,
+        Referer: PUBLIC_URL,
+      },
+    });
+
+    if (!res.ok) {
+      console.log('Status: ' + res.status);
+      console.log(res.headers);
+      console.log(await res.json());
+      throw new Error('Submission Failed');
+    }
+
+    payload.update({
+      collection: 'form-submissions',
+      id,
+      data: {
+        dubsadoSyncStatus: 'success',
+      },
+    });
     payload.logger.info('Dubsado sync complete');
   } catch (e) {
+    payload.update({
+      collection: 'form-submissions',
+      id,
+      data: {
+        dubsadoSyncStatus: 'failed',
+      },
+    });
     payload.logger.error(e, 'Dubsado sync error');
   }
 };
