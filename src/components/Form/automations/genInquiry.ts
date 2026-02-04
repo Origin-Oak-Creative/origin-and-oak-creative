@@ -42,9 +42,6 @@ export const handleGenInquiry = async (
       },
     });
     if (!initResponse.ok) {
-      console.log('Status: ' + initResponse.status);
-      console.log(initResponse.headers);
-      console.log(await initResponse.json());
       throw new Error('Init Fetch Failed');
     }
 
@@ -109,9 +106,6 @@ export const handleGenInquiry = async (
     });
 
     if (!res.ok) {
-      console.log('Status: ' + res.status);
-      console.log(res.headers);
-      console.log(await res.json());
       throw new Error('Submission Failed');
     }
 
