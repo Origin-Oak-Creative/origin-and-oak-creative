@@ -36,12 +36,12 @@ export const handleGenInquiry = async (
     const initResponse = await fetch(FORM_URL, {
       headers: {
         Accept: 'application/json',
+        'User-Agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        Connection: 'close',
       },
     });
     if (!initResponse.ok) {
-      console.log('Status: ' + initResponse.status);
-      console.log(initResponse.headers);
-      console.log(await initResponse.json());
       throw new Error('Init Fetch Failed');
     }
 
@@ -62,7 +62,7 @@ export const handleGenInquiry = async (
         if (isString(submittedValue)) {
           matchCount++;
           if (fieldItem.type === 'date') {
-            const dateObj = new Date(submittedValue);
+            const dateObj = new Date(`${submittedValue}T10:00:00.000Z`);
             return {
               ...fieldItem,
               value: dateObj.getTime(),
@@ -96,6 +96,9 @@ export const handleGenInquiry = async (
       headers: {
         'Content-Type': 'application/json',
         Accept: '*/*',
+        'User-Agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        Connection: 'close',
         'X-Requested-With': 'XMLHttpRequest',
         Origin: BASE_URL,
         Referer: PUBLIC_URL,
@@ -103,13 +106,10 @@ export const handleGenInquiry = async (
     });
 
     if (!res.ok) {
-      console.log('Status: ' + res.status);
-      console.log(res.headers);
-      console.log(await res.json());
       throw new Error('Submission Failed');
     }
 
-    payload.update({
+    await payload.update({
       collection: 'form-submissions',
       id,
       data: {
@@ -118,7 +118,7 @@ export const handleGenInquiry = async (
     });
     payload.logger.info('Dubsado sync complete');
   } catch (e) {
-    payload.update({
+    await payload.update({
       collection: 'form-submissions',
       id,
       data: {

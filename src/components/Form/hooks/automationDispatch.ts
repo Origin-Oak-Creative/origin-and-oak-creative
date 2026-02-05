@@ -13,5 +13,5 @@ export const automationDispatcher: CollectionAfterChangeHook = async ({ doc, req
   });
 
   // This function handles the "if/else" logic for every service
-  void runFormAutomations(form, doc, payload);
+  await runFormAutomations(form, doc, payload);
 };
