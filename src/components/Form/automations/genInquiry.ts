@@ -62,7 +62,7 @@ export const handleGenInquiry = async (
         if (isString(submittedValue)) {
           matchCount++;
           if (fieldItem.type === 'date') {
-            const dateObj = new Date(submittedValue);
+            const dateObj = new Date(`${submittedValue}Z`);
             return {
               ...fieldItem,
               value: dateObj.getTime(),
