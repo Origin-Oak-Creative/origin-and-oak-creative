@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import React from 'react';
+import { GoogleTagManager } from '@next/third-parties/google';
 
 import { AdminBar } from '@/components/AdminBar';
 import { Footer } from '@/globals/Footer/Component';
@@ -17,13 +18,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const { isEnabled } = await draftMode();
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
-        <BusinessSchema />
+        <BusinessSchema strategy="beforeInteractive" />
       </head>
       <body>
+        <GoogleTagManager gtmId="GTM-TFZRV9M4" />
         <Providers>
           <AdminBar
             adminBarProps={{

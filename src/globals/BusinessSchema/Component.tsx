@@ -1,9 +1,11 @@
+import Script from 'next/script';
+
 import { getCachedGlobal } from '@/utilities/getGlobals';
 import { getServerSideURL } from '@/utilities/getURL';
 
 import type { Schema, Logo } from '@/payload-types';
 
-export async function BusinessSchema() {
+export async function BusinessSchema({ strategy }: { strategy: 'beforeInteractive' }) {
   const schemaData: Schema = await getCachedGlobal('schema', 1)();
   const logoData: Logo = await getCachedGlobal('logo', 1)();
 
@@ -45,8 +47,10 @@ export async function BusinessSchema() {
   };
 
   return (
-    <script
+    <Script
+      id="business-schema"
       type="application/ld+json"
+      strategy={strategy}
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />
   );
