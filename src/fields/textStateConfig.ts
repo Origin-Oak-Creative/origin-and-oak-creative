@@ -43,6 +43,9 @@ export const TEXT_STATE_CONFIGS = {
       'semi-spacious': { label: 'Semi Spacious', css: { 'letter-spacing': '0.02em' } },
       spacious: { label: 'Spacious', css: { 'letter-spacing': '0.1em' } },
     },
+    animate: {
+      'fade-in': { label: 'Fade In', css: { 'text-shadow': '#7f7f80 0 0 10px' } },
+    },
   },
   heading: {
     style: {
@@ -91,6 +94,9 @@ export const TEXT_STATE_CONFIGS = {
       'semi-spacious': { label: 'Semi Spacious', css: { 'letter-spacing': '0.02em' } },
       spacious: { label: 'Spacious', css: { 'letter-spacing': '0.1em' } },
     },
+    animate: {
+      'fade-in': { label: 'Fade In', css: { 'text-shadow': '#7f7f80 0 0 10px' } },
+    },
   },
   content: {
     size: {
@@ -112,6 +118,9 @@ export const TEXT_STATE_CONFIGS = {
       standard: { label: 'Standard', css: { 'letter-spacing': '0' } },
       spacious: { label: 'Spacious', css: { 'letter-spacing': '0.02em' } },
     },
+    animate: {
+      'fade-in': { label: 'Fade In', css: { 'text-shadow': '#7f7f80 0 0 10px' } },
+    },
   },
 } as const;
 
@@ -127,11 +136,13 @@ export const getTextStateConfig = (type: ConfigType) => {
         style: 'style' in config ? config.style : {},
         color: 'color' in config ? config.color : undefined,
         spacing: 'spacing' in config ? config.spacing : undefined,
+        animate: 'animate' in config ? config.animate : undefined,
       };
     case 'content':
       return {
         size: 'size' in config ? config.size : undefined,
         spacing: 'spacing' in config ? config.spacing : undefined,
+        animate: 'animate' in config ? config.animate : undefined,
       };
     default:
       return {};

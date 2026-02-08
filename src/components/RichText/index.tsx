@@ -5,7 +5,6 @@ import type {
   SerializedLinkNode,
   DefaultTypedEditorState,
 } from '@payloadcms/richtext-lexical';
-
 import {
   type JSXConverters,
   defaultJSXConverters,
@@ -25,6 +24,7 @@ import { IconInlineBlock } from '@/inlineBlocks/Icon/Component';
 import { LinkButtonInlineBlock } from '@/inlineBlocks/LinkButton/Component';
 
 import styles from './style.module.css';
+import { TextState } from './TextState';
 
 type NodeTypes =
   | DefaultNodeTypes
@@ -105,7 +105,7 @@ const jsxConverters = (type: ConfigType): JSXConverters<NodeTypes> => {
       if (node.format & IS_CODE) element = <code>{element}</code>;
 
       if (classNames) {
-        return <span className={classNames}>{element}</span>;
+        return <TextState classNames={classNames} element={element} />;
       }
 
       return element;
