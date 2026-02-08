@@ -78,6 +78,8 @@ export const Form: React.FC<{ form: FormProps }> = ({ form }) => {
       const submitForm = async () => {
         setError(undefined);
 
+        if (data.honeyPot) return;
+
         // delay loading indicator by 1s
         loadingTimerID = setTimeout(() => {
           setIsLoading(true);
@@ -169,6 +171,14 @@ export const Form: React.FC<{ form: FormProps }> = ({ form }) => {
               }
               return null;
             })}
+            <input
+              {...register('honeyPot')}
+              type="text"
+              name="realAddress"
+              style={{ display: 'none' }}
+              tabIndex={-1}
+              autoComplete="off"
+            />
           </div>
           <div className={`${styles.buttons}`}>
             {steps.length > 1 && (
