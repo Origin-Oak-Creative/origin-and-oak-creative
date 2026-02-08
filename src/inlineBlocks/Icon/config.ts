@@ -1,6 +1,6 @@
-import type { Block, Field } from 'payload';
+import type { Block } from 'payload';
 
-import { LucideIconPicker } from 'payload-lucide-picker-next';
+import LucideIconPicker from '@/fields/iconPicker/config';
 
 export const Icon: Block = {
   slug: 'icon',
@@ -9,7 +9,7 @@ export const Icon: Block = {
     LucideIconPicker({
       name: 'icon',
       required: true,
-    }) as unknown as Field,
+    }),
     {
       name: 'color',
       label: 'Color Override',

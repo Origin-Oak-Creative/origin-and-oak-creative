@@ -37,4 +37,26 @@
 
 .parent {
   position: relative;
+  height: 100%;
+}
+
+.wrapper {
+  opacity: 0;
+  transform: translateY(50px);
+  border-radius: 25px;
+  margin: 10px;
+  transition:
+    opacity 1s ease-out,
+    transform 1s ease-out,
+    all 0.25s ease-in-out;
+
+  &.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 3px 10px rgb(0 0 0 / 10%);
+  }
 }

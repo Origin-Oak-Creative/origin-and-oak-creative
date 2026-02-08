@@ -15,7 +15,8 @@ import { handleFormSubmission } from './action';
 import styles from './styles.module.css';
 
 export const Form: React.FC<{ form: FormProps }> = ({ form }) => {
-  const { fields, id, confirmationType, confirmationMessage, redirect, submitButtonLabel } = form;
+  const { fields, id, confirmationType, confirmationMessage, redirect, submitButtonLabel, title } =
+    form;
   const steps = getFormSteps(fields);
 
   const formMethods = useForm({
@@ -76,6 +77,8 @@ export const Form: React.FC<{ form: FormProps }> = ({ form }) => {
       let loadingTimerID: ReturnType<typeof setTimeout>;
       const submitForm = async () => {
         setError(undefined);
+
+        if (data.honeyPot) return;
 
         // delay loading indicator by 1s
         loadingTimerID = setTimeout(() => {
@@ -147,7 +150,7 @@ export const Form: React.FC<{ form: FormProps }> = ({ form }) => {
       {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
       {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
       {!hasSubmitted && (
-        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form} id={title}>
           <div className={styles.fields}>
             {steps[currentStep].map((field, index) => {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -168,6 +171,14 @@ export const Form: React.FC<{ form: FormProps }> = ({ form }) => {
               }
               return null;
             })}
+            <input
+              {...register('honeyPot')}
+              type="text"
+              name="realAddress"
+              style={{ display: 'none' }}
+              tabIndex={-1}
+              autoComplete="off"
+            />
           </div>
           <div className={`${styles.buttons}`}>
             {steps.length > 1 && (
