@@ -14,9 +14,10 @@ export const RichTextCard: React.FC<{
   theme: ThemeField;
   data: { heading?: DefaultTypedEditorState | null; content: DefaultTypedEditorState };
   cardBackgroundImage?: CardImageProps;
-}> = ({ theme, data, cardBackgroundImage }) => {
+  index?: number;
+}> = ({ theme, data, cardBackgroundImage, index = 0 }) => {
   return (
-    <CardBackground theme={theme} {...cardBackgroundImage}>
+    <CardBackground theme={theme} {...cardBackgroundImage} index={index}>
       <div className={`${styles.card} ${theme}`}>
         {data.heading && (
           <div className={styles.heading}>

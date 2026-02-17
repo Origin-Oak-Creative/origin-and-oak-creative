@@ -16,7 +16,8 @@ export const TeamCard: React.FC<{
   member: TeamMember;
   theme: 'softLinen' | 'riverStone' | 'midnight';
   cardBackgroundImage?: CardImageProps;
-}> = ({ member, theme, cardBackgroundImage }) => {
+  index: number;
+}> = ({ member, theme, cardBackgroundImage, index }) => {
   const [open, setOpen] = useState(false);
   const modalRef = useRef<HTMLDialogElement | null>(null);
 
@@ -33,7 +34,7 @@ export const TeamCard: React.FC<{
 
   const { name, title, headshot, biography } = member;
   return (
-    <CardBackground theme={theme} {...cardBackgroundImage}>
+    <CardBackground theme={theme} {...cardBackgroundImage} index={index}>
       <div className={`${styles.card} ${theme}`}>
         <div className={styles.image}>
           <Media resource={headshot} />
