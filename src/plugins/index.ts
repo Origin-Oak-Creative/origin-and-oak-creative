@@ -64,11 +64,12 @@ const automationField = (exitable = false): Field => {
               name: 'redirect',
               label: 'Redirect',
               type: 'text',
-              defaultValue: 'none',
+              defaultValue: 'None',
               admin: {
                 components: {
                   Field: '@/components/RedirectSelector#RedirectSelector', // Path to your file
                 },
+
                 description:
                   'Choose from the "Conditional Redirects" defined at the bottom of the form.',
               },
