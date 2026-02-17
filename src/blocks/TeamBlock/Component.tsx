@@ -34,9 +34,10 @@ export const TeamBlock: React.FC<TeamBlockProps> = async ({
           </div>
         )}
         <div className={styles.grid} style={{ '--max-columns': columns }}>
-          {members.map((m) => (
+          {members.map((m, i) => (
             <TeamCard
-              key={m.id}
+              key={i}
+              index={i}
               member={m}
               theme={theme}
               cardBackgroundImage={cardBackgroundImage}

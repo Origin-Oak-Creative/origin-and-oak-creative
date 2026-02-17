@@ -14,6 +14,7 @@ interface CardBackgroundProps {
   image?: number | MediaType | null;
   opacity?: number | null;
   children: React.ReactNode;
+  index?: number;
 }
 
 export const CardBackground: React.FC<CardBackgroundProps> = ({
@@ -21,6 +22,7 @@ export const CardBackground: React.FC<CardBackgroundProps> = ({
   image,
   opacity,
   children,
+  index = 0,
 }) => {
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -28,7 +30,11 @@ export const CardBackground: React.FC<CardBackgroundProps> = ({
   });
 
   return (
-    <div ref={ref} className={`${styles.wrapper} ${inView ? styles.visible : ''}`}>
+    <div
+      ref={ref}
+      className={`${styles.wrapper} ${inView ? styles.visible : ''}`}
+      style={{ '--index': index }}
+    >
       <div className={styles.parent}>
         <div className={styles.content}>{children}</div>
         <div

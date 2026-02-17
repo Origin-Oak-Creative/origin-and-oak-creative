@@ -46,17 +46,28 @@
   border-radius: 25px;
   margin: 10px;
   transition:
-    opacity 1s ease-out,
-    transform 1s ease-out,
-    all 0.25s ease-in-out;
+    transform 0.25s ease-in-out,
+    box-shadow 0.25s ease-in-out;
 
   &.visible {
-    opacity: 1;
-    transform: none;
+    animation: fade-in 0.5s ease-out forwards;
+    animation-delay: calc(var(--index) * 0.2s);
   }
 
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 3px 10px rgb(0 0 0 / 10%);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

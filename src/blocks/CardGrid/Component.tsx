@@ -35,6 +35,7 @@ export const CardGridBlock: React.FC<CardGridBlockProps> = ({
           )}
           {cards.map((e, i) => (
             <RichTextCard
+              index={i}
               key={i}
               theme={theme}
               data={e.card}
