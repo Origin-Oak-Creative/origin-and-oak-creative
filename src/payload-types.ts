@@ -2024,7 +2024,8 @@ export interface Footer {
  */
 export interface Logo {
   id: number;
-  media: number | Media;
+  light: number | Media;
+  dark: number | Media;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2134,7 +2135,8 @@ export interface FooterSelect<T extends boolean = true> {
  * via the `definition` "logo_select".
  */
 export interface LogoSelect<T extends boolean = true> {
-  media?: T;
+  light?: T;
+  dark?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -2259,7 +2261,7 @@ export interface LinkButtonInlineBlock {
     appearance: 'plain' | 'solid' | 'outline' | 'circle';
     direction?: ('left' | 'right') | null;
     label: string;
-    colour: 'light' | 'dark';
+    colour: 'light' | 'dark' | 'green';
     icon?: IconInlineBlock[] | null;
     placement?: ('left' | 'right') | null;
   };

@@ -10,7 +10,13 @@ export const Logo: GlobalConfig = {
 
   fields: [
     {
-      name: 'media',
+      name: 'light',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+    },
+    {
+      name: 'dark',
       type: 'upload',
       relationTo: 'media',
       required: true,
