@@ -17,7 +17,7 @@ interface HeaderClientProps {
 }
 
 export const HeaderClient: React.FC<HeaderClientProps> = ({ data, logo }) => {
-  const media = logo && typeof logo.media === 'object' ? logo.media : null;
+  const media = logo && logo && typeof logo.light === 'object' ? logo.light : null;
   const logoUrl = media?.sizes?.thumbnail?.url || media?.url;
   const logoHeight = media?.sizes?.thumbnail?.height || media?.height || undefined;
   const logoWidth = media?.sizes?.thumbnail?.width || media?.width || undefined;

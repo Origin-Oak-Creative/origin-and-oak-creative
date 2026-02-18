@@ -17,7 +17,7 @@ export async function Footer() {
   const form = footerData.form;
   const legalLinks = footerData.legalLinks || [];
   const socials = footerData.socials || [];
-  const media = logoData && typeof logoData.media === 'object' ? logoData.media : null;
+  const media = logoData && typeof logoData.dark === 'object' ? logoData.dark : null;
   const logoUrl = media?.url;
   const logoHeight = media?.height || undefined;
   const logoWidth = media?.width || undefined;

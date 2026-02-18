@@ -3,15 +3,15 @@
     background-color: transparent;
     border: none;
     padding: 0;
-    color: var(--midnight);
+    color: var(--dune-sand);
 
     &:hover {
-      color: var(--deep-wisdom-olive);
+      color: var(--soft-linen);
     }
   }
 
   .nav {
-    background-color: var(--soft-linen);
+    background-color: var(--midnight);
     position: fixed;
     top: 0;
     right: 0;

@@ -37,7 +37,12 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
           {navItems.map((link, i) => {
             return (
               <li key={i}>
-                <CMSLink {...link} />
+                <CMSLink
+                  link={link.link}
+                  label={link.label}
+                  appearance={link.appearance}
+                  colour="light"
+                />
               </li>
             );
           })}
