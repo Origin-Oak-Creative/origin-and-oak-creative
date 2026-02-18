@@ -38,6 +38,14 @@
     &::after {
       background-color: var(--dune-sand);
     }
+
+    &:global(.plain.green) {
+      color: var(--deep-wisdom-olive);
+
+      &::after {
+        background-color: var(--midnight);
+      }
+    }
   }
 
   &:global(.solid) {
@@ -59,6 +67,15 @@
 
     &:hover {
       background-color: oklch(from var(--dune-sand) l c h / 80%);
+    }
+  }
+
+  &:global(.solid.green) {
+    background-color: oklch(from var(--deep-wisdom-olive) l c h / 80%);
+    color: var(--soft-linen);
+
+    &:hover {
+      background-color: oklch(from var(--deep-wisdom-olive) l c h / 90%);
     }
   }
 
@@ -84,6 +101,17 @@
     &:hover {
       background-color: var(--dune-sand);
       color: var(--graphite-smoke);
+    }
+  }
+
+  &:global(.outline.green) {
+    background-color: oklch(from var(--deep-wisdom-olive) l c h / 0%);
+    color: var(--deep-wisdom-olive);
+    border: 2px solid var(--deep-wisdom-olive);
+
+    &:hover {
+      background-color: var(--deep-wisdom-olive);
+      color: var(--soft-linen);
     }
   }
 
@@ -117,6 +145,15 @@
 
     &:hover {
       background-color: oklch(from var(--dune-sand) l c h / 80%);
+    }
+  }
+
+  &:global(.circle.green) {
+    background-color: oklch(from var(--deep-wisdom-olive) l c h / 80%);
+    color: var(--soft-linen);
+
+    &:hover {
+      background-color: oklch(from var(--deep-wisdom-olive) l c h / 90%);
     }
   }
 }

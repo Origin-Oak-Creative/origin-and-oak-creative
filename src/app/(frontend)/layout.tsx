@@ -13,6 +13,7 @@ import { draftMode } from 'next/headers';
 
 import './globals.css';
 import { getServerSideURL } from '@/utilities/getURL';
+import FacebookPixel from '@/components/MetaPixel';
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode();
@@ -32,11 +33,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               preview: isEnabled,
             }}
           />
-
           <Header />
           {children}
           <Footer />
         </Providers>
+        <FacebookPixel />
       </body>
     </html>
   );

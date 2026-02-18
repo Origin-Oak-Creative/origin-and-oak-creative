@@ -31,6 +31,7 @@ const LinkButtonFields: Field[] = [
             options: [
               { label: 'Light', value: 'light' },
               { label: 'Dark', value: 'dark' },
+              { label: 'Green', value: 'green' },
             ],
             admin: {
               width: '50%',

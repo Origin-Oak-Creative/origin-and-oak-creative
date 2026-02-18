@@ -20,7 +20,7 @@ type LinkType = {
   };
   appearance?: 'plain' | 'solid' | 'outline' | 'circle';
   direction?: ('left' | 'right') | null;
-  colour?: 'light' | 'dark';
+  colour?: 'light' | 'dark' | 'green';
   label: string;
   icon?: IconInlineBlockProps[] | null;
   placement?: 'left' | 'right' | null;
