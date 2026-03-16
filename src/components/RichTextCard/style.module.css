@@ -28,11 +28,11 @@
   }
 
   &:global(.midnight) {
-    color: var(--graphite-smoke);
+    color: var(--soft-linen);
 
     h2,
     h3 {
-      color: var(--midnight);
+      color: var(--river-stone);
     }
   }
 }

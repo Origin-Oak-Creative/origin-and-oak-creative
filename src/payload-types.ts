@@ -407,6 +407,7 @@ export interface MediaBlock {
 export interface TeamBlock {
   width: 'block' | 'fullWidth';
   theme: 'softLinen' | 'riverStone' | 'midnight';
+  cardTheme: 'softLinen' | 'riverStone' | 'midnight';
   backgroundImage?: {
     image?: (number | null) | Media;
     opacity?: number | null;
@@ -863,6 +864,7 @@ export interface ContentWithMediaBlock {
 export interface ContentWithCardBlock {
   width: 'block' | 'fullWidth';
   theme: 'softLinen' | 'riverStone' | 'midnight';
+  cardTheme: 'softLinen' | 'riverStone' | 'midnight';
   backgroundImage?: {
     image?: (number | null) | Media;
     opacity?: number | null;
@@ -945,6 +947,7 @@ export interface ContentWithCardBlock {
 export interface CardGridBlock {
   width: 'block' | 'fullWidth';
   theme: 'softLinen' | 'riverStone' | 'midnight';
+  cardTheme: 'softLinen' | 'riverStone' | 'midnight';
   backgroundImage?: {
     image?: (number | null) | Media;
     opacity?: number | null;
@@ -1362,6 +1365,7 @@ export interface MediaBlockSelect<T extends boolean = true> {
 export interface TeamBlockSelect {
   width?: boolean;
   theme?: boolean;
+  cardTheme?: boolean;
   backgroundImage?:
     | boolean
     | {
@@ -1433,6 +1437,7 @@ export interface ContentWithMediaBlockSelect {
 export interface ContentWithCardBlockSelect {
   width?: boolean;
   theme?: boolean;
+  cardTheme?: boolean;
   backgroundImage?:
     | boolean
     | {
@@ -1464,6 +1469,7 @@ export interface ContentWithCardBlockSelect {
 export interface CardGridBlockSelect {
   width?: boolean;
   theme?: boolean;
+  cardTheme?: boolean;
   backgroundImage?:
     | boolean
     | {

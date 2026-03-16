@@ -7,6 +7,8 @@
 
   p {
     font-size: 20px;
+    line-height: 1.2;
+    margin-bottom: 0.5em;
   }
 
   &:global(.softLinen) {
@@ -26,10 +28,10 @@
   }
 
   &:global(.midnight) {
-    color: var(--graphite-smoke);
+    color: var(--soft-linen);
 
     h3 {
-      color: var(--midnight);
+      color: var(--river-stone);
     }
   }
 }
@@ -52,6 +54,15 @@
   &:hover {
     transform: translateY(-3px);
     background-color: oklch(from var(--midnight) l c h / 90%);
+  }
+
+  &:global(.midnight) {
+    background-color: oklch(from var(--river-stone) l c h / 90%);
+    color: var(--midnight);
+
+    &:hover {
+      background-color: oklch(from var(--river-stone) l c h / 80%);
+    }
   }
 }
 

@@ -11,6 +11,7 @@ import styles from './style.module.css';
 export const CardGridBlock: React.FC<CardGridBlockProps> = ({
   width,
   theme,
+  cardTheme,
   heading = { content: null, position: 'out' },
   columns,
   cards,
@@ -37,7 +38,7 @@ export const CardGridBlock: React.FC<CardGridBlockProps> = ({
             <RichTextCard
               index={i}
               key={i}
-              theme={theme}
+              theme={cardTheme}
               data={e.card}
               cardBackgroundImage={cardBackgroundImage}
             />

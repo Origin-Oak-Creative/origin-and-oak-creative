@@ -12,6 +12,7 @@ export const ContentWithCardBlock: React.FC<ContentWithCardBlockProps> = ({
   width,
   cardPlacement,
   theme,
+  cardTheme,
   heading,
   content,
   card,
@@ -30,7 +31,7 @@ export const ContentWithCardBlock: React.FC<ContentWithCardBlockProps> = ({
           <RichText data={content} />
         </div>
         <div className={`${styles.card} ${cardPlacement}`}>
-          <RichTextCard theme={theme} data={card} cardBackgroundImage={cardBackgroundImage} />
+          <RichTextCard theme={cardTheme} data={card} cardBackgroundImage={cardBackgroundImage} />
         </div>
       </div>
     </BlockBackground>
