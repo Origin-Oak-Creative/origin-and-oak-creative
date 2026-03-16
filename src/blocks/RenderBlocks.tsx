@@ -10,6 +10,7 @@ import { TeamBlock } from './TeamBlock/Component';
 import { ContentWithMediaBlock } from './ContentWithMedia/Component';
 import { ContentWithCardBlock } from './ContentWithCard/Component';
 import { CardGridBlock } from './CardGrid/Component';
+import { TestimonialsBlock } from './TestimonialBlock/Component';
 
 const blockComponents = {
   content: ContentBlock,
@@ -20,6 +21,7 @@ const blockComponents = {
   'content-media': ContentWithMediaBlock,
   'content-card': ContentWithCardBlock,
   'card-grid': CardGridBlock,
+  'testimonials-block': TestimonialsBlock,
 };
 
 export const RenderBlocks: React.FC<{

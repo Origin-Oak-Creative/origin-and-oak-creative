@@ -9,6 +9,7 @@ import { Media } from './collections/Media';
 import { Pages } from './collections/Pages';
 import { Users } from './collections/Users';
 import { TeamMembers } from './collections/TeamMembers';
+import { Testimonials } from './collections/Testimonials';
 import { PDFDocuments } from './collections/Documents';
 import { Footer } from './globals/Footer/config';
 import { Header } from './globals/Header/config';
@@ -67,7 +68,7 @@ export default buildConfig({
     },
     push: false,
   }),
-  collections: [Pages, Media, PDFDocuments, Users, TeamMembers],
+  collections: [Pages, Media, PDFDocuments, Users, TeamMembers, Testimonials],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, Logo, BusinessSchema],
   plugins,

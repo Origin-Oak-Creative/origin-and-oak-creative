@@ -1,0 +1,49 @@
+.card {
+  white-space: normal;
+
+  h3 {
+    font-size: 48px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+  }
+
+  &:global(.softLinen) {
+    color: var(--graphite-smoke);
+
+    h3 {
+      color: var(--midnight);
+    }
+
+    .subtitle {
+      color: var(--deep-wisdom-olive);
+    }
+  }
+
+  &:global(.riverStone) {
+    color: var(--graphite-smoke);
+
+    h3 {
+      color: var(--midnight);
+    }
+
+    .subtitle {
+      color: var(--midnight);
+    }
+  }
+
+  &:global(.midnight) {
+    color: var(--soft-linen);
+
+    h3 {
+      color: var(--river-stone);
+    }
+
+    .subtitle {
+      color: var(--dune-sand);
+    }
+  }
+}
