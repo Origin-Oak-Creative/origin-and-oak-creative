@@ -4,10 +4,12 @@ import { hasText } from '@payloadcms/richtext-lexical/shared';
 import { blockWidthField, blockThemeField, headingLexical, cardField } from '@/fields';
 import { blockImageField } from '@/fields/blockImage';
 import { cardImageField } from '@/fields/cardImage';
+import { cardThemeField } from '@/fields/cardTheme';
 
 const CardGridFields: Field[] = [
   blockWidthField,
   blockThemeField,
+  cardThemeField,
   blockImageField,
   cardImageField,
   {

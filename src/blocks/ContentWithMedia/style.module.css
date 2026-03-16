@@ -52,7 +52,7 @@
   .image {
     overflow: hidden;
     border-radius: 25px;
-
+    max-height: 50vh;
     grid-column: span 12;
 
     img {
@@ -85,6 +85,8 @@
   }
 
   .image {
+    max-height: initial;
+
     &:global(.right) {
       grid-column: 1 / span 6;
     }

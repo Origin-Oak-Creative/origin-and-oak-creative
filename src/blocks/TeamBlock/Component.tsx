@@ -11,6 +11,7 @@ import styles from './style.module.css';
 
 export const TeamBlock: React.FC<TeamBlockProps> = async ({
   theme,
+  cardTheme,
   width,
   columns,
   heading,
@@ -39,7 +40,7 @@ export const TeamBlock: React.FC<TeamBlockProps> = async ({
               key={i}
               index={i}
               member={m}
-              theme={theme}
+              theme={cardTheme}
               cardBackgroundImage={cardBackgroundImage}
             />
           ))}

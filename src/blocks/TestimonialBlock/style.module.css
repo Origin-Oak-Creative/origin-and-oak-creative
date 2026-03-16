@@ -1,0 +1,135 @@
+@media all and (min-width: 0px) {
+  .carouselWrapper button {
+    display: none;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .carouselWrapper button {
+    display: inline;
+  }
+}
+
+.wrapper {
+  &:global(.block) {
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+
+  &:global(.softLinen) {
+    color: var(--graphite-smoke);
+
+    h2 {
+      color: var(--midnight);
+    }
+  }
+
+  &:global(.riverStone) {
+    color: var(--graphite-smoke);
+
+    h2 {
+      color: var(--midnight);
+    }
+  }
+
+  &:global(.midnight) {
+    color: var(--soft-linen);
+
+    h2 {
+      color: var(--river-stone);
+    }
+  }
+}
+
+.heading {
+  margin-bottom: 1.5em;
+}
+
+.carouselWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+
+  button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    color: var(--graphite-smoke);
+    transition: color 0.25s ease-in-out;
+
+    &:hover {
+      color: var(--deep-wisdom-olive);
+    }
+
+    &:global(.midnight) {
+      color: var(--dune-sand);
+
+      &:hover {
+        color: var(--soft-linen);
+      }
+    }
+  }
+}
+
+.carousel {
+  width: 100%;
+  overflow: hidden;
+}
+
+.window {
+  width: 100%;
+  white-space: nowrap;
+  transition: transform 0.25s ease-in-out;
+}
+
+.slide {
+  display: inline-block;
+  width: 100%;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+
+  button {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--deep-wisdom-olive);
+    border-radius: 50%;
+    transition: background-color 0.25s ease-in-out;
+  }
+
+  .inactive {
+    background-color: var(--deep-wisdom-olive);
+
+    &:hover {
+      background-color: var(--dune-sand);
+    }
+  }
+
+  .active {
+    background-color: var(--dune-sand);
+  }
+
+  &:global(.midnight) {
+    button {
+      border: 2px solid var(--dune-sand);
+    }
+
+    .inactive {
+      background-color: var(--dune-sand);
+
+      &:hover {
+        background-color: var(--deep-wisdom-olive);
+      }
+    }
+
+    .active {
+      background-color: var(--deep-wisdom-olive);
+    }
+  }
+}

@@ -22,6 +22,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields';
+import { Testimonials } from '@/blocks/TestimonialBlock/config';
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -79,6 +80,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 ContentWithMedia,
                 ContentWithCard,
                 CardGrid,
+                Testimonials,
               ],
               required: true,
               admin: {

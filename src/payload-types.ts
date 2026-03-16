@@ -72,6 +72,7 @@ export interface Config {
     'pdf-documents': PdfDocument;
     users: User;
     'team-members': TeamMember;
+    testimonials: Testimonial;
     forms: Form;
     'form-submissions': FormSubmission;
     'payload-kv': PayloadKv;
@@ -92,6 +93,7 @@ export interface Config {
     'pdf-documents': PdfDocumentsSelect<false> | PdfDocumentsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'team-members': TeamMembersSelect<false> | TeamMembersSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -118,6 +120,9 @@ export interface Config {
     schema: SchemaSelect<false> | SchemaSelect<true>;
   };
   locale: null;
+  widgets: {
+    collections: CollectionsWidget;
+  };
   user: User;
   jobs: {
     tasks: {
@@ -164,6 +169,7 @@ export interface Page {
     | ContentWithMediaBlock
     | ContentWithCardBlock
     | CardGridBlock
+    | TestimonialsBlock
   )[];
   meta?: {
     title?: string | null;
@@ -407,6 +413,7 @@ export interface MediaBlock {
 export interface TeamBlock {
   width: 'block' | 'fullWidth';
   theme: 'softLinen' | 'riverStone' | 'midnight';
+  cardTheme: 'softLinen' | 'riverStone' | 'midnight';
   backgroundImage?: {
     image?: (number | null) | Media;
     opacity?: number | null;
@@ -863,6 +870,7 @@ export interface ContentWithMediaBlock {
 export interface ContentWithCardBlock {
   width: 'block' | 'fullWidth';
   theme: 'softLinen' | 'riverStone' | 'midnight';
+  cardTheme: 'softLinen' | 'riverStone' | 'midnight';
   backgroundImage?: {
     image?: (number | null) | Media;
     opacity?: number | null;
@@ -945,6 +953,7 @@ export interface ContentWithCardBlock {
 export interface CardGridBlock {
   width: 'block' | 'fullWidth';
   theme: 'softLinen' | 'riverStone' | 'midnight';
+  cardTheme: 'softLinen' | 'riverStone' | 'midnight';
   backgroundImage?: {
     image?: (number | null) | Media;
     opacity?: number | null;
@@ -1013,6 +1022,42 @@ export interface CardGridBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials Block".
+ */
+export interface TestimonialsBlock {
+  width: 'block' | 'fullWidth';
+  theme: 'softLinen' | 'riverStone' | 'midnight';
+  cardTheme: 'softLinen' | 'riverStone' | 'midnight';
+  backgroundImage?: {
+    image?: (number | null) | Media;
+    opacity?: number | null;
+  };
+  cardBackgroundImage?: {
+    image?: (number | null) | Media;
+    opacity?: number | null;
+  };
+  heading?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  relationTo: 'testimonials';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials-block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -1048,6 +1093,32 @@ export interface TeamMember {
   title: string;
   headshot: number | Media;
   biography: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: number;
+  name: string;
+  business?: string | null;
+  testimonial: {
     root: {
       type: string;
       children: {
@@ -1221,6 +1292,10 @@ export interface PayloadLockedDocument {
         value: number | TeamMember;
       } | null)
     | ({
+        relationTo: 'testimonials';
+        value: number | Testimonial;
+      } | null)
+    | ({
         relationTo: 'forms';
         value: number | Form;
       } | null)
@@ -1291,6 +1366,7 @@ export interface PagesSelect<T extends boolean = true> {
         'content-media'?: T | ContentWithMediaBlockSelect<T>;
         'content-card'?: T | ContentWithCardBlockSelect<T>;
         'card-grid'?: T | CardGridBlockSelect<T>;
+        'testimonials-block'?: T | TestimonialsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1362,6 +1438,7 @@ export interface MediaBlockSelect<T extends boolean = true> {
 export interface TeamBlockSelect {
   width?: boolean;
   theme?: boolean;
+  cardTheme?: boolean;
   backgroundImage?:
     | boolean
     | {
@@ -1433,6 +1510,7 @@ export interface ContentWithMediaBlockSelect {
 export interface ContentWithCardBlockSelect {
   width?: boolean;
   theme?: boolean;
+  cardTheme?: boolean;
   backgroundImage?:
     | boolean
     | {
@@ -1464,6 +1542,7 @@ export interface ContentWithCardBlockSelect {
 export interface CardGridBlockSelect {
   width?: boolean;
   theme?: boolean;
+  cardTheme?: boolean;
   backgroundImage?:
     | boolean
     | {
@@ -1494,6 +1573,31 @@ export interface CardGridBlockSelect {
             };
         id?: boolean;
       };
+  id?: boolean;
+  blockName?: boolean;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials Block_select".
+ */
+export interface TestimonialsBlockSelect {
+  width?: boolean;
+  theme?: boolean;
+  cardTheme?: boolean;
+  backgroundImage?:
+    | boolean
+    | {
+        image?: boolean;
+        opacity?: boolean;
+      };
+  cardBackgroundImage?:
+    | boolean
+    | {
+        image?: boolean;
+        opacity?: boolean;
+      };
+  heading?: boolean;
+  relationTo?: boolean;
   id?: boolean;
   blockName?: boolean;
 }
@@ -1641,6 +1745,17 @@ export interface TeamMembersSelect<T extends boolean = true> {
   title?: T;
   headshot?: T;
   biography?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  name?: T;
+  business?: T;
+  testimonial?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2174,6 +2289,16 @@ export interface SchemaSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "collections_widget".
+ */
+export interface CollectionsWidget {
+  data?: {
+    [k: string]: unknown;
+  };
+  width: 'full';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

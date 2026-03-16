@@ -41,14 +41,17 @@ export const TeamCard: React.FC<{
         </div>
         <h3>{name}</h3>
         <p>{title}</p>
-        <button className={styles.btn} onClick={() => setOpen(true)}>{`More About ${name}`}</button>
+        <button
+          className={`${styles.btn} ${theme}`}
+          onClick={() => setOpen(true)}
+        >{`More About ${name}`}</button>
         <dialog
           className={styles.dialog}
           ref={modalRef}
           onClose={() => setOpen(false)}
           onClick={handleDialogClose}
         >
-          <div className={`${styles.content} ${theme}`}>
+          <div className={styles.content}>
             <button onClick={() => setOpen(false)} aria-label="Close modal">
               <X size={36} />
             </button>

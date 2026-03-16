@@ -9,15 +9,15 @@
   border-radius: 25px;
 
   &:global(.softLinen) {
-    background-color: var(--river-stone);
-  }
-
-  &:global(.riverStone) {
     background-color: var(--soft-linen);
   }
 
-  &:global(.midnight) {
+  &:global(.riverStone) {
     background-color: var(--river-stone);
+  }
+
+  &:global(.midnight) {
+    background-color: var(--midnight);
   }
 
   img {

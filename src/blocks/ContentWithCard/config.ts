@@ -9,10 +9,12 @@ import {
 } from '@/fields';
 import { blockImageField } from '@/fields/blockImage';
 import { cardImageField } from '@/fields/cardImage';
+import { cardThemeField } from '@/fields/cardTheme';
 
 const ContentWithCardFields: Field[] = [
   blockWidthField,
   blockThemeField,
+  cardThemeField,
   blockImageField,
   cardImageField,
   {
