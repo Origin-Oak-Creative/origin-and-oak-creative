@@ -92,6 +92,16 @@
 }
 
 .content {
+  .heading-medium {
+    font-family: var(--analogue);
+    font-size: clamp(2rem, 3.8vw, 3rem);
+  }
+
+  .heading-small {
+    font-family: var(--analogue);
+    font-size: 2rem;
+  }
+
   .large {
     font-size: 1.25rem;
   }
@@ -139,4 +149,8 @@
 
 .deep-wisdom-olive {
   color: var(--deep-wisdom-olive);
+}
+
+.black {
+  color: black;
 }
