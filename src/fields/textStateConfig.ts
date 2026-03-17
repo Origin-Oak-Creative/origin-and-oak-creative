@@ -36,6 +36,7 @@ export const TEXT_STATE_CONFIGS = {
         label: 'Deep Wisdom Olive',
         css: { color: 'var(--deep-wisdom-olive)' },
       },
+      black: { label: 'Black', css: { color: 'var(--black)' } },
     },
     spacing: {
       condensed: { label: 'Condensed', css: { 'letter-spacing': '-0.02em' } },
@@ -87,6 +88,7 @@ export const TEXT_STATE_CONFIGS = {
         label: 'Deep Wisdom Olive',
         css: { color: 'var(--deep-wisdom-olive)' },
       },
+      black: { label: 'Black', css: { color: 'var(--black)' } },
     },
     spacing: {
       condensed: { label: 'Condensed', css: { 'letter-spacing': '-0.02em' } },
@@ -99,7 +101,15 @@ export const TEXT_STATE_CONFIGS = {
     },
   },
   content: {
-    size: {
+    style: {
+      'heading-medium': {
+        label: 'Medium Heading',
+        css: { 'font-family': 'var(--analogue)', 'font-size': '48px' },
+      },
+      'heading-small': {
+        label: 'Small Heading',
+        css: { 'font-family': 'var(--analogue)', 'font-size': '32px' },
+      },
       large: {
         label: 'Large',
         css: { 'font-size': '20px' },
@@ -112,6 +122,21 @@ export const TEXT_STATE_CONFIGS = {
         label: 'Small',
         css: { 'font-size': '16px' },
       },
+    },
+    color: {
+      'soft-linen': { label: 'Soft Linen', css: { color: 'var(--soft-linen)' } },
+      'river-stone': { label: 'River Stone', css: { color: 'var(--river-stone)' } },
+      'dune-sand': { label: 'Dune Sand', css: { color: 'var(--dune-sand)' } },
+      midnight: { label: 'Midnight', css: { color: 'var(--midnight)' } },
+      'graphite-smoke': {
+        label: 'Graphite Smoke',
+        css: { color: 'var(--graphite-smoke)' },
+      },
+      'deep-wisdom-olive': {
+        label: 'Deep Wisdom Olive',
+        css: { color: 'var(--deep-wisdom-olive)' },
+      },
+      black: { label: 'Black', css: { color: 'var(--black)' } },
     },
     spacing: {
       condensed: { label: 'Condensed', css: { 'letter-spacing': '-0.02em' } },
@@ -140,7 +165,8 @@ export const getTextStateConfig = (type: ConfigType) => {
       };
     case 'content':
       return {
-        size: 'size' in config ? config.size : undefined,
+        style: 'style' in config ? config.style : {},
+        color: 'color' in config ? config.color : undefined,
         spacing: 'spacing' in config ? config.spacing : undefined,
         animate: 'animate' in config ? config.animate : undefined,
       };
